@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Cooking mania</title>
-    </head>
-    <body>
-        <h1>Welcome to Cooking Mania</h1>
-        
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css\styles.css">
+    <title>Cooking Mania</title>
+</head>
+<body>
+    <h1>Welcome to Cooking Mania</h1>
+    <?php 
+    echo "Hello World, Ariana Pouya is a nerd! :D"
+    ?>
+    
+</body>
 </html>
