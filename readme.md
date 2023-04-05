@@ -17,4 +17,8 @@ The Student can create recipes and comments. The student can join/leave a class.
 ### Admin
 The Admin can create/delete Teacher accounts and Student accounts. The Admin can create/delete classes, recipes, comments. 
 
+XAMPP: everyone should have it but the demo will be off of one computer
 
+All functionalities should flow
+
+Web server + SQL on local. share web server files. Each person independently develops their page.
