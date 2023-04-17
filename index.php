@@ -6,10 +6,12 @@
     <title>Cooking Mania</title>
 </head>
 <body>
+    <?php include "navbar.php"?>
     <h1>Welcome to Cooking Mania</h1>
     <?php 
     echo "Hello World, Ariana Pouya is a nerd! :D"
     ?>
+
     
 </body>
 </html>
