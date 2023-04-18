@@ -10,7 +10,8 @@
     <?php include "navbar.php"?>
     <h1>Classes</h1>
     <h2>Create Class</h2>
-    <p>oh</p>
+    <p>should only be able to be done if user is a teacher! either check in the form with a field. Potentially this page is only visible to teachers</p>
+    
     <h2>Class Schedular</h2>
     <h2>Class List</h2>
 
