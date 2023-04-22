@@ -53,10 +53,10 @@
       $name_res = mysqli_fetch_array($name);
       Print '<p align="center">'. "Recipe Creator: ". $name_res["User_fname"]. " ".$name_res["User_lname"] .'</p>';
 
-      $class = mysqli_query($connection, "SELECT COUNT(*) FROM Classes WHERE Recipe_ID = ".$row["Recipe_ID"]." ");
+      //$class = mysqli_query($connection, "SELECT COUNT(*) FROM Classes WHERE Recipe_ID = ".$row["Recipe_ID"]." ");
       //$class_res = mysqli_fetch_array($class);
       //Print '<p>'. "Classes available: ". $class_res. '</p>'
-      echo $class; 
+      //echo $class;
       Print '<hr />';
       Print "<br />";
 
