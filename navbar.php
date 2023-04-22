@@ -15,7 +15,7 @@
             <ul class="navbar body">
                 <li><a href="Ariana.php">Ariana</a></li>
                 <li><a href="John.php">John</a></li>
-                <li><a href="Preksha.php">Preksha</a></li>
+                <li><a href="Preksha.php">Recipes</a></li>
                 <li><a href="Shri.php">Shri</a></li>
             </ul>
         </div>
