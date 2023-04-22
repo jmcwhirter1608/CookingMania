@@ -8,7 +8,12 @@
 </head>
 <body>
     <?php include "navbar.php"?>
-    <h1>Shri</h1>
+    <h1>Classes</h1>
+    <h2>Create Class</h2>
+    <p>oh</p>
+    <h2>Class Schedular</h2>
+    <h2>Class List</h2>
+
     
 </body>
 </html>

@@ -13,8 +13,9 @@
                 <a class="Logo" href="index.php">Home</a>
             </div>
             <ul class="navbar body">
+                <li><a href="Register.php">Register</a></li>
+                <li><a href="SignIn.php">Sign In</a></li>
                 <li><a href="Ariana.php">Ariana</a></li>
-                <li><a href="John.php">John</a></li>
                 <li><a href="Preksha.php">Preksha</a></li>
                 <li><a href="Shri.php">Shri</a></li>
             </ul>
