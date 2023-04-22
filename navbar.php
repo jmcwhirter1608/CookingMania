@@ -16,6 +16,16 @@
                 <li><a href="Ariana.php">Ariana</a></li>
                 <li><a href="John.php">John</a></li>
                 <li><a href="Preksha.php">Recipes</a></li>
+
+
+                <?php
+                include "dbconnection.php";
+
+                $result = mysqli_query($connection, "SELECT * FROM Users WHERE User_type = 2 ");
+
+                Print '<li> <a href="create_recipe.php">'. 'Add Recipe'.'</a></li>';
+                ?>
+
                 <li><a href="Shri.php">Shri</a></li>
             </ul>
         </div>
