@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 18, 2023 at 07:53 AM
+-- Generation Time: Apr 22, 2023 at 03:06 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -35,6 +35,13 @@ CREATE TABLE `Classes` (
   `Class_Size_Limit` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `Classes`
+--
+
+INSERT INTO `Classes` (`Class_ID`, `Recipe_ID`, `Class_duration`, `User_ID`, `Class_Size_Limit`) VALUES
+(1, 1, 3, 1, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -53,7 +60,7 @@ CREATE TABLE `Class_Enrollment` (
 --
 
 CREATE TABLE `Class_Scheduler` (
-  `Class_ID` int(11) DEFAULT NULL,
+  `Class_ID` int(11) NOT NULL,
   `DateClass` date DEFAULT NULL,
   `Class_StartTime` time DEFAULT NULL,
   `Class_EndTime` time DEFAULT NULL,
@@ -164,19 +171,30 @@ INSERT INTO `Users` (`User_ID`, `User_type`, `User_fname`, `User_lname`, `User_e
 -- Indexes for table `Classes`
 --
 ALTER TABLE `Classes`
-  ADD PRIMARY KEY (`Class_ID`);
+  ADD PRIMARY KEY (`Class_ID`),
+  ADD KEY `Classes_Recipes` (`Recipe_ID`),
+  ADD KEY `Classes_User` (`User_ID`);
 
 --
 -- Indexes for table `Class_Enrollment`
 --
 ALTER TABLE `Class_Enrollment`
-  ADD PRIMARY KEY (`Class_ID`,`User_ID`);
+  ADD PRIMARY KEY (`Class_ID`,`User_ID`),
+  ADD KEY `user_id_enrollment` (`User_ID`);
+
+--
+-- Indexes for table `Class_Scheduler`
+--
+ALTER TABLE `Class_Scheduler`
+  ADD PRIMARY KEY (`Class_ID`);
 
 --
 -- Indexes for table `Comments`
 --
 ALTER TABLE `Comments`
-  ADD PRIMARY KEY (`Comment_ID`);
+  ADD PRIMARY KEY (`Comment_ID`),
+  ADD KEY `Comments_Recipe` (`Recipe_ID`),
+  ADD KEY `Comments_User` (`User_ID`);
 
 --
 -- Indexes for table `Ingredients`
@@ -188,19 +206,65 @@ ALTER TABLE `Ingredients`
 -- Indexes for table `Ingredient_List`
 --
 ALTER TABLE `Ingredient_List`
-  ADD PRIMARY KEY (`Recipe_ID`,`Ingredient_ID`);
+  ADD PRIMARY KEY (`Recipe_ID`,`Ingredient_ID`),
+  ADD KEY `Ingredient_List_ID` (`Ingredient_ID`);
 
 --
 -- Indexes for table `Recipes`
 --
 ALTER TABLE `Recipes`
-  ADD PRIMARY KEY (`Recipe_ID`);
+  ADD PRIMARY KEY (`Recipe_ID`),
+  ADD KEY `User_id_Recipes` (`User_ID`);
 
 --
 -- Indexes for table `Users`
 --
 ALTER TABLE `Users`
   ADD PRIMARY KEY (`User_ID`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `Classes`
+--
+ALTER TABLE `Classes`
+  ADD CONSTRAINT `Classes_Recipes` FOREIGN KEY (`Recipe_ID`) REFERENCES `Recipes` (`Recipe_ID`),
+  ADD CONSTRAINT `Classes_User` FOREIGN KEY (`User_ID`) REFERENCES `Users` (`User_ID`);
+
+--
+-- Constraints for table `Class_Enrollment`
+--
+ALTER TABLE `Class_Enrollment`
+  ADD CONSTRAINT `Class_id_enrollment` FOREIGN KEY (`Class_ID`) REFERENCES `Classes` (`Class_ID`),
+  ADD CONSTRAINT `user_id_enrollment` FOREIGN KEY (`User_ID`) REFERENCES `Users` (`User_ID`);
+
+--
+-- Constraints for table `Class_Scheduler`
+--
+ALTER TABLE `Class_Scheduler`
+  ADD CONSTRAINT `class_id_scheduler` FOREIGN KEY (`Class_ID`) REFERENCES `Classes` (`Class_ID`);
+
+--
+-- Constraints for table `Comments`
+--
+ALTER TABLE `Comments`
+  ADD CONSTRAINT `Comments_Recipe` FOREIGN KEY (`Recipe_ID`) REFERENCES `Recipes` (`Recipe_ID`),
+  ADD CONSTRAINT `Comments_User` FOREIGN KEY (`User_ID`) REFERENCES `Users` (`User_ID`);
+
+--
+-- Constraints for table `Ingredient_List`
+--
+ALTER TABLE `Ingredient_List`
+  ADD CONSTRAINT `Ingredient_List` FOREIGN KEY (`Recipe_ID`) REFERENCES `Recipes` (`Recipe_ID`),
+  ADD CONSTRAINT `Ingredient_List_ID` FOREIGN KEY (`Ingredient_ID`) REFERENCES `Ingredients` (`Ingredient_ID`);
+
+--
+-- Constraints for table `Recipes`
+--
+ALTER TABLE `Recipes`
+  ADD CONSTRAINT `User_id_Recipes` FOREIGN KEY (`User_ID`) REFERENCES `Users` (`User_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

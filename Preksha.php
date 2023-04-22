@@ -32,7 +32,7 @@
 
       Print '<h4 align="center">'. "This recipe will take " . $row["Recipe_time"]. " hours. ". "</h4>";
       //Print '<table border ="1" align="center" cellpadding="20%">'
-      Print '<h5 align="center">'. " Recipe Ingredients and Quantities". "</h5>";
+      Print '<p align="center"> <b>'. " Recipe Ingredients and Quantities". " </b> </p>";
 
       $ingredient_list_res = mysqli_query($connection, "SELECT * FROM Ingredient_List WHERE Recipe_ID = ".$row['Recipe_ID']." ");
 
@@ -49,7 +49,16 @@
       Print '<p align="center"  > <b>'. " Recipe Instructions: ". "</b></p>";
       Print '<p align="center" style="width: 100%">'. $row["Recipe_instructions"]. "</p>";
 
+      Print '<p align="center">'. "Recipe Difficulty: ". $row["Recipe_level"].'</p>';
 
+      $name = mysqli_query($connection, "SELECT * FROM Users WHERE User_ID = ".$row["User_ID"]." ");
+      $name_res = mysqli_fetch_array($name);
+      Print '<p align="center">'. "Recipe Creator: ". $name_res["User_fname"]. " ".$name_res["User_lname"] .'</p>';
+
+      $class = mysqli_query($connection, "SELECT COUNT(*) FROM Classes WHERE Recipe_ID = ".$row["Recipe_ID"]." ");
+      //$class_res = mysqli_fetch_array($class);
+      //Print '<p>'. "Classes available: ". $class_res. '</p>'
+      echo $class; 
       Print '<hr />';
       Print "<br />";
 
