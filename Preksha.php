@@ -12,20 +12,21 @@
     <h1 align="center">Recipes List</h1>
     <?php include "dbconnection.php"?>
     <?php
+    $user_name = $_COOKIE['user'];
 
     //go through all the recipes and get all recipe data
     $result = mysqli_query($connection, "SELECT * FROM Recipes");
 
-    while ( $row = mysqli_fetch_array($result) ) {
+    while ( $recipe = mysqli_fetch_array($result) ) {
       //for each recipe get the name and the time of ingredients
       Print '<hr />';
-      Print '<h2 align="center">'. $row['Recipe_name'] . "</h2>";
+      Print '<h2 align="center">'. $recipe['Recipe_name'] . "</h2>";
 
-      Print '<h4 align="center">'. "This recipe will take " . $row["Recipe_time"]. " hours. ". "</h4>";
+      Print '<h4 align="center">'. "This recipe will take " . $recipe["Recipe_time"]. " hours. ". "</h4>";
 
       Print '<p align="center"> <b>'. " Recipe Ingredients and Quantities". " </b> </p>";
 
-      $ingredient_list_res = mysqli_query($connection, "SELECT * FROM Ingredient_List WHERE Recipe_ID = ".$row['Recipe_ID']." ");
+      $ingredient_list_res = mysqli_query($connection, "SELECT * FROM Ingredient_List WHERE Recipe_ID = ".$recipe['Recipe_ID']." ");
 
       //for all ingredients for this recipe print the item and the quantity
       while( $ingredient = mysqli_fetch_array($ingredient_list_res) ){
@@ -39,21 +40,24 @@
 
       //print out the instructions
       Print '<p align="center"  > <b>'. " Recipe Instructions: ". "</b></p>";
-      Print '<p align="center" style="width: 100%">'. $row["Recipe_instructions"]. "</p>";
+      Print '<p align="center" style="width: 100%">'. $recipe["Recipe_instructions"]. "</p>";
       Print "<br />";
       //print the recipe level
-      Print '<p align="center">'. "Recipe Difficulty: ". $row["Recipe_level"].'</p>';
+      Print '<p align="center">'. "Recipe Difficulty: ". $recipe["Recipe_level"].'</p>';
 
       //get the recipe creator
-      $name = mysqli_query($connection, "SELECT * FROM Users WHERE User_ID = ".$row["User_ID"]." ");
+      $name = mysqli_query($connection, "SELECT * FROM Users WHERE User_ID = ".$recipe["User_ID"]." ");
       $name_res = mysqli_fetch_array($name);
       Print '<p align="center">'. "Recipe Creator: ". $name_res["User_fname"]. " ".$name_res["User_lname"] .'</p>';
 
       //get the number of classes
-      $class = mysqli_query($connection, "SELECT * FROM Classes WHERE Recipe_ID = ".$row["Recipe_ID"]." ");
+      $class = mysqli_query($connection, "SELECT * FROM Classes WHERE Recipe_ID = ".$recipe["Recipe_ID"]." ");
       $class_num = mysqli_num_rows($class);
       Print '<p align="center">'. "Classes available: ". $class_num .'</p>';
 
+      //make a delete button if the user is the same as creator.
+
+      //make a edit button and post all of it to create recipe with the data.
       Print '<hr />';
       Print "<br />";
 
