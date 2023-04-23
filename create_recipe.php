@@ -12,48 +12,70 @@
     <h1 align="center">Add Recipe as a Chef</h1>
     <?php include "dbconnection.php"?>
 
-  
+    <!-- IF USER IS AN ADMIN OR A TEACHER ONLY SHOULD BE ABLE TO ACCESS. -->
 
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+    <hr />
 
+
+  <form method="post" action="create_sql_recipe.php">
+
+    <div class="create_recipe" align="center">
     <h1>Create Recipe</h1>
+    <label for="recipename"><b>Recipe Name</b></label>
+    <input type="text" placeholder="Recipe Name" name="recipename" required>
+    <br /><br />
+
+    <label for="time"><b>Enter Time this Recipe will take in hours</b></label>
+    <input type="number" placeholder="Time" name="time" min="0" max="10" step="0.1" required>
+    <br/>  <br />
+    <label for="level"><b>Level from 1 (easy) to 5 (hard): </b></label>
+    <input type="number" id="value" name="level" placeholder="1" min="1" max="5">
+    <br/> <br />
+
+    <label for="instructions"><b>Instructions</b></label><br />
+    <textarea name="instructions" rows="10" cols="30"> <?php echo $instructions; ?>
+    </textarea>
+    <br /><br />
+
+    <label for="Ingredients"><b>Ingredients</b></label><br />
+
+    <?php
+      $result_ingredients = mysqli_query($connection, "SELECT * FROM Ingredients");
+      $ingredient_name = array();
+      $ingredient_id = array();
+      $ingredient_quanitity = array();
+      while( $ingredient = mysqli_fetch_array($result_ingredients) ){
+            $ingredient_name[] = $ingredient['Ingredient_Name'];
+            $ingredient_id[] = $ingredient['Ingredient_ID'];
+      //     Print '<label for="level">'. $ingredient['Ingredient_Name']. "  ". "</label>";
+      //     Print '<input type="number" name=ingredient[]. placeholder="0" min="0" max="30">';
+      //     Print '<br />';
+      }
+
+      //echo ingredient[];
+    ?>
+
+    <?php foreach ($ingredient_name as $ingr) { ?>
+      <label for="ingredient"> <?php echo $ingr ?> </label>
+      <input type="number" name="ingredient_quantity[]" placeholder="0" min="0" max="30">
+       <br />
+    <?php } ?>
+
+    <?php
+    foreach ($ingredient_quanitity as $ingr) {
+     echo $ingr;
+   }
+    ?>
+    <br/><br />
 
 
-    <label for="fname"><b>First Name</b></label>
-    <input type="text" placeholder="Enter First Name" name="fname" required><br/>
 
-    <label for="lname"><b>Last Name</b></label>
-    <input type="text" placeholder="Enter Last Name" name="lname" required><br/>
-
-    <label for="lname"><b>User Name</b></label>
-    <input type="text" placeholder="Enter User Name" name="uname" required><br/>
-
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required><br/>
-
-    <label for="phone"><b>Phone Number</b></label>
-    <input type="text" placeholder="(xxx) xxx-xxxx" name="phone" required><br/>
-
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required><br/>
-
-    <label for="psw-repeat"><b>Repeat Password</b></label>
-    <input type="password" placeholder="Repeat Password" name="psw-repeat" required><br/>
-
-    <label for="acc-type"><b>Teacher</b></label>
-    <input type="radio" name="acc-type" value='Teacher' required>
-    <label for="acc-type"><b>Student</b></label>
-    <input type="radio" name="acc-type" value='Student' required>
-
-    <div class="clearfix">
-      <button type="button" class="cancelbtn">Cancel</button>
-      <button type="submit" class="signupbtn">Sign Up</button>
-    </div>
+    <input type='submit' name='submit' value='Post Recipe'>
   </div>
 </form>
 
 
-
+    <?php
     //close the connection
     mysqli_close($connection);
     ?>

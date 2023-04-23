@@ -9,7 +9,4 @@ $database_name = "CookingMania";
 $connection = mysqli_connect($server_name, $user_name, $password, $database_name);
 
 
-
-//close the connection
-// mysqli_close($connection);
 ?>

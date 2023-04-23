@@ -8,6 +8,7 @@
 </head>
 <body>
     <?php include 'navbar.php'?>
+
     <?php
         // define variables and set to empty values
         $uname = $email = $psw = $psw_repeat = "";
@@ -45,7 +46,7 @@
     <br>
     <input type='submit' name='submit' value='Sign In'>
   </div>
-</form> 
+</form>
     <?php
     echo "<h2>Your Input:</h2>";
     echo $uname;
@@ -58,4 +59,3 @@
     ?>
 </body>
 </html>
-
