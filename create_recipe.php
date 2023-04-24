@@ -47,12 +47,7 @@
       while( $ingredient = mysqli_fetch_array($result_ingredients) ){
             $ingredient_name[] = $ingredient['Ingredient_Name'];
             $ingredient_id[] = $ingredient['Ingredient_ID'];
-      //     Print '<label for="level">'. $ingredient['Ingredient_Name']. "  ". "</label>";
-      //     Print '<input type="number" name=ingredient[]. placeholder="0" min="0" max="30">';
-      //     Print '<br />';
       }
-
-      //echo ingredient[];
     ?>
 
     <?php foreach ($ingredient_name as $ingr) { ?>

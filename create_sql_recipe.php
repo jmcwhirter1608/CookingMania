@@ -31,58 +31,67 @@
       $Recipe_level = ($_REQUEST["level"]);
       $Recipe_instructions = ($_REQUEST["instructions"]);
       $User_ID = 1; //FIX ME
-      $last_update_date = date ('Y-m-d H:i:s');
+      $last_update_date = date ('Y-m-d');
 
-
-      $insert_sql = $connection->prepare("INSERT INTO Recipes(Recipe_name, Recipe_time, Recipe_level, Recipe_instructions, last_update_date, User_ID) Values (?, ?,?,?, ?, ?)");
-      $insert_sql->bind_param("ssissi", $Recipe_name, $Recipe_time, $Recipe_level, $Recipe_instructions, $last_update_date, $User_ID );
-
-      if ($insert_sql->execute() === TRUE) {
-        echo "New recipe created successfully". "\n";
-      } else {
-        echo "Error Recipe not created.";
-      }
-
-      $result_id = $connection->prepare( "SELECT Recipe_ID FROM Recipes WHERE Recipe_name = ? AND Recipe_time = ? AND Recipe_level=? AND last_update_date=? AND User_ID=?");
-      $result_id->bind_param("ssssss", $Recipe_name, $Recipe_time, $Recipe_level,  $last_update_date, $User_ID );
+      $result_id = $connection->prepare( "SELECT Recipe_ID FROM Recipes WHERE Recipe_name = ? AND User_ID = ? AND last_update_date=? AND Recipe_time = ? AND Recipe_level=?");
+      $result_id->bind_param("ssssi", $Recipe_name, $User_ID, $last_update_date, $Recipe_time, $Recipe_level);
 
       $result_id->execute();
       $result_id->bind_result($Recipe_ID);
 
+      $Recipe_ids = array();
       while ($result_id->fetch()) {
-        echo $Recipe_ID;
+        $Recipe_ids[] = $Recipe_ID;
       }
-      // /* fetch values */
-      // while ($result_id->fetch()) {
-      //     echo $Recipe_ID;
-      // }
-      // $id_val = $result_id->get_result();
-      // $Recipe_ID = $id_val->fetch_assoc();
-
-      // Print "<br />";
-      //
-      // echo "hello";
-      // } else {
-      //   echo "Error recipe id not got.";
-      // }
-
-      $Recipe_ID = 44;
-
-      $ingredient_quanitity = $_REQUEST["ingredient_quantity"];
-      $ingredient_id = 0;
-      foreach ($ingredient_quanitity as $ingr_quantity){
-        $insert_ingr = $connection->prepare("INSERT INTO Ingredient_List(Recipe_ID, Ingredient_ID, Ingredient_Quantity) Values (?, ?,?)");
-        $insert_ingr->bind_param("iii", $Recipe_ID, $ingredient_id, $ingr_quantity);
-        $ingredient_id++;
 
 
-        if ($insert_ingr->execute() === TRUE) {
-          echo "ingredient linked successfully \n" ;
-          //echo $ingredient_id;
+      if ( $Recipe_ids == array() ){
+        $insert_sql = $connection->prepare("INSERT INTO Recipes(Recipe_name, Recipe_time, Recipe_level, Recipe_instructions, last_update_date, User_ID) Values (?, ?,?,?, ?, ?)");
+        $insert_sql->bind_param("ssissi", $Recipe_name, $Recipe_time, $Recipe_level, $Recipe_instructions, $last_update_date, $User_ID );
+
+        if ($insert_sql->execute() === TRUE) {
+          Print  '<p>'. "New recipe created successfully". '</p>';
         } else {
-          echo "ingredient not linked \n";
+          Print  '<p>'. "Error Recipe not created.". '</p>';
         }
+
+
+        $result_id = $connection->prepare( "SELECT Recipe_ID FROM Recipes WHERE Recipe_name = ? AND User_ID = ? AND last_update_date=? AND Recipe_time = ? AND Recipe_level=?");
+        $result_id->bind_param("ssssi", $Recipe_name, $User_ID, $last_update_date, $Recipe_time, $Recipe_level);
+
+        $result_id->execute();
+        $result_id->bind_result($Recipe_ID);
+
+        while ($result_id->fetch()) {
+          $Recipe_ids[] = $Recipe_ID;
+        }
+
+        Print '<p>'. "Recipe ID: ". $Recipe_ids[0].'</p>';
+
+
+        $ingredient_quanitity = $_REQUEST["ingredient_quantity"];
+        $ingredient_id = 0;
+        foreach ($ingredient_quanitity as $ingr_quantity){
+
+          $insert_ingr = $connection->prepare("INSERT INTO Ingredient_List(Recipe_ID, Ingredient_ID, Ingredient_Quantity) Values (?, ?,?)");
+          $insert_ingr->bind_param("iii", $Recipe_ids[0], $ingredient_id, $ingr_quantity);
+          $ingredient_id++;
+
+
+          if ($insert_ingr->execute() === TRUE) {
+              Print  '<p>'. "ingredient linked successfully". "</p> ";
+              Print '<br />';
+          } else {
+              Print  '<p>'. "ingredient not linked". "</p> ";
+          }
+        }
+
       }
+      else{
+        Print '<h1>'."Recipe already exists with ID ". $Recipe_ids[0].'</h1>';
+      }
+
+
 
       //close the connection
       $connection -> close();
