@@ -219,8 +219,7 @@ ALTER TABLE `Recipes`
 --
 -- Indexes for table `Users`
 --
-ALTER TABLE `Users`
-  ADD PRIMARY KEY (`User_ID`);
+ALTER TABLE `users` CHANGE `User_ID` `User_ID` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY; 
 
 --
 -- Constraints for dumped tables
