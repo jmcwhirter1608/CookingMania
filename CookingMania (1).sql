@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 23, 2023 at 03:55 AM
+-- Generation Time: Apr 23, 2023 at 10:28 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -124,7 +124,8 @@ CREATE TABLE `Ingredients` (
 --
 
 INSERT INTO `Ingredients` (`Ingredient_ID`, `Ingredient_Name`) VALUES
-(1, 'Carrot');
+(1, 'Carrot'),
+(2, 'Chicken');
 
 -- --------------------------------------------------------
 
@@ -143,7 +144,9 @@ CREATE TABLE `Ingredient_List` (
 --
 
 INSERT INTO `Ingredient_List` (`Recipe_ID`, `Ingredient_ID`, `Ingredient_Quantity`) VALUES
-(1, 1, 3);
+(1, 1, 3),
+(44, 1, 2),
+(44, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -166,7 +169,25 @@ CREATE TABLE `Recipes` (
 --
 
 INSERT INTO `Recipes` (`Recipe_ID`, `Recipe_name`, `Recipe_time`, `Recipe_level`, `Recipe_instructions`, `last_update_date`, `User_ID`) VALUES
-(1, 'Chicken Preksha', '0.23', 3, 'Cook the chicken. Make sure its not raw or burning. ', '2023-04-16', 1);
+(1, 'Chicken Preksha', '0.23', 3, 'Cook the chicken. Make sure its not raw or burning. ', '2023-04-16', 1),
+(2, 'Meat', '0.23', 1, 'Cook the meat', NULL, 1),
+(4, 'meatballs', '1', 1, 'reheat the meatballs and then add some salt and pepper. Then, after a bit it is ready. ', '2023-04-23', 1),
+(5, 'Chicken tacos', '1', 1, 'make chicken, tacos and pico.        ', '2023-04-23', 1),
+(7, 'meatballs', '0.1', 1, ' cook them.', '2023-04-23', 1),
+(14, 'cake', '4', 4, '    get a box from the grocery store and make it.', '2023-04-23', 1),
+(15, 'cake', '4', 4, '    get a box from the grocery store and make it.', '2023-04-23', 1),
+(16, 'cake', '4', 4, '    get a box from the grocery store and make it.', '2023-04-23', 1),
+(28, 'veggie taco', '2', 2, '     chicken and add taco and carrot. ', '2023-04-23', 1),
+(37, 'veggie taco', '2', 2, '     chicken and add taco and carrot. ', '2023-04-23', 1),
+(44, 'chicken carrots', '1', 2, '     chicken and carrots. ', '2023-04-23', 1),
+(49, 'chicken carrots', '1', 2, '     chicken and carrots. ', '2023-04-23', 1),
+(50, 'chicken carrots', '1', 2, '     chicken and carrots. ', '2023-04-23', 1),
+(51, 'chicken carrots', '1', 2, '     chicken and carrots. ', '2023-04-23', 1),
+(52, 'chicken carrots', '1', 2, '     chicken and carrots. ', '2023-04-23', 1),
+(53, 'chicken carrots', '1', 2, '     chicken and carrots. ', '2023-04-23', 1),
+(54, 'chicken carrots', '1', 2, '     chicken and carrots. ', '2023-04-23', 1),
+(55, 'chicken carrots', '1', 2, '     chicken and carrots. ', '2023-04-23', 1),
+(56, 'chicken carrots', '1', 2, '     chicken and carrots. ', '2023-04-23', 1);
 
 -- --------------------------------------------------------
 
@@ -233,7 +254,8 @@ ALTER TABLE `Comments`
 --
 ALTER TABLE `Ingredients`
   ADD PRIMARY KEY (`Ingredient_ID`),
-  ADD UNIQUE KEY `Ingredient_ID` (`Ingredient_ID`);
+  ADD UNIQUE KEY `Ingredient_ID` (`Ingredient_ID`),
+  ADD UNIQUE KEY `Ingredient_Name` (`Ingredient_Name`);
 
 --
 -- Indexes for table `Ingredient_List`
@@ -276,13 +298,13 @@ ALTER TABLE `Comments`
 -- AUTO_INCREMENT for table `Ingredients`
 --
 ALTER TABLE `Ingredients`
-  MODIFY `Ingredient_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Ingredient_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `Recipes`
 --
 ALTER TABLE `Recipes`
-  MODIFY `Recipe_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Recipe_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `Users`
