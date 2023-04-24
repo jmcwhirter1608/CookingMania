@@ -6,7 +6,7 @@ $password = "";
 $database_name = "CookingMania";
 
 
-$connection = mysqli_connect($server_name, $user_name, $password, $database_name);
+$connection = new mysqli($server_name, $user_name, $password, $database_name);
 
 
 ?>
