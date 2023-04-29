@@ -7,3 +7,15 @@
 h1 {
     font-size: 32pt;
 }
+
+#EditAccount-RowForm{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 20px;
+    width: 1500px;
+}
+
+#EditAccount-RowForm-Row{
+    display: flex;
+    justify-content: center;
+}

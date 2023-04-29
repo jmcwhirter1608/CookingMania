@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
 
-    setcookie("UserID", FALSE, 1, '/');
+    setcookie("UserID", FALSE, 1, '/'); // Deletes cookies
     setcookie("AccType", FALSE, 1, '/');
 
 ?>

@@ -11,97 +11,7 @@
 <body>
     <?php include 'navbar.php'?>
     <?php include 'dbconnection.php'?>
-    <?php
-        // define variables and set to empty values
-        $acc_type = NULL;
-        $fname = $lname = $email = $phone = $psw = $psw_repeat = NULL;
-        $Err = NULL;
-
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-          
-          switch(0){
-            case 0: 
-              if(empty($_POST['fname'])){
-                $Err = "First Name is Required";
-                break;
-              } else{
-                $fname = test_input($_POST['fname']);
-              }
-            case 1:
-              if(empty($_POST['lname'])){
-                $Err = "Last Name is Required";
-                break;
-              } else{
-                $lname = test_input($_POST['lname']);
-              }
-            case 2:
-              if(empty($_POST['email'])){
-                $Err = "Email is Required";
-                break;
-              } else{
-                $email = test_input($_POST['email']);
-              }
-              if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-                $Err = "Invalid Email";
-                break;
-              }
-              $query = sprintf("SELECT * FROM users 
-              WHERE User_email='%s'",
-              $connection->real_escape_string($email));
-
-              if($connection->query($query)->num_rows > 0){
-                $Err = 'Email already in use';
-                break;
-              }
-            case 3:
-              if(empty($_POST['phone'])){
-                $Err = "Phone is Required";
-                break;
-              } else{
-                $phone = test_input($_POST['phone']);
-              }
-              if(preg_match('/^[0-9]{10}+$/', $phone) == FALSE){
-                $Err = "Invalid Phone Number (Format: 1234567890)";
-                break;
-              }
-            case 4:
-              if(empty($_POST['psw'])){
-                $Err = "Password is Required";
-                break;
-              } else{
-                $psw = test_input($_POST['psw']);
-              }
-            case 5:
-              if(empty($_POST['psw-repeat'])){
-                $Err = "Repeat Password is Required";
-                break;
-              } else{
-                $psw_repeat = test_input($_POST['psw']);
-              }
-              if($psw != $psw_repeat){
-                $Err = "Passwords are not Equal";
-                break;
-              }
-            case 6:
-              if(empty($_POST['acc-type'])){
-                $Err = "Please select Teacher or Student";
-                break;
-              } else{
-                $acc_type = test_input($_POST['acc-type']);
-              }
-
-            default:
-              break;
-            }
-        }
-
-        function test_input($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-        }
-    ?>
+    <?php include 'Register/RegisterInputConfirm.php'?>
     <form method='post' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
       <div class="register">
         <h1>Register</h1>
@@ -128,14 +38,13 @@
         <label for="acc-type"><b>Teacher</b></label>
         <input type="radio" name="acc-type" value=2>
         <label for="acc-type"><b>Student</b></label>
-        <input type="radio" name="acc-type" value=1>
+        <input type="radio" name="acc-type" value=3>
         <br>
-        <input type='submit' name='submit' value='Register'>
+        <input type='submit' name='Create-submit' value='Register'>
 
       </div>
     </form> 
     <?php
-
         if(empty($fname) || empty($lname) || empty($email) || empty($phone) || empty($psw) || empty($psw_repeat) || empty($acc_type)){
           if($Err != NULL)
             echo "Error: ". $Err . "<br>";
@@ -157,16 +66,6 @@
               setcookie("AccType", $acc_type, time() + (86400 * 30), '/');
               setcookie("UserID", $connection->insert_id, time() + (86400 * 30), '/');
               header("Location: Register.php");
-              // $sql = sprintf("SELECT 'User_ID' from users
-              // WHERE User_email = \"%s\"",
-              // $connection->real_escape_string($email));
-              // $result = $connection->query($sql);
-              // if($result->num_rows > 0){
-              //   while($row = $result->fetch_assoc()){
-              //     echo $row['User_ID']. "<br>" . $sql;
-              //     setcookie("UserID", $row['User_ID'], time() + (86400 * 30), '/');
-              //   }
-              // }
             }
           } catch(Exception $e) {
             switch($e->getCode()){
@@ -181,9 +80,6 @@
         if ($connection->connect_error){
             die("Connection failed: " . $connection->connect_error);
         }
-
-
-        
         ?>
 </body>
 </html>

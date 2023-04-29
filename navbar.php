@@ -15,7 +15,7 @@
             <ul class="navbar body">
                 <?php
                     if(isset($_COOKIE['AccType'])){
-                        if($_COOKIE['AccType'] == 0){
+                        if($_COOKIE['AccType'] == 1){
                             echo "<li><a href=\"Accounts.php\">Accounts</a></li>";
                         }
                         echo "<li><a href=\"SignOut.php\">Sign Out</a></li>";
