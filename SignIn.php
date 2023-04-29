@@ -67,8 +67,7 @@
                 while($row = $result->fetch_assoc()){
                     if($row['User_password'] == $psw){
                         echo "Welcome back " . $row['User_fname'] . " " . $row['User_lname'] ."<br>";
-                        setcookie("email", $email, time() + (86400 * 30), '/');
-                        setcookie("psw", $psw, time() + (86400 * 30), '/');
+                        setcookie("UserID", $row['User_ID'], time() + (86400 * 30), '/');
                     } else {
                         echo "Incorrect Email or Password";
                     }
