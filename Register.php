@@ -13,9 +13,9 @@
     <?php include 'dbconnection.php'?>
     <?php
         // define variables and set to empty values
-        $acc_type = 1;
-        $fname = $lname = $email = $phone = $psw = $psw_repeat = "";
-        $unameErr = $emailErr = $pswErr = $psw_repeatErr ='';
+        $acc_type = NULL;
+        $fname = $lname = $email = $phone = $psw = $psw_repeat = NULL;
+        $Err = NULL;
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
           
@@ -136,10 +136,11 @@
     </form> 
     <?php
 
-        if(empty($fname) || empty($lname) || empty($email) || empty($phone) || empty($psw) || empty($psw_repeat) || empty($acc_type))
-          echo "Error: ". $Err . "<br>";
+        if(empty($fname) || empty($lname) || empty($email) || empty($phone) || empty($psw) || empty($psw_repeat) || empty($acc_type)){
+          if($Err != NULL)
+            echo "Error: ". $Err . "<br>";
+        }
         else{
-          
           $sql = sprintf("INSERT INTO `users` (`User_ID`, `User_type`, `User_fname`, `User_lname`, `User_email`, `User_phonenumber`, `User_password`)
           VALUES (NULL, %d , '%s', '%s', '%s', %d, '%s')", 
           $acc_type,
@@ -150,14 +151,23 @@
           $connection->real_escape_string($psw));
           try {
             $result = $connection->query($sql);
-            if($result->num_rows > 0){
-              while($row = $result->fetch_assoc()){
-                echo $row['User_ID'];
-                setcookie("User_ID", $row['User_ID'], time() + (86400 * 30), '/');
-              }
+            
+            if($result === TRUE){
+              echo "Account Created, Welcome $fname $lname!";
+              setcookie("AccType", $acc_type, time() + (86400 * 30), '/');
+              setcookie("UserID", $connection->insert_id, time() + (86400 * 30), '/');
+              header("Location: Register.php");
+              // $sql = sprintf("SELECT 'User_ID' from users
+              // WHERE User_email = \"%s\"",
+              // $connection->real_escape_string($email));
+              // $result = $connection->query($sql);
+              // if($result->num_rows > 0){
+              //   while($row = $result->fetch_assoc()){
+              //     echo $row['User_ID']. "<br>" . $sql;
+              //     setcookie("UserID", $row['User_ID'], time() + (86400 * 30), '/');
+              //   }
+              // }
             }
-            echo "Account Created, Welcome $fname $lname!";
-            setcookie("AccType", $acc_type, time() + (86400 * 30), '/');
           } catch(Exception $e) {
             switch($e->getCode()){
               case 1062:
