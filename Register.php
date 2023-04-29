@@ -95,6 +95,8 @@
                 try {
                   $result = $connection->query($sql);
                   echo "Account Created, Welcome $fname $lname!";
+                  setcookie("email", $email, time() + (86400 * 30), '/');
+                  setcookie("psw", $psw, time() + (86400 * 30), '/');
                 } catch(Exception $e) {
                   switch($e->getCode()){
                     case 1062:
