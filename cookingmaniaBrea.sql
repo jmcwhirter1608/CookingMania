@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 23, 2023 at 10:28 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.0.25
+-- Host: 127.0.0.1
+-- Generation Time: Apr 30, 2023 at 06:15 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,16 +18,16 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `CookingMania`
+-- Database: `cookingmania`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Classes`
+-- Table structure for table `classes`
 --
 
-CREATE TABLE `Classes` (
+CREATE TABLE `classes` (
   `Class_ID` int(11) NOT NULL,
   `Recipe_ID` int(11) DEFAULT NULL,
   `Class_duration` double DEFAULT NULL,
@@ -36,29 +36,29 @@ CREATE TABLE `Classes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `Classes`
+-- Dumping data for table `classes`
 --
 
-INSERT INTO `Classes` (`Class_ID`, `Recipe_ID`, `Class_duration`, `User_ID`, `Class_Size_Limit`) VALUES
+INSERT INTO `classes` (`Class_ID`, `Recipe_ID`, `Class_duration`, `User_ID`, `Class_Size_Limit`) VALUES
 (1, 1, 3, 1, 5),
 (2, 1, 4, 1, 43);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Class_Enrollment`
+-- Table structure for table `class_enrollment`
 --
 
-CREATE TABLE `Class_Enrollment` (
+CREATE TABLE `class_enrollment` (
   `User_ID` int(11) NOT NULL,
   `Class_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `Class_Enrollment`
+-- Dumping data for table `class_enrollment`
 --
 
-INSERT INTO `Class_Enrollment` (`User_ID`, `Class_ID`) VALUES
+INSERT INTO `class_enrollment` (`User_ID`, `Class_ID`) VALUES
 (1, 1),
 (2, 1),
 (1, 2),
@@ -67,10 +67,10 @@ INSERT INTO `Class_Enrollment` (`User_ID`, `Class_ID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Class_Scheduler`
+-- Table structure for table `class_scheduler`
 --
 
-CREATE TABLE `Class_Scheduler` (
+CREATE TABLE `class_scheduler` (
   `Class_ID` int(11) NOT NULL,
   `DateClass` date NOT NULL,
   `Class_StartTime` time DEFAULT NULL,
@@ -79,10 +79,10 @@ CREATE TABLE `Class_Scheduler` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `Class_Scheduler`
+-- Dumping data for table `class_scheduler`
 --
 
-INSERT INTO `Class_Scheduler` (`Class_ID`, `DateClass`, `Class_StartTime`, `Class_EndTime`, `Class_RoomNum`) VALUES
+INSERT INTO `class_scheduler` (`Class_ID`, `DateClass`, `Class_StartTime`, `Class_EndTime`, `Class_RoomNum`) VALUES
 (1, '2023-04-22', '13:00:00', '14:00:00', '123'),
 (1, '2023-05-22', '13:00:00', '14:00:00', '123'),
 (2, '2023-05-22', '13:00:00', '14:00:00', '123');
@@ -90,10 +90,10 @@ INSERT INTO `Class_Scheduler` (`Class_ID`, `DateClass`, `Class_StartTime`, `Clas
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Comments`
+-- Table structure for table `comments`
 --
 
-CREATE TABLE `Comments` (
+CREATE TABLE `comments` (
   `Comment_ID` int(11) NOT NULL,
   `Recipe_ID` int(11) DEFAULT NULL,
   `User_ID` int(11) DEFAULT NULL,
@@ -101,49 +101,49 @@ CREATE TABLE `Comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `Comments`
+-- Dumping data for table `comments`
 --
 
-INSERT INTO `Comments` (`Comment_ID`, `Recipe_ID`, `User_ID`, `CommentText`) VALUES
+INSERT INTO `comments` (`Comment_ID`, `Recipe_ID`, `User_ID`, `CommentText`) VALUES
 (1, 1, 1, 'I like this.'),
 (2, 1, 1, 'I dont like this.');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Ingredients`
+-- Table structure for table `ingredients`
 --
 
-CREATE TABLE `Ingredients` (
+CREATE TABLE `ingredients` (
   `Ingredient_ID` int(11) NOT NULL,
   `Ingredient_Name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `Ingredients`
+-- Dumping data for table `ingredients`
 --
 
-INSERT INTO `Ingredients` (`Ingredient_ID`, `Ingredient_Name`) VALUES
+INSERT INTO `ingredients` (`Ingredient_ID`, `Ingredient_Name`) VALUES
 (1, 'Carrot'),
 (2, 'Chicken');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Ingredient_List`
+-- Table structure for table `ingredient_list`
 --
 
-CREATE TABLE `Ingredient_List` (
+CREATE TABLE `ingredient_list` (
   `Recipe_ID` int(11) NOT NULL,
   `Ingredient_ID` int(11) NOT NULL,
   `Ingredient_Quantity` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `Ingredient_List`
+-- Dumping data for table `ingredient_list`
 --
 
-INSERT INTO `Ingredient_List` (`Recipe_ID`, `Ingredient_ID`, `Ingredient_Quantity`) VALUES
+INSERT INTO `ingredient_list` (`Recipe_ID`, `Ingredient_ID`, `Ingredient_Quantity`) VALUES
 (1, 1, 3),
 (44, 1, 2),
 (44, 2, 2);
@@ -151,10 +151,10 @@ INSERT INTO `Ingredient_List` (`Recipe_ID`, `Ingredient_ID`, `Ingredient_Quantit
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Recipes`
+-- Table structure for table `recipes`
 --
 
-CREATE TABLE `Recipes` (
+CREATE TABLE `recipes` (
   `Recipe_ID` int(11) NOT NULL,
   `Recipe_name` varchar(255) DEFAULT NULL,
   `Recipe_time` varchar(255) DEFAULT NULL,
@@ -165,10 +165,10 @@ CREATE TABLE `Recipes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `Recipes`
+-- Dumping data for table `recipes`
 --
 
-INSERT INTO `Recipes` (`Recipe_ID`, `Recipe_name`, `Recipe_time`, `Recipe_level`, `Recipe_instructions`, `last_update_date`, `User_ID`) VALUES
+INSERT INTO `recipes` (`Recipe_ID`, `Recipe_name`, `Recipe_time`, `Recipe_level`, `Recipe_instructions`, `last_update_date`, `User_ID`) VALUES
 (1, 'Chicken Preksha', '0.23', 3, 'Cook the chicken. Make sure its not raw or burning. ', '2023-04-16', 1),
 (2, 'Meat', '0.23', 1, 'Cook the meat', NULL, 1),
 (4, 'meatballs', '1', 1, 'reheat the meatballs and then add some salt and pepper. Then, after a bit it is ready. ', '2023-04-23', 1),
@@ -192,10 +192,10 @@ INSERT INTO `Recipes` (`Recipe_ID`, `Recipe_name`, `Recipe_time`, `Recipe_level`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Users`
+-- Table structure for table `users`
 --
 
-CREATE TABLE `Users` (
+CREATE TABLE `users` (
   `User_ID` int(11) NOT NULL,
   `User_type` int(11) DEFAULT NULL,
   `User_fname` varchar(255) DEFAULT NULL,
@@ -206,10 +206,10 @@ CREATE TABLE `Users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `Users`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `Users` (`User_ID`, `User_type`, `User_fname`, `User_lname`, `User_email`, `User_phonenumber`, `User_password`) VALUES
+INSERT INTO `users` (`User_ID`, `User_type`, `User_fname`, `User_lname`, `User_email`, `User_phonenumber`, `User_password`) VALUES
 (1, 3, 'Preksha', 'Vaghela', 'prekshavaghela@gmail.com', '12234567890', 'preksha'),
 (2, 1, 'Ella', 'Hello', 'helloella@gmail.com', '21321231', 'hello'),
 (5, 3, NULL, NULL, NULL, NULL, NULL);
@@ -219,62 +219,62 @@ INSERT INTO `Users` (`User_ID`, `User_type`, `User_fname`, `User_lname`, `User_e
 --
 
 --
--- Indexes for table `Classes`
+-- Indexes for table `classes`
 --
-ALTER TABLE `Classes`
+ALTER TABLE `classes`
   ADD PRIMARY KEY (`Class_ID`),
   ADD UNIQUE KEY `Class_ID` (`Class_ID`),
   ADD KEY `Class_User` (`User_ID`),
   ADD KEY `Class_recipe` (`Recipe_ID`);
 
 --
--- Indexes for table `Class_Enrollment`
+-- Indexes for table `class_enrollment`
 --
-ALTER TABLE `Class_Enrollment`
+ALTER TABLE `class_enrollment`
   ADD PRIMARY KEY (`Class_ID`,`User_ID`),
   ADD KEY `Class_enrollment_user` (`User_ID`);
 
 --
--- Indexes for table `Class_Scheduler`
+-- Indexes for table `class_scheduler`
 --
-ALTER TABLE `Class_Scheduler`
+ALTER TABLE `class_scheduler`
   ADD PRIMARY KEY (`Class_ID`,`DateClass`);
 
 --
--- Indexes for table `Comments`
+-- Indexes for table `comments`
 --
-ALTER TABLE `Comments`
+ALTER TABLE `comments`
   ADD PRIMARY KEY (`Comment_ID`),
   ADD UNIQUE KEY `Comment_ID` (`Comment_ID`),
   ADD KEY `Comment_Recipe` (`Recipe_ID`),
   ADD KEY `Comment_user` (`User_ID`);
 
 --
--- Indexes for table `Ingredients`
+-- Indexes for table `ingredients`
 --
-ALTER TABLE `Ingredients`
+ALTER TABLE `ingredients`
   ADD PRIMARY KEY (`Ingredient_ID`),
   ADD UNIQUE KEY `Ingredient_ID` (`Ingredient_ID`),
   ADD UNIQUE KEY `Ingredient_Name` (`Ingredient_Name`);
 
 --
--- Indexes for table `Ingredient_List`
+-- Indexes for table `ingredient_list`
 --
-ALTER TABLE `Ingredient_List`
+ALTER TABLE `ingredient_list`
   ADD PRIMARY KEY (`Recipe_ID`,`Ingredient_ID`),
   ADD KEY `Ingredient_ID_list` (`Ingredient_ID`);
 
 --
--- Indexes for table `Recipes`
+-- Indexes for table `recipes`
 --
-ALTER TABLE `Recipes`
+ALTER TABLE `recipes`
   ADD PRIMARY KEY (`Recipe_ID`),
   ADD UNIQUE KEY `Recipe_ID` (`Recipe_ID`);
 
 --
--- Indexes for table `Users`
+-- Indexes for table `users`
 --
-ALTER TABLE `Users`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`User_ID`),
   ADD UNIQUE KEY `User_ID` (`User_ID`);
 
@@ -283,33 +283,33 @@ ALTER TABLE `Users`
 --
 
 --
--- AUTO_INCREMENT for table `Classes`
+-- AUTO_INCREMENT for table `classes`
 --
-ALTER TABLE `Classes`
+ALTER TABLE `classes`
   MODIFY `Class_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `Comments`
+-- AUTO_INCREMENT for table `comments`
 --
-ALTER TABLE `Comments`
+ALTER TABLE `comments`
   MODIFY `Comment_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `Ingredients`
+-- AUTO_INCREMENT for table `ingredients`
 --
-ALTER TABLE `Ingredients`
+ALTER TABLE `ingredients`
   MODIFY `Ingredient_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `Recipes`
+-- AUTO_INCREMENT for table `recipes`
 --
-ALTER TABLE `Recipes`
+ALTER TABLE `recipes`
   MODIFY `Recipe_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
--- AUTO_INCREMENT for table `Users`
+-- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE `Users`
+ALTER TABLE `users`
   MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
@@ -317,38 +317,38 @@ ALTER TABLE `Users`
 --
 
 --
--- Constraints for table `Classes`
+-- Constraints for table `classes`
 --
-ALTER TABLE `Classes`
-  ADD CONSTRAINT `Class_User` FOREIGN KEY (`User_ID`) REFERENCES `Users` (`User_ID`),
-  ADD CONSTRAINT `Class_recipe` FOREIGN KEY (`Recipe_ID`) REFERENCES `Recipes` (`Recipe_ID`);
+ALTER TABLE `classes`
+  ADD CONSTRAINT `Class_User` FOREIGN KEY (`User_ID`) REFERENCES `users` (`User_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Class_recipe` FOREIGN KEY (`Recipe_ID`) REFERENCES `recipes` (`Recipe_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `Class_Enrollment`
+-- Constraints for table `class_enrollment`
 --
-ALTER TABLE `Class_Enrollment`
-  ADD CONSTRAINT `Class_enrollment_class` FOREIGN KEY (`Class_ID`) REFERENCES `Classes` (`Class_ID`),
-  ADD CONSTRAINT `Class_enrollment_user` FOREIGN KEY (`User_ID`) REFERENCES `Users` (`User_ID`);
+ALTER TABLE `class_enrollment`
+  ADD CONSTRAINT `Class_enrollment_class` FOREIGN KEY (`Class_ID`) REFERENCES `classes` (`Class_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Class_enrollment_user` FOREIGN KEY (`User_ID`) REFERENCES `users` (`User_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `Class_Scheduler`
+-- Constraints for table `class_scheduler`
 --
-ALTER TABLE `Class_Scheduler`
-  ADD CONSTRAINT `ClassID_scheduler` FOREIGN KEY (`Class_ID`) REFERENCES `Classes` (`Class_ID`);
+ALTER TABLE `class_scheduler`
+  ADD CONSTRAINT `ClassID_scheduler` FOREIGN KEY (`Class_ID`) REFERENCES `classes` (`Class_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `Comments`
+-- Constraints for table `comments`
 --
-ALTER TABLE `Comments`
-  ADD CONSTRAINT `Comment_Recipe` FOREIGN KEY (`Recipe_ID`) REFERENCES `Recipes` (`Recipe_ID`),
-  ADD CONSTRAINT `Comment_user` FOREIGN KEY (`User_ID`) REFERENCES `Users` (`User_ID`);
+ALTER TABLE `comments`
+  ADD CONSTRAINT `Comment_Recipe` FOREIGN KEY (`Recipe_ID`) REFERENCES `recipes` (`Recipe_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Comment_user` FOREIGN KEY (`User_ID`) REFERENCES `users` (`User_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `Ingredient_List`
+-- Constraints for table `ingredient_list`
 --
-ALTER TABLE `Ingredient_List`
-  ADD CONSTRAINT `Ingredient_ID_list` FOREIGN KEY (`Ingredient_ID`) REFERENCES `Ingredients` (`Ingredient_ID`),
-  ADD CONSTRAINT `Recipe_ID_list` FOREIGN KEY (`Recipe_ID`) REFERENCES `Recipes` (`Recipe_ID`);
+ALTER TABLE `ingredient_list`
+  ADD CONSTRAINT `Ingredient_ID_list` FOREIGN KEY (`Ingredient_ID`) REFERENCES `ingredients` (`Ingredient_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Recipe_ID_list` FOREIGN KEY (`Recipe_ID`) REFERENCES `recipes` (`Recipe_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
