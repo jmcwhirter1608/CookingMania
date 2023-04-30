@@ -19,3 +19,40 @@ h1 {
     display: flex;
     justify-content: center;
 }
+
+#DeleteAccount-RowForm{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+
+    width: 1500px;
+}
+
+#DeleteAccount-RowForm-Row{
+    display: flex;
+    justify-content: center;
+    border: 1px solid black;
+    min-width: 200px;
+    font-size: 10pt;
+}
+
+#DeleteAccount-RowForm-Row-header{
+    display: flex;
+    justify-content: center;
+    min-width: 200px;
+}
+
+#DeleteAccount-RowForm-Row-Delete{
+    display: flex;
+    justify-content: center;
+    border: 1px solid black;
+    width: 100px;
+    font-size: 10pt;
+}
+
+#DeleteAccount-RowForm-Row-Delete-header{
+    display: flex;
+    justify-content: center;
+    width: 100px;
+}
+
+
