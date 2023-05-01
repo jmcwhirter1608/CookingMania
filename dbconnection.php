@@ -8,5 +8,4 @@ $database_name = "CookingMania";
 
 $connection = new mysqli($server_name, $user_name, $password, $database_name);
 
-
 ?>

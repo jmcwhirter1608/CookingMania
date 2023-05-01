@@ -8,8 +8,6 @@
     <title>Accounts</title>
 </head>
 <body>
-    <?php include 'navbar.php'?>
-    <?php include 'dbconnection.php'?>
     <?php
     if(!isset($_COOKIE['AccType'])){
         header("Location: SignIn.php");
@@ -19,9 +17,9 @@
         }
     }
     ?>
-    <h1>Create</h1>
+    <h3>Create</h3>
     <?php include 'Register/CreateAccount.php'?>
-    <h1>Edit</h1>
+    <h3>Edit</h3>
     <div id='EditAccount-RowForm'>
         <div id='EditAccount-RowForm-Row'>User ID</div>
         <div id='EditAccount-RowForm-Row'>User Type</div>
@@ -33,7 +31,7 @@
         <div id='EditAccount-RowForm-Row'>Update</div>
     </div>
     <?php include 'Register/EditAccount.php'?>
-    <h1>Delete</h1>
+    <h3>Delete</h3>
     <div id='DeleteAccount-RowForm'>
         <div id='DeleteAccount-RowForm-Row-header'>User ID</div>
         <div id='DeleteAccount-RowForm-Row-header'>User Type</div>

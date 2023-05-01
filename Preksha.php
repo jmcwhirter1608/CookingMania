@@ -12,7 +12,7 @@
     <h1 align="center">Recipes List</h1>
     <?php include "dbconnection.php"?>
     <?php
-    $user_name = $_COOKIE['user'];
+    // $user_name = $_COOKIE['user'];
 
     //go through all the recipes and get all recipe data
     $result = mysqli_query($connection, "SELECT * FROM Recipes");

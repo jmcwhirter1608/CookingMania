@@ -1,4 +1,4 @@
-<?php include 'Register/RegisterInputConfirm.php'?>
+<?php include 'RegisterInputConfirm.php'?>
     <form method='post' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
       <div class="register">
         <label for="fname"><b>First Name</b></label>
@@ -20,11 +20,11 @@
         <input type="password" placeholder="Repeat Password" name="psw-repeat"><br/>
         <label for='acc-type'><b>Account Type: </b></label>
         <label for="acc-type"><b>Admin</b></label>
-        <input type="radio" name="acc-type" value=3>
+        <input type="radio" name="acc-type" value=1>
         <label for="acc-type"><b>Teacher</b></label>
         <input type="radio" name="acc-type" value=2>
         <label for="acc-type"><b>Student</b></label>
-        <input type="radio" name="acc-type" value=1>
+        <input type="radio" name="acc-type" value=3>
         <br>
         <input type='submit' name='Create-submit' value='Create'>
 
