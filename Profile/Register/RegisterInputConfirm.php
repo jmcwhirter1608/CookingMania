@@ -77,15 +77,13 @@
                 $acc_type = test_input($_POST['acc-type']);
               }
 
-            default:
-              break;
-            }
         }
+      }
 
         function test_input($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-        }
+          $data = trim($data);
+          $data = stripslashes($data);
+          $data = htmlspecialchars($data);
+          return $data;
+          }
     ?>

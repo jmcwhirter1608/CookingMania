@@ -14,10 +14,9 @@
             </div>
             <ul class="navbar body">
                 <?php
-                    if(isset($_COOKIE['AccType'])){
-                        if($_COOKIE['AccType'] == 1){
-                            echo "<li><a href=\"Accounts.php\">Accounts</a></li>";
-                        }
+                     session_start();
+                    if(isset($_SESSION['User_ID'])){
+                        echo "<li><a href=\"ProfilePage.php\">Profile</a></li>";
                         echo "<li><a href=\"SignOut.php\">Sign Out</a></li>";
                     } else {
                         echo "<li><a href=\"Register.php\">Register</a></li>";
@@ -25,7 +24,7 @@
                     }
                 ?>
                 <li><a href="Ariana.php">Ariana</a></li>
-                <li><a href="John.php">John</a></li>
+                
                 <li><a href="Preksha.php">Recipes</a></li>
 
 

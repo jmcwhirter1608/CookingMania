@@ -9,9 +9,12 @@
     <title>Sign In</title>
 </head>
 <body>
-    <?php include 'navbar.php'?>
-    <?php include 'dbconnection.php'?>
 
+    <?php include 'navbar.php'; include 'dbconnection.php';?>
+    <?php 
+        if(isset($_SESSION['User_ID'])){
+            header("Location: ProfilePage.php");
+        } ?>
     <?php
         // define variables and set to empty values
         $acc_type = NULL;
@@ -92,10 +95,12 @@
             if($result !== false && $result->num_rows > 0){
                 while($row = $result->fetch_assoc()){
                     if($row['User_password'] == $psw){
+                        $_SESSION['User_fname'] = $row['User_fname'];
+                        $_SESSION['User_lname'] = $row['User_lname'];
+                        $_SESSION['User_ID'] = $row['User_ID'];
+                        $_SESSION['User_type'] = $row['User_type'];
                         echo "Welcome back " . $row['User_fname'] . " " . $row['User_lname'] ."<br>";
-                        setcookie("UserID", $row['User_ID'], time() + (86400 * 30), '/');
-                        setcookie("AccType", $row['User_type'], time() + (86400 * 30), '/');
-                        header("Location: SignIn.php");
+                        header("Location: ProfilePage.php");
                     } else {
                         echo "Incorrect Email or Password";
                     }

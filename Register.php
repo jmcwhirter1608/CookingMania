@@ -10,8 +10,12 @@
 </head>
 <body>
     <?php include 'navbar.php'?>
+    <?php 
+    if(isset($_SESSION['User_ID'])){
+      header("Location: ProfilePage.php");
+    }?>
     <?php include 'dbconnection.php'?>
-    <?php include 'Register/RegisterInputConfirm.php'?>
+    <?php include 'Profile/Register/RegisterInputConfirm.php'?>
     <form method='post' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
       <div class="register">
         <h1>Register</h1>
@@ -61,11 +65,15 @@
           try {
             $result = $connection->query($sql);
             
-            if($result === TRUE){
+            if($result == TRUE){
               echo "Account Created, Welcome $fname $lname!";
-              setcookie("AccType", $acc_type, time() + (86400 * 30), '/');
-              setcookie("UserID", $connection->insert_id, time() + (86400 * 30), '/');
-              header("Location: Register.php");
+              $_SESSION['User_fname'] = $fname;
+              $_SESSION['User_lname'] = $lname;
+              $_SESSION['User_ID'] = $connection->insert_id;
+              $_SESSION['User_type'] = $acc_type;
+              header("Location: ProfilePage.php");
+            } else{
+              echo "Failed";
             }
           } catch(Exception $e) {
             switch($e->getCode()){
