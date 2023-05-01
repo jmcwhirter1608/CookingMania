@@ -7,8 +7,12 @@
     <title>Ariana</title>
 </head>
 <body>
-    <?php include "navbar.php"?>
-    <h1>Ariana</h1>
+<?php include "navbar.php"?>
+    <hr />
+    <h1 align="center">Recipes Comment</h1>
+    <?php include "dbconnection.php"?>
+  
+  
     
 </body>
 </html>
