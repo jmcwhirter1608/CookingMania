@@ -25,8 +25,7 @@
                 ?>
                 <li><a href="Ariana.php">Ariana</a></li>
                 <li><a href="view_recipe.php">Recipes</a></li>
-                
-                <li><a href="Preksha.php">Recipes</a></li>
+      
 
 
                 <?php
