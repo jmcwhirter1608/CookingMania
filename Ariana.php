@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ariana Pouya</title>
+    <title>Ariana</title>
 </head>
 <body>
-    <?php include "navbar.php"?>
-    <h1>Ariana</h1>
+<?php include "navbar.php"?>
+    <hr />
+    <h1 align="center">Recipes Comment</h1>
+    <?php include "dbconnection.php"?>
+  
+  
     
 </body>
 </html>
