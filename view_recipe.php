@@ -13,6 +13,22 @@
     <h1 align="center">Recipes List</h1>
 
     <?php
+<<<<<<< Updated upstream:Preksha.php
+=======
+    $User_ID = 1;
+
+
+    $user_result = mysqli_query($connection, "SELECT User_type FROM Users WHERE User_ID = $User_ID");
+    $user_type = array();
+
+    while( $val = mysqli_fetch_array($user_result)){
+      $user_type[] = $val['User_type'];
+    }
+
+
+    //$user_type = 3; //got from cookies and login.
+
+>>>>>>> Stashed changes:view_recipe.php
 
     $server_name = "localhost";
     $user_name = "root";
@@ -55,6 +71,7 @@
       $name_res = mysqli_fetch_array($name);
       Print '<p align="center">'. "Recipe Creator: ". $name_res["User_fname"]. " ".$name_res["User_lname"] .'</p>';
 
+<<<<<<< Updated upstream:Preksha.php
       $class = mysqli_query($connection, "SELECT COUNT(*) FROM Classes WHERE Recipe_ID = ".$row["Recipe_ID"]." ");
       //$class_res = mysqli_fetch_array($class);
       //Print '<p>'. "Classes available: ". $class_res. '</p>'
@@ -76,6 +93,37 @@
     //close the connection
     mysqli_close($connection);
     ?>
+=======
+      //get the number of classes
+      $class = mysqli_query($connection, "SELECT * FROM Classes WHERE Recipe_ID = ".$recipe["Recipe_ID"]." ");
+      $class_num = mysqli_num_rows($class);
+      Print '<p align="center">'. "Classes available: ". $class_num .'</p>';
+      ?>
+
+      <!-- //make a delete button if the user is the same as creator.
+
+      //make a edit button and post all of it to create recipe with the data. -->
+
+      <?php if( $User_ID == $recipe["User_ID"] || $user_type[0] == 3 ) { ?>
+
+        <div align='center'>
+
+
+        <form method="post" action="edit_delete_recipe.php">
+          <input type='submit' name='edit' value='Edit Recipe'>
+        </form>
+        </div>
+
+      <?php }
+      Print '<hr />';
+      Print "<br />";
+
+       }
+
+      //close the connection
+      mysqli_close($connection);
+      ?>
+>>>>>>> Stashed changes:view_recipe.php
 
 
     <h2> </h2>
