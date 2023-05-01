@@ -6,7 +6,7 @@
     <title>Cooking Mania</title>
 </head>
 <body>
-    <?php include "navbar.php"?> <!-- Include This for navbar /!-->
+    <?php include "navbar.php";?> <!-- Include This for navbar /!-->
     <h1>Welcome to Cooking Mania</h1>
 
     <!-- <form method='post' action='SignInForm.php'>
