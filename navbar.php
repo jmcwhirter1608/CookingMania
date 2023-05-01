@@ -13,17 +13,24 @@
                 <a class="Logo" href="index.php">Home</a>
             </div>
             <ul class="navbar body">
+                <?php
+                     session_start();
+                    if(isset($_SESSION['User_ID'])){
+                        echo "<li><a href=\"ProfilePage.php\">Profile</a></li>";
+                        echo "<li><a href=\"SignOut.php\">Sign Out</a></li>";
+                    } else {
+                        echo "<li><a href=\"Register.php\">Register</a></li>";
+                        echo "<li><a href=\"SignIn.php\">Sign In</a></li>";
+                    }
+                ?>
                 <li><a href="Ariana.php">Ariana</a></li>
-                <li><a href="John.php">John</a></li>
-<<<<<<< Updated upstream
-                <li><a href="Preksha.php">Preksha</a></li>
-                <li><a href="Recipe_list.php">Recipes Available</a></li>
-=======
                 <li><a href="view_recipe.php">Recipes</a></li>
+                
+                <li><a href="Preksha.php">Recipes</a></li>
+
 
                 <?php
                 include "dbconnection.php";
-
                 $User_ID = 1; //get from cookie.
 
                 $result = mysqli_query($connection, "SELECT User_type FROM Users WHERE User_ID = $User_ID");
@@ -43,7 +50,6 @@
 
                 <!-- <li> <a href="create_recipe.php"> Add Recipe </a></li> -->
 
->>>>>>> Stashed changes
                 <li><a href="Shri.php">Shri</a></li>
             </ul>
         </div>

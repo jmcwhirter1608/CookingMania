@@ -65,8 +65,6 @@
 
 
 
-
-
     <input type='submit' name='submit' value='Post Recipe'>
   </div>
 </form>
