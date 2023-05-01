@@ -42,10 +42,10 @@
         </form>
     </div>
 
-    <div id='Class-Information'>
+    <div id='UserType-Information'>
         <?php 
-            if(isset($_COOKIE['AccType'])){
-                switch($_COOKIE['AccType']){
+            if(isset($_SESSION['User_type'])){
+                switch($_SESSION['User_type']){
                     case 1:
                         # Admin
                         echo "<h2>Accounts</h2>";
