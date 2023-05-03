@@ -14,7 +14,6 @@
     <?php
 
     $User_ID = $_SESSION['User_ID'];
-    //echo $User_ID;
     $user_type = $_SESSION['User_type'];
 
     //go through all the recipes and get all recipe data

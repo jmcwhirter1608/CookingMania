@@ -13,6 +13,10 @@
     <?php include "dbconnection.php"?>
 
     <!-- IF USER IS AN ADMIN OR A TEACHER ONLY SHOULD BE ABLE TO ACCESS. -->
+    <?php
+      $User_ID = $_SESSION['User_ID'];
+      $user_type = $_SESSION['User_type'];
+    ?>
 
     <hr />
 
@@ -33,17 +37,38 @@
     <br/> <br />
 
     <label for="instructions"><b>Instructions</b></label><br />
-    <textarea required name="instructions" rows="10" cols="30" > <?php echo $instructions; ?>
+    <textarea required name="instructions" rows="10" cols="30" required> <?php echo $instructions; ?>
     </textarea>
     <br /><br />
 
     <label for="Ingredients"><b>Ingredients</b></label><br />
-    <textarea required name="ingredients" rows="10" cols="30" > <?php echo $ingredients; ?>
+    <textarea required name="ingredients" rows="10" cols="30" required > <?php echo $ingredients; ?>
     </textarea>
     <br /><br />
 
     <br/><br />
 
+    <?php
+    if($user_type == 3 ){
+    ?>
+    <label for="User_name">Recipe Creator:</label>
+    <select name="User">
+    <?php
+        // use a while loop to fetch data
+        // from the $all_categories variable
+        // and individually display as an option
+        $users_recipe = mysqli_query($connection,"SELECT User_ID, User_fname, User_lname FROM Users WHERE User_Type != 1" );
+        while ($users = mysqli_fetch_array(  $users_recipe) ){
+          //echo $users["User_fname"]." ". $users["User_lname"];
+    ?>
+    <option value="<?php echo $users["User_ID"]?>">
+    <?php echo $users["User_fname"]." ". $users["User_lname"];?>
+    <?php } ?>
+
+
+    </select><br/>
+    <br/>
+      <?php } ?>
 
     <input type='submit' name='submit' value='Post Recipe'>
 

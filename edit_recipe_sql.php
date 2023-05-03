@@ -32,6 +32,8 @@
       $Recipe_level = ($_REQUEST["level"]);
       $Recipe_instructions = ($_REQUEST["instructions"]);
       $Recipe_Ingredients = ($_REQUEST["ingredients"]);
+      $recipe_creator = ($_REQUEST["User"]);
+
       $User_ID = $_SESSION['User_ID'];
       $user_type = $_SESSION['User_type'];
       $last_update_date = date ('Y-m-d');
@@ -40,8 +42,15 @@
       //make sure is teacher or admin
       if( $user_type != 1){
 
-        $result_id = $connection->prepare( "UPDATE Recipes SET Recipe_name = ?, last_update_date=?, Recipe_time = ? ,Recipe_instructions=?, Recipe_Ingredients=?, Recipe_level=? WHERE Recipe_ID=? ");
-        $result_id->bind_param("sssssii", $Recipe_name, $last_update_date, $Recipe_time,$Recipe_instructions, $Recipe_Ingredients,  $Recipe_level, $Recipe_ID);
+        if ($user_type == 3){
+          if( $recipe_creator != "" && $recipe_creator != $User_ID){
+              $User_ID= $recipe_creator;
+          }
+
+        }
+
+        $result_id = $connection->prepare( "UPDATE Recipes SET Recipe_name = ?, last_update_date=?, Recipe_time = ? ,Recipe_instructions=?, Recipe_Ingredients=?, Recipe_level=?, User_ID = ? WHERE Recipe_ID=? ");
+        $result_id->bind_param("sssssiii", $Recipe_name, $last_update_date, $Recipe_time,$Recipe_instructions, $Recipe_Ingredients,  $Recipe_level, $User_ID, $Recipe_ID);
 
         $result_id->execute();
 

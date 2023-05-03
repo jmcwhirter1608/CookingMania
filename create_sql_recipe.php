@@ -32,11 +32,20 @@
       $Recipe_level = ($_REQUEST["level"]);
       $Recipe_instructions = ($_REQUEST["instructions"]);
       $Recipe_ingredients = ($_REQUEST["ingredients"]);
+      $recipe_creator = ($_REQUEST["User"]);
+
       $User_ID = $_SESSION['User_ID'];
       $last_update_date = date ('Y-m-d');
       $user_type = $_SESSION['User_type'];
 
+
       if( $user_type != 1){
+
+        if ($user_type == 3){
+          if( $recipe_creator != "" && $recipe_creator != $User_ID){
+              $User_ID= $recipe_creator;
+          }
+        }
 
         //make sure not already inserted.
         $result_id = $connection->prepare( "SELECT Recipe_ID FROM Recipes WHERE Recipe_name = ? AND User_ID = ? AND last_update_date=? AND Recipe_time = ? AND Recipe_level=?");
