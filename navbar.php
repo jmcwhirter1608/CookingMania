@@ -37,16 +37,12 @@
                             break;
                         default:
                             echo '<li> <a href="create_recipe.php">Add Recipe</a></li>';
-                            //echo '<li> <a href="edit_delete_recipe.php">Edit/Delete Recipe</a></li>';
+                          
                     }
                 }
 
-                
+
                 ?>
-
-
-                <!-- <li> <a href="create_recipe.php"> Add Recipe </a></li> -->
-
                 <li><a href="Shri.php">Shri</a></li>
             </ul>
         </div>

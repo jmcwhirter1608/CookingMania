@@ -60,7 +60,7 @@
       <?php if( $User_ID == $recipe["User_ID"] || $user_type[0] == 3 ) { ?>
 
         <div align='center'>
-
+      <!-- send all needed data to edit/delete -->
       <?php
         echo "<form method='post' action='edit_delete_recipe.php'>.
           <input type='hidden' name='recipe_id' value=". $recipe_id. ">

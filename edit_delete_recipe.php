@@ -14,19 +14,11 @@
       $Recipe_ID = ($_REQUEST['recipe_id']);
       $result = mysqli_query($connection, "SELECT * FROM Recipes WHERE Recipe_ID=$Recipe_ID");
       $recipe = mysqli_fetch_array($result);
-        //for each recipe get the name
+
+      //for recipe get the name
       $recipe_name = $recipe['Recipe_name'];
 
-      $result_ingredients = mysqli_query($connection, "SELECT * FROM Ingredients ORDER BY Ingredient_ID ASC");
-      $ingredient_name = array();
-      $ingredient_id = array();
-      $ingredient_quanitity = array();
-      while( $ingredient = mysqli_fetch_array($result_ingredients) ){
-            $ingredient_name[] = $ingredient['Ingredient_Name'];
-            $ingredient_id[] = $ingredient['Ingredient_ID'];
-      }
-
-
+      //form to edit with the old value prepopulated.
       echo "<form method='post' action='edit_recipe_sql.php'>
 
       <div class='create_recipe' align='center'>
@@ -58,7 +50,7 @@
        </div>
        </form> ";
 
-
+       //delete button and send the recipe ID and name. 
       echo "
 
       <br /><br />

@@ -37,7 +37,7 @@
       $last_update_date = date ('Y-m-d');
 
 
-
+      //make sure is teacher or admin
       if( $user_type != 1){
 
         $result_id = $connection->prepare( "UPDATE Recipes SET Recipe_name = ?, last_update_date=?, Recipe_time = ? ,Recipe_instructions=?, Recipe_Ingredients=?, Recipe_level=? WHERE Recipe_ID=? ");
@@ -47,6 +47,7 @@
 
         Print '<h1>'.' You have updated the recipe with ID:'. $Recipe_ID. ' </h1>';
 
+        //show updated information to user
         $result = mysqli_query($connection, "SELECT * FROM Recipes WHERE Recipe_ID=$Recipe_ID");
 
         $recipe = mysqli_fetch_array($result);
@@ -60,8 +61,8 @@
         Print '<p align="center" style="width: 100%">'. $recipe["Recipe_instructions"]. "</p>";
         Print "<br />";
 
+        //print ingredients
         Print '<p align="center"  > <b>'. " Recipe Ingredients: ". "</b></p>";
-
         Print '<p align="center" style="width: 100%">'. $recipe["Recipe_Ingredients"]. "</p>";
         Print "<br />";
 

@@ -16,7 +16,7 @@
 
     <hr />
 
-
+    <!-- form to create a new recipe. all fields are required. -->
   <form method="post" action="create_sql_recipe.php">
 
     <div class="create_recipe" align="center">
@@ -38,10 +38,6 @@
     <br /><br />
 
     <label for="Ingredients"><b>Ingredients</b></label><br />
-    <!-- <p>Ingredient options: </p> -->
-
-
-    <!-- <p>Ingredient special instructions: </p> -->
     <textarea required name="ingredients" rows="10" cols="30" > <?php echo $ingredients; ?>
     </textarea>
     <br /><br />
@@ -51,9 +47,9 @@
 
     <input type='submit' name='submit' value='Post Recipe'>
 
-  </div>
-</form>
-  <br/><br />
+    </div>
+  </form>
+    <br/><br />
 
 
     <?php
