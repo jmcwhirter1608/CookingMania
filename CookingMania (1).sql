@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 03, 2023 at 02:14 AM
+-- Generation Time: May 03, 2023 at 06:43 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -175,7 +175,10 @@ INSERT INTO `Ingredient_List` (`Recipe_ID`, `Ingredient_ID`, `Ingredient_Quantit
 (97, 7, 1),
 (98, 1, 1),
 (98, 7, 1),
-(98, 8, 1);
+(98, 8, 1),
+(100, 1, 1),
+(100, 2, 1),
+(100, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -199,9 +202,9 @@ CREATE TABLE `Recipes` (
 --
 
 INSERT INTO `Recipes` (`Recipe_ID`, `Recipe_name`, `Recipe_time`, `Recipe_level`, `Recipe_instructions`, `Recipe_Ingredients`, `last_update_date`, `User_ID`) VALUES
-(1, 'Chicken Preksha', '0.2', 3, 'Cook the chicken. Make sure its not raw or burning. ', 'chicken 1', '2023-05-03', 1),
+(1, 'Chicken Preksha', '0.2', 3, 'Cook the chicken. Make sure its not raw or burning. ', 'chicken 1', '2023-05-03', 6),
 (2, 'Meat', '0.2', 1, 'Cook the meat', '1 cup of Meat', '2023-05-03', 1),
-(4, 'meatballs', '1', 1, 'reheat the meatballs and then add some salt and pepper. Then, after a bit it is ready. ', '', '2023-04-23', 1),
+(4, 'meatballs', '1', 1, 'reheat the meatballs and then add some salt and pepper. Then, after a bit it is ready. ', '', '2023-04-23', 2),
 (5, 'Chicken tacos', '1', 1, 'make chicken, tacos and pico.        ', '', '2023-04-23', 1),
 (7, 'meatballs', '0.1', 1, ' cook them.', '', '2023-04-23', 1),
 (14, 'cake', '4', 4, '    get a box from the grocery store and make it.', '', '2023-04-23', 1),
@@ -219,7 +222,8 @@ INSERT INTO `Recipes` (`Recipe_ID`, `Recipe_name`, `Recipe_time`, `Recipe_level`
 (95, 'onion omlet preksha 2', '0.2', 1, 'Wash and chop onions finely.\r\nTurn on stove and take a frying pan. Add oil to pan. Then, add egg and onions. When the egg is bubbling, flip over and cook until ready. ', '', '2023-04-30', 1),
 (96, 'onion omlet preksha 3', '0.2', 1, 'Wash and chop onions finely.\r\nTurn on stove and take a frying pan. Add oil to pan. Then, add egg and onions. When the egg is bubbling, flip over and cook until ready. ', '', '2023-04-30', 1),
 (97, 'veggie taco', '0.2', 1, '     n/a', '', '2023-04-30', 1),
-(98, 'veggie taco 2', '0.2', 1, '     n/a', '', '2023-04-30', 3);
+(98, 'veggie taco 2', '0.2', 1, '     n/a', '', '2023-04-30', 6),
+(100, 'chicken and veggies', '0.2', 1, 'Cut chicken and carrots and tomatoes and onions. Add oil and the vegetables into a pan and then add the chicken. Cook for 10 minutes and then serve.      ', '    Cut the chicken into small pieces. ', '2023-05-03', 6);
 
 -- --------------------------------------------------------
 
@@ -301,7 +305,8 @@ ALTER TABLE `Ingredient_List`
 --
 ALTER TABLE `Recipes`
   ADD PRIMARY KEY (`Recipe_ID`),
-  ADD UNIQUE KEY `Recipe_ID` (`Recipe_ID`);
+  ADD UNIQUE KEY `Recipe_ID` (`Recipe_ID`),
+  ADD KEY `Recipe_User` (`User_ID`);
 
 --
 -- Indexes for table `Users`
@@ -336,7 +341,7 @@ ALTER TABLE `Ingredients`
 -- AUTO_INCREMENT for table `Recipes`
 --
 ALTER TABLE `Recipes`
-  MODIFY `Recipe_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `Recipe_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT for table `Users`
@@ -381,6 +386,12 @@ ALTER TABLE `Comments`
 ALTER TABLE `Ingredient_List`
   ADD CONSTRAINT `Ingredient_ID_list` FOREIGN KEY (`Ingredient_ID`) REFERENCES `Ingredients` (`Ingredient_ID`),
   ADD CONSTRAINT `Recipe_ID_list` FOREIGN KEY (`Recipe_ID`) REFERENCES `Recipes` (`Recipe_ID`);
+
+--
+-- Constraints for table `Recipes`
+--
+ALTER TABLE `Recipes`
+  ADD CONSTRAINT `Recipe_User` FOREIGN KEY (`User_ID`) REFERENCES `Users` (`User_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
