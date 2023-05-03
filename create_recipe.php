@@ -38,6 +38,7 @@
     <br /><br />
 
     <label for="Ingredients"><b>Ingredients</b></label><br />
+    <p>Ingredient options: </p>
 
     <?php
       $result_ingredients = mysqli_query($connection, "SELECT * FROM Ingredients ORDER BY Ingredient_ID ASC");
@@ -56,20 +57,19 @@
        <br />
     <?php } ?>
 
-    <?php
-    foreach ($ingredient_quanitity as $ingr) {
-     echo $ingr;
-   }
-    ?>
+    <p>Ingredient special instructions: </p>
+    <textarea required name="ingredients" rows="10" cols="30" > <?php echo $ingredients; ?>
+    </textarea>
+    <br /><br />
+
     <br/><br />
 
 
-
-
-
     <input type='submit' name='submit' value='Post Recipe'>
+
   </div>
 </form>
+  <br/><br />
 
 
     <?php

@@ -16,15 +16,25 @@
 
       //echo "Editing recipe id: ". $Recipe_ID;
       $recipe = mysqli_fetch_array($result);
-
-
-        //for each recipe get the name and the time of ingredients
+        //for each recipe get the name
       $recipe_name = $recipe['Recipe_name'];
       //echo $recipe_name;
+
+      $result_ingredients = mysqli_query($connection, "SELECT * FROM Ingredients ORDER BY Ingredient_ID ASC");
+      $ingredient_name = array();
+      $ingredient_id = array();
+      $ingredient_quanitity = array();
+      while( $ingredient = mysqli_fetch_array($result_ingredients) ){
+            $ingredient_name[] = $ingredient['Ingredient_Name'];
+            $ingredient_id[] = $ingredient['Ingredient_ID'];
+      }
+
+      // echo "<h1> ". foreach ($ingredient_name as $ingr){ ."<br />" .}."</h1>";
 
       echo "<form method='post' action='edit_recipe_sql.php'>
 
       <div class='create_recipe' align='center'>
+
       <h1>Edit Recipe ". $recipe_name." with ID: ".$Recipe_ID. "</h1>
       <label for='recipename'><b>Recipe Name</b></label>
       <input type='text' required name='recipename' value=\"". $recipe_name ."\"  >
@@ -41,18 +51,22 @@
       <textarea name='instructions' rows='10' cols='30' required>". $recipe['Recipe_instructions'] .
       "</textarea>
       <br /><br />
-
       <label for='Ingredients'><b>Ingredients</b></label><br />
+
+      <p>Ingredient options and Quantities: </p>";
+
+      foreach ($ingredient_name as $ingr) {
+          echo "<label for='ingredient'>".$ingr. "</label>
+         <input type='number' name='ingredient_quantity[]' placeholder='0' min='0' max='30'>
+          <br />";
+      }
+      echo "<br /><br />";
+      echo "<input type='hidden' name='recipe_id' value=". $Recipe_ID. ">
+      <p>Ingredient special instructions: </p>
       <textarea name='ingredients' rows='10' cols='30' required>". $recipe['Recipe_Ingredients'] .
       "</textarea>
       <br /><br />
-
-      <input type='hidden' name='recipe_id' value=". $Recipe_ID. ">
-
       <input type='submit' name='submit' value='Update Recipe'>
-
-
-
       </div>
       </form> ";
 

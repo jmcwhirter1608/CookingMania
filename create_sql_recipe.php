@@ -30,6 +30,7 @@
       $Recipe_time = ($_REQUEST["time"]);
       $Recipe_level = ($_REQUEST["level"]);
       $Recipe_instructions = ($_REQUEST["instructions"]);
+      $Recipe_ingredients = ($_REQUEST["ingredients"]);
       $User_ID = 1; //FIX ME. get this from cookies.
       $last_update_date = date ('Y-m-d');
 
@@ -54,8 +55,9 @@
 
 
         if ( $Recipe_ids == array() ){
-          $insert_sql = $connection->prepare("INSERT INTO Recipes(Recipe_name, Recipe_time, Recipe_level, Recipe_instructions, last_update_date, User_ID) Values (?, ?,?,?, ?, ?)");
-          $insert_sql->bind_param("ssissi", $Recipe_name, $Recipe_time, $Recipe_level, $Recipe_instructions, $last_update_date, $User_ID );
+
+          $insert_sql = $connection->prepare("INSERT INTO Recipes(Recipe_name, Recipe_time, Recipe_level, Recipe_instructions,Recipe_Ingredients, last_update_date, User_ID) Values (?, ?,?,?,?, ?, ?)");
+          $insert_sql->bind_param("ssisssi", $Recipe_name, $Recipe_time, $Recipe_level, $Recipe_instructions, $Recipe_ingredients, $last_update_date, $User_ID );
 
           if ($insert_sql->execute() === TRUE) {
             Print  '<p>'. "New recipe created successfully". '</p>';
@@ -84,15 +86,12 @@
               $insert_ingr = $connection->prepare("INSERT INTO Ingredient_List(Recipe_ID, Ingredient_ID, Ingredient_Quantity) Values (?, ?,?)");
               $insert_ingr->bind_param("iii", $Recipe_ids[0], $ingredient_id, $ingr_quantity);
 
-
-
-
-              if ($insert_ingr->execute() === TRUE) {
-                  Print  '<p>'. "ingredient linked successfully".$ingredient_id . $ingr_quantity . "</p> ";
-                  Print '<br />';
-              } else {
-                  Print  '<p>'. "ingredient not linked". "</p> ";
-              }
+              // if ($insert_ingr->execute() === TRUE) {
+              //     Print  '<p>'. "ingredient linked successfully".$ingredient_id . $ingr_quantity . "</p> ";
+              //     Print '<br />';
+              // } else {
+              //     Print  '<p>'. "ingredient not linked". "</p> ";
+              // }
             }
             $ingredient_id++;
           }

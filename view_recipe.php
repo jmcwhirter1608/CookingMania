@@ -39,9 +39,10 @@
 
       Print '<p align="center"> <b>'. " Recipe Ingredients and Quantities". " </b> </p>";
 
-      $ingredient_list_res = mysqli_query($connection, "SELECT * FROM Ingredient_List WHERE Recipe_ID = ".$recipe['Recipe_ID']." ");
 
       //for all ingredients for this recipe print the item and the quantity
+      $ingredient_list_res = mysqli_query($connection, "SELECT * FROM Ingredient_List WHERE Recipe_ID = ".$recipe['Recipe_ID']." ");
+
       while( $ingredient = mysqli_fetch_array($ingredient_list_res) ){
 
         $ingredients_res = mysqli_query($connection, "SELECT * FROM Ingredients WHERE Ingredient_ID = ".$ingredient['Ingredient_ID']." ");
@@ -51,6 +52,11 @@
         }
       }
 
+      if ($recipe["Recipe_Ingredients"] != ""){
+        Print '<p align="center"> <b>'. " Recipe Special Instructions". " </b> </p>";
+        Print '<p align="center" style="width: 100%">'. $recipe["Recipe_Ingredients"]. "</p>";
+      }
+      Print "<br />";
       //print out the instructions
       Print '<p align="center"  > <b>'. " Recipe Instructions: ". "</b></p>";
       Print '<p align="center" style="width: 100%">'. $recipe["Recipe_instructions"]. "</p>";
@@ -59,6 +65,7 @@
       Print '<p align="center">'. "Recipe Difficulty: ". $recipe["Recipe_level"].'</p>';
 
       //get the recipe creator
+      //FIX ME:
       $name = mysqli_query($connection, "SELECT * FROM Users WHERE User_ID = ".$recipe["User_ID"]." ");
       $name_res = mysqli_fetch_array($name);
       Print '<p align="center">'. "Recipe Creator: ". $name_res["User_fname"]. " ".$name_res["User_lname"] .'</p>';
@@ -66,6 +73,8 @@
       //get the number of classes
       $class = mysqli_query($connection, "SELECT * FROM Classes WHERE Recipe_ID = ".$recipe["Recipe_ID"]." ");
       $class_num = mysqli_num_rows($class);
+
+
       Print '<p align="center">'. "Classes available: ". $class_num .'</p>';
       ?>
 

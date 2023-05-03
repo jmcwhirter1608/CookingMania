@@ -48,6 +48,27 @@
 
         $result_id->execute();
 
+        //INGREDIENTS UPDATE:
+        $ingredient_quanitity = $_REQUEST["ingredient_quantity"];
+        $ingredient_id = 1;
+        foreach ($ingredient_quanitity as $ingr_quantity){
+          if($ingr_quantity > 0 ){
+            $insert_ingr = $connection->prepare("INSERT INTO Ingredient_List(Recipe_ID, Ingredient_ID, Ingredient_Quantity) Values (?, ?,?)");
+            $insert_ingr->bind_param("iii", $Recipe_ids[0], $ingredient_id, $ingr_quantity);
+
+
+
+
+            if ($insert_ingr->execute() === TRUE) {
+                Print  '<p>'. "ingredient linked successfully".$ingredient_id . $ingr_quantity . "</p> ";
+                Print '<br />';
+            } else {
+                Print  '<p>'. "ingredient not linked". "</p> ";
+            }
+          }
+          $ingredient_id++;
+        }
+
         Print '<h1>'.' You have updated the recipe with ID:'. $Recipe_ID. ' </h1>';
 
         $result = mysqli_query($connection, "SELECT * FROM Recipes WHERE Recipe_ID=$Recipe_ID");
