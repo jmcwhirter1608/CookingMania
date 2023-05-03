@@ -30,7 +30,6 @@
 
 
                 <?php
-                // We don't want to do any of this 
 
                 if(isset($_SESSION['User_type'])){
                     switch($_SESSION['User_type']){
