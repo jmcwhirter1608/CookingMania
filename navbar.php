@@ -24,17 +24,30 @@
                     }
                 ?>
                 <li><a href="Ariana.php">Ariana</a></li>
-                
-                <li><a href="Preksha.php">Recipes</a></li>
+                <li><a href="view_recipe.php">Recipes</a></li>
+
 
 
                 <?php
                 include "dbconnection.php";
+                $User_ID = 1; //get from cookie.
 
-                $result = mysqli_query($connection, "SELECT * FROM Users WHERE User_type = 2 ");
+                $result = mysqli_query($connection, "SELECT User_type FROM Users WHERE User_ID = $User_ID");
+                $user_type = array();
 
-                Print '<li> <a href="create_recipe.php">'. 'Add Recipe'.'</a></li>';
+                while( $val = mysqli_fetch_array($result)){
+                  $user_type[] = $val['User_type'];
+                }
+
+                if( $user_type[0] != 1){
+                  Print '<li> <a href="create_recipe.php">'. 'Add Recipe'.'</a></li>';
+                  //Print '<li> <a href="edit_delete_recipe.php">'. 'Edit/Delete Recipe'. '</a></li>';
+                }
+
                 ?>
+
+
+                <!-- <li> <a href="create_recipe.php"> Add Recipe </a></li> -->
 
                 <li><a href="Shri.php">Shri</a></li>
             </ul>
@@ -42,3 +55,11 @@
     </nav>
 </body>
 </html>
+
+<!-- <?php
+include "dbconnection.php";
+
+$result = mysqli_query($connection, "SELECT * FROM Users WHERE User_type = 2 OR U ");
+
+Print '';
+?> -->

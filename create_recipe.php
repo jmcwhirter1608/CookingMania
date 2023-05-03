@@ -29,18 +29,18 @@
     <input type="number" placeholder="Time" name="time" min="0" max="10" step="0.1" required>
     <br/>  <br />
     <label for="level"><b>Level from 1 (easy) to 5 (hard): </b></label>
-    <input type="number" id="value" name="level" placeholder="1" min="1" max="5">
+    <input type="number" id="value" name="level" placeholder="1" min="1" max="5" required>
     <br/> <br />
 
     <label for="instructions"><b>Instructions</b></label><br />
-    <textarea name="instructions" rows="10" cols="30"> <?php echo $instructions; ?>
+    <textarea required name="instructions" rows="10" cols="30" > <?php echo $instructions; ?>
     </textarea>
     <br /><br />
 
     <label for="Ingredients"><b>Ingredients</b></label><br />
 
     <?php
-      $result_ingredients = mysqli_query($connection, "SELECT * FROM Ingredients");
+      $result_ingredients = mysqli_query($connection, "SELECT * FROM Ingredients ORDER BY Ingredient_ID ASC");
       $ingredient_name = array();
       $ingredient_id = array();
       $ingredient_quanitity = array();
@@ -62,6 +62,8 @@
    }
     ?>
     <br/><br />
+
+
 
 
 

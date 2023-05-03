@@ -12,13 +12,26 @@
     <h1 align="center">Recipes List</h1>
     <?php include "dbconnection.php"?>
     <?php
-    // $user_name = $_COOKIE['user'];
+    $User_ID = 1;
+
+
+    $user_result = mysqli_query($connection, "SELECT User_type FROM Users WHERE User_ID = $User_ID");
+    $user_type = array();
+
+    while( $val = mysqli_fetch_array($user_result)){
+      $user_type[] = $val['User_type'];
+    }
+
+
+    //$user_type = 3; //got from cookies and login.
+
 
     //go through all the recipes and get all recipe data
     $result = mysqli_query($connection, "SELECT * FROM Recipes");
 
     while ( $recipe = mysqli_fetch_array($result) ) {
       //for each recipe get the name and the time of ingredients
+      $recipe_id = $recipe['Recipe_ID'];
       Print '<hr />';
       Print '<h2 align="center">'. $recipe['Recipe_name'] . "</h2>";
 
@@ -54,18 +67,35 @@
       $class = mysqli_query($connection, "SELECT * FROM Classes WHERE Recipe_ID = ".$recipe["Recipe_ID"]." ");
       $class_num = mysqli_num_rows($class);
       Print '<p align="center">'. "Classes available: ". $class_num .'</p>';
+      ?>
 
-      //make a delete button if the user is the same as creator.
+      <!-- //make a delete button if the user is the same as creator.
 
-      //make a edit button and post all of it to create recipe with the data.
+      //make a edit button and post all of it to create recipe with the data. -->
+
+      <?php if( $User_ID == $recipe["User_ID"] || $user_type[0] == 3 ) { ?>
+
+        <div align='center'>
+
+      <?php
+        //echo $recipe["User_ID"];
+        echo "<form method='post' action='edit_delete_recipe.php'>.
+          <input type='hidden' name='recipe_id' value=". $recipe_id. ">
+          <input type='submit' name='edit' value='Edit Recipe'>
+
+        </form>"
+      ?>
+        </div>
+
+      <?php }
       Print '<hr />';
       Print "<br />";
 
-     }
+       }
 
-    //close the connection
-    mysqli_close($connection);
-    ?>
+      //close the connection
+      mysqli_close($connection);
+      ?>
 
 
 </body>
