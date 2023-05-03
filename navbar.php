@@ -29,19 +29,31 @@
 
 
                 <?php
-                include "dbconnection.php";
-                $User_ID = 1; //get from cookie.
+                // We don't want to do any of this 
+                // include "dbconnection.php";
+                // $User_ID = 1; //get from cookie.
 
-                $result = mysqli_query($connection, "SELECT User_type FROM Users WHERE User_ID = $User_ID");
-                $user_type = array();
+                // $result = mysqli_query($connection, "SELECT User_type FROM Users WHERE User_ID = $User_ID");
+                // $user_type = array();
 
-                while( $val = mysqli_fetch_array($result)){
-                  $user_type[] = $val['User_type'];
-                }
+                // while( $val = mysqli_fetch_array($result)){
+                //   $user_type[] = $val['User_type'];
+                // }
 
-                if( $user_type[0] != 1){
-                  Print '<li> <a href="create_recipe.php">'. 'Add Recipe'.'</a></li>';
-                  //Print '<li> <a href="edit_delete_recipe.php">'. 'Edit/Delete Recipe'. '</a></li>';
+                // if( $user_type[0] != 1){
+                //   Print '<li> <a href="create_recipe.php">'. 'Add Recipe'.'</a></li>';
+                //   //Print '<li> <a href="edit_delete_recipe.php">'. 'Edit/Delete Recipe'. '</a></li>';
+                // }
+
+                if(isset($_SESSION['User_type'])){
+                    switch($_SESSION['User_type']){
+                        case 1:
+                            echo '<li> Type Admin </li>';
+                            break;
+                        default:
+                            echo '<li> <a href="create_recipe.php">Add Recipe</a></li>';
+                            echo '<li> <a href="edit_delete_recipe.php">Edit/Delete Recipe</a></li>';
+                    }   
                 }
 
                 ?>
@@ -56,10 +68,3 @@
 </body>
 </html>
 
-<!-- <?php
-include "dbconnection.php";
-
-$result = mysqli_query($connection, "SELECT * FROM Users WHERE User_type = 2 OR U ");
-
-Print '';
-?> -->
