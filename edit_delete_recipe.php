@@ -52,23 +52,26 @@
       "</textarea>
       <br /><br />
       <label for='Ingredients'><b>Ingredients</b></label><br />
+      <br />
+      <input type='hidden' name='recipe_id' value=". $Recipe_ID. ">
 
-      <p>Ingredient options and Quantities: </p>";
+       <textarea name='ingredients' rows='10' cols='30' required>". $recipe['Recipe_Ingredients'] .
+       "</textarea>
+       <br /><br />
+       <input type='submit' name='submit' value='Update Recipe'>
+       </div>
+       </form> ";
 
-      foreach ($ingredient_name as $ingr) {
-          echo "<label for='ingredient'>".$ingr. "</label>
-         <input type='number' name='ingredient_quantity[]' placeholder='0' min='0' max='30'>
-          <br />";
-      }
-      echo "<br /><br />";
-      echo "<input type='hidden' name='recipe_id' value=". $Recipe_ID. ">
-      <p>Ingredient special instructions: </p>
-      <textarea name='ingredients' rows='10' cols='30' required>". $recipe['Recipe_Ingredients'] .
-      "</textarea>
-      <br /><br />
-      <input type='submit' name='submit' value='Update Recipe'>
-      </div>
-      </form> ";
+      // <p>Ingredient options and Quantities: </p>;
+
+      // foreach ($ingredient_name as $ingr) {
+      //     echo "<label for='ingredient'>".$ingr. "</label>
+      //    <input type='number' name='ingredient_quantity[]' placeholder='0' min='0' max='30 value=".$ingr.">
+      //     <br />";
+      // }
+      //
+      //// <p>Ingredient special instructions: </p>
+     
 
 
       echo "

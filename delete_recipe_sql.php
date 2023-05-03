@@ -38,13 +38,19 @@
 
       if( $user_type[0] != 1){
 
-        
+
         $result_id = $connection->prepare( "DELETE FROM Recipes WHERE Recipe_ID=? ");
         $result_id->bind_param("i", $Recipe_ID);
 
         $result_id->execute();
 
-        Print '<h1>'.' You have deleted: '.$Recipe_Name . ' Recipe </h1>';
+        // $result_id = $connection->prepare( "DELETE FROM Ingredient_List WHERE Recipe_ID=? ");
+        // $result_id->bind_param("i", $Recipe_ID);
+        //
+        // $result_id->execute();
+
+
+        Print '<h1>'.' You have deleted: '.$Recipe_Name . ' Recipe with ID '. $Recipe_ID.'</h1>';
 
       }
       else{

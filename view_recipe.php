@@ -41,21 +41,21 @@
 
 
       //for all ingredients for this recipe print the item and the quantity
-      $ingredient_list_res = mysqli_query($connection, "SELECT * FROM Ingredient_List WHERE Recipe_ID = ".$recipe['Recipe_ID']." ");
+      // $ingredient_list_res = mysqli_query($connection, "SELECT * FROM Ingredient_List WHERE Recipe_ID = ".$recipe['Recipe_ID']." ");
+      //
+      // while( $ingredient = mysqli_fetch_array($ingredient_list_res) ){
+      //
+      //   $ingredients_res = mysqli_query($connection, "SELECT * FROM Ingredients WHERE Ingredient_ID = ".$ingredient['Ingredient_ID']." ");
+      //
+      //   while( $item = mysqli_fetch_array($ingredients_res) ){
+      //       Print '<p align="center">'. $ingredient["Ingredient_Quantity"]. " " .$item["Ingredient_Name"] ."</p>";
+      //   }
+      // }
 
-      while( $ingredient = mysqli_fetch_array($ingredient_list_res) ){
-
-        $ingredients_res = mysqli_query($connection, "SELECT * FROM Ingredients WHERE Ingredient_ID = ".$ingredient['Ingredient_ID']." ");
-
-        while( $item = mysqli_fetch_array($ingredients_res) ){
-            Print '<p align="center">'. $ingredient["Ingredient_Quantity"]. " " .$item["Ingredient_Name"] ."</p>";
-        }
-      }
-
-      if ($recipe["Recipe_Ingredients"] != ""){
-        Print '<p align="center"> <b>'. " Recipe Special Instructions". " </b> </p>";
+      //if ($recipe["Recipe_Ingredients"] != ""){
+        //Print '<p align="center"> <b>'. " Recipe Special Instructions". " </b> </p>";
         Print '<p align="center" style="width: 100%">'. $recipe["Recipe_Ingredients"]. "</p>";
-      }
+      //}
       Print "<br />";
       //print out the instructions
       Print '<p align="center"  > <b>'. " Recipe Instructions: ". "</b></p>";

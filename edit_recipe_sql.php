@@ -49,25 +49,47 @@
         $result_id->execute();
 
         //INGREDIENTS UPDATE:
-        $ingredient_quanitity = $_REQUEST["ingredient_quantity"];
-        $ingredient_id = 1;
-        foreach ($ingredient_quanitity as $ingr_quantity){
-          if($ingr_quantity > 0 ){
-            $insert_ingr = $connection->prepare("INSERT INTO Ingredient_List(Recipe_ID, Ingredient_ID, Ingredient_Quantity) Values (?, ?,?)");
-            $insert_ingr->bind_param("iii", $Recipe_ids[0], $ingredient_id, $ingr_quantity);
+        // $ingredient_quanitity = $_REQUEST["ingredient_quantity"];
+        // $ingredient_id = 1;
+        //
+        // foreach ($ingredient_quanitity as $ingr_quantity){
+        //
+        //
+        //   $ingredient_list_res = mysqli_query($connection, "SELECT Ingredient_Quantity FROM Ingredient_List WHERE Recipe_ID = $Recipe_ID AND Ingredient_ID=$ingredient_id");
+        //   $item_quantity_curr = mysqli_fetch_array($ingredient_list_res);
+        //   //echo
+        //   $exists = mysqli_num_rows($ingredient_list_res);
 
-
-
-
-            if ($insert_ingr->execute() === TRUE) {
-                Print  '<p>'. "ingredient linked successfully".$ingredient_id . $ingr_quantity . "</p> ";
-                Print '<br />';
-            } else {
-                Print  '<p>'. "ingredient not linked". "</p> ";
-            }
-          }
-          $ingredient_id++;
-        }
+          //echo $exists;
+        //  if($exists > 0 ){
+        //     if($ingr_quantity > 0 ){
+        //       $insert_ingr = $connection->prepare("UPDATE Ingredient_List SET Ingredient_Quantity=? WHERE Recipe_ID= ? AND Ingredient_ID=?,");
+        //       $insert_ingr->bind_param("iii",  $ingr_quantity, $Recipe_ID, $ingredient_id,);
+        //       $insert_ingr->execute();
+        //       echo "update";
+        //     }
+        //     elseif( $ingr_quantity == 0){
+        //       $insert_ingr = $connection->prepare("DELETE FROM Ingredient_List WHERE Recipe_ID=? AND Ingredient_ID=? ");
+        //       $insert_ingr->bind_param("ii", $Recipe_ID, $ingredient_id);
+        //       $insert_ingr->execute();
+        //       echo "deleted";
+        //     }
+        //   }
+        //   else{
+        //     if($ingr_quantity > 0 ){
+        //       $insert_ingr = $connection->prepare("INSERT INTO Ingredient_List(Recipe_ID, Ingredient_ID, Ingredient_Quantity) Values (?, ?,?)");
+        //       $insert_ingr->bind_param("iii", $Recipe_ID, $ingredient_id, $ingr_quantity);
+        //
+        //       if ($insert_ingr->execute() === TRUE) {
+        //           Print  '<p>'. "ingredient linked successfully".$ingredient_id . $ingr_quantity . "</p> ";
+        //           Print '<br />';
+        //       } else {
+        //           Print  '<p>'. "ingredient not linked". "</p> ";
+        //       }
+        //     }
+        //   }
+        //   $ingredient_id++;
+        // }
 
         Print '<h1>'.' You have updated the recipe with ID:'. $Recipe_ID. ' </h1>';
 
@@ -85,6 +107,17 @@
         Print "<br />";
 
         Print '<p align="center"  > <b>'. " Recipe Ingredients: ". "</b></p>";
+        // $ingredient_list_res = mysqli_query($connection, "SELECT * FROM Ingredient_List WHERE Recipe_ID = $Recipe_ID ");
+        //
+        // while( $ingredient = mysqli_fetch_array($ingredient_list_res) ){
+        //
+        //   $ingredients_res = mysqli_query($connection, 'SELECT * FROM Ingredients WHERE Ingredient_ID = $ingredient["Ingredient_ID"] ');
+        //
+        //   while( $item = mysqli_fetch_array($ingredients_res) ){
+        //       Print '<p align="center">'. $ingredient["Ingredient_Quantity"]. " " .$item["Ingredient_Name"] ."</p>";
+        //   }
+        // }
+        // Print '<p align="center"> <b>'. " Recipe Special Instructions". " </b> </p>";
         Print '<p align="center" style="width: 100%">'. $recipe["Recipe_Ingredients"]. "</p>";
         Print "<br />";
 
