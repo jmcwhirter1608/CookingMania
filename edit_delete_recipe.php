@@ -13,12 +13,9 @@
     <?php
       $Recipe_ID = ($_REQUEST['recipe_id']);
       $result = mysqli_query($connection, "SELECT * FROM Recipes WHERE Recipe_ID=$Recipe_ID");
-
-      //echo "Editing recipe id: ". $Recipe_ID;
       $recipe = mysqli_fetch_array($result);
         //for each recipe get the name
       $recipe_name = $recipe['Recipe_name'];
-      //echo $recipe_name;
 
       $result_ingredients = mysqli_query($connection, "SELECT * FROM Ingredients ORDER BY Ingredient_ID ASC");
       $ingredient_name = array();
@@ -29,7 +26,6 @@
             $ingredient_id[] = $ingredient['Ingredient_ID'];
       }
 
-      // echo "<h1> ". foreach ($ingredient_name as $ingr){ ."<br />" .}."</h1>";
 
       echo "<form method='post' action='edit_recipe_sql.php'>
 
@@ -62,17 +58,6 @@
        </div>
        </form> ";
 
-      // <p>Ingredient options and Quantities: </p>;
-
-      // foreach ($ingredient_name as $ingr) {
-      //     echo "<label for='ingredient'>".$ingr. "</label>
-      //    <input type='number' name='ingredient_quantity[]' placeholder='0' min='0' max='30 value=".$ingr.">
-      //     <br />";
-      // }
-      //
-      //// <p>Ingredient special instructions: </p>
-     
-
 
       echo "
 
@@ -81,7 +66,7 @@
       <br /><br /><form method='post' action='delete_recipe_sql.php' align='center'>
 
       <input type='hidden' name='recipe_id' value=". $Recipe_ID. ">
-      <input type='hidden' name='recipe_name' value=". $recipe_name. ">
+      <input type='hidden' name='recipe_name' value=\"". $recipe_name ."\" >
 
       <input type='submit' name='submit' value='DELETE RECIPE.'>
       </form>

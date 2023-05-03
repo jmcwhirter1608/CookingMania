@@ -26,35 +26,28 @@
       }
 
       // define variables
+      $User_ID= $_SESSION['User_ID'];
       $Recipe_ID = ($_REQUEST['recipe_id']);
       $Recipe_Name = ($_REQUEST['recipe_name']);
+      $user_type = $_SESSION['User_type'];
 
-
-      $result = mysqli_query($connection, "SELECT User_type FROM Users WHERE User_ID = $User_ID");
-      $user_type = array();
-      while( $val = mysqli_fetch_array($result)){
-        $user_type[] = $val['User_type'];
-      }
-
-      if( $user_type[0] != 1){
-
+      //if can delete then remove. 
+      if( $user_type != 1){
 
         $result_id = $connection->prepare( "DELETE FROM Recipes WHERE Recipe_ID=? ");
         $result_id->bind_param("i", $Recipe_ID);
 
-        $result_id->execute();
+        if($result_id->execute()){
+          echo "<h1> You have deleted: $Recipe_Name Recipe with ID ". $Recipe_ID.'</h1>';
 
-        // $result_id = $connection->prepare( "DELETE FROM Ingredient_List WHERE Recipe_ID=? ");
-        // $result_id->bind_param("i", $Recipe_ID);
-        //
-        // $result_id->execute();
-
-
-        Print '<h1>'.' You have deleted: '.$Recipe_Name . ' Recipe with ID '. $Recipe_ID.'</h1>';
+        }
+        else{
+          echo "<h1> Deletion failed </h1>";
+        }
 
       }
       else{
-        Print '<h1>'.' You do not have permissions to make recipes.'. ' </h1>';
+        echo '<h1>'.' You do not have permissions to make recipes.'. ' </h1>';
       }
 
       //close the connection

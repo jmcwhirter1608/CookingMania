@@ -31,7 +31,7 @@
       $Recipe_level = ($_REQUEST["level"]);
       $Recipe_instructions = ($_REQUEST["instructions"]);
       $Recipe_ingredients = ($_REQUEST["ingredients"]);
-      $User_ID = 1; //FIX ME. get this from cookies.
+      $User_ID = $_SESSION['User_ID']; 
       $last_update_date = date ('Y-m-d');
 
       $result = mysqli_query($connection, "SELECT User_type FROM Users WHERE User_ID = $User_ID");
