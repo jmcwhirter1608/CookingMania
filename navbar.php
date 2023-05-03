@@ -25,7 +25,7 @@
                 ?>
                 <li><a href="Ariana.php">Ariana</a></li>
                 <li><a href="view_recipe.php">Recipes</a></li>
-      
+
 
 
                 <?php
@@ -41,7 +41,7 @@
 
                 if( $user_type[0] != 1){
                   Print '<li> <a href="create_recipe.php">'. 'Add Recipe'.'</a></li>';
-                  Print '<li> <a href="edit_delete_recipe.php">'. 'Edit/Delete Recipe'. '</a></li>';
+                  //Print '<li> <a href="edit_delete_recipe.php">'. 'Edit/Delete Recipe'. '</a></li>';
                 }
 
                 ?>

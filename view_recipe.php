@@ -31,6 +31,7 @@
 
     while ( $recipe = mysqli_fetch_array($result) ) {
       //for each recipe get the name and the time of ingredients
+      $recipe_id = $recipe['Recipe_ID'];
       Print '<hr />';
       Print '<h2 align="center">'. $recipe['Recipe_name'] . "</h2>";
 
@@ -76,10 +77,14 @@
 
         <div align='center'>
 
-
-        <form method="post" action="edit_delete_recipe.php">
+      <?php
+        //echo $recipe["User_ID"];
+        echo "<form method='post' action='edit_delete_recipe.php'>.
+          <input type='hidden' name='recipe_id' value=". $recipe_id. ">
           <input type='submit' name='edit' value='Edit Recipe'>
-        </form>
+
+        </form>"
+      ?>
         </div>
 
       <?php }
