@@ -48,7 +48,7 @@
           if($row1['User_ID']==$_SESSION['User_ID'] ||  $_SESSION['User_type']==1 ) { //if user = logged in user (you can edit/delete )
             
             //form to edit/delete 
-            Print '<form method = "post" action = "Edit_Delete_CommentSQL.php?Comment_ID='.$row1['Comment_ID'].'">
+            Print '<form method = "post" action = "Comments/Edit_Delete_CommentSQL.php?Comment_ID='.$row1['Comment_ID'].'">
             <label>'. $row1['User_fname'] . ": " .  '</label> <input type = "text" name = "CommentText" value ="' .$row1['CommentText'].'"> <br>
            <input type="submit" name="Edit-comment" value="Edit"> 
            <input type="submit" name="Delete-comment" value="Delete">
@@ -62,7 +62,7 @@
     }; 
 
       //create comment form, INSERT INTO Comments(Comment_ID, Recipe_ID,User_ID, CommentText)
-      Print '<form method = "post" action = "CreateSQLComment.php?Recipe_ID='.$row['Recipe_ID'].'">
+      Print '<form method = "post" action = "Comments/CreateSQLComment.php?Recipe_ID='.$row['Recipe_ID'].'">
           <label> Comment: </label> <input type = "text" name = "comment"> <br>
          <input type="submit" name="Create-comment" value="Submit">
       </form>';
