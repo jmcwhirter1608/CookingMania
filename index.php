@@ -6,13 +6,25 @@
     <title>Cooking Mania</title>
 </head>
 <body>
-    <?php include "navbar.php";?> <!-- Include This for navbar /!-->
-    <h1 align="center">Welcome to Cooking Mania</h1>
+    <?php    
+    include 'dbconnection.php'; 
+    session_start();
+    function test_input($data) {
+      $data = trim($data);
+      $data = stripslashes($data);
+      $data = htmlspecialchars($data);
+      return $data;
+      } 
 
-    <!-- <form method='post' action='SignInForm.php'>
-      <input type='submit' name='signin' value='Sign In'></input>
-      <input type='submit' name='register' value='Register'></input>
-    </form> -->
+    echo '<h1>Welcome to Cooking Mania</h1>';
+
+    if(isset($_SESSION['User_ID'])){
+      header('Location: ProfilePage.php');
+    } else{
+      include "Profile/SignIn.php";
+      include "Profile/Register.php";
+    }
+    ?>
 
     
 </body>

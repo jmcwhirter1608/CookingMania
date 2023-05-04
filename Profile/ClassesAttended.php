@@ -6,7 +6,14 @@
     
 
     $sql = sprintf(
-        "SELECT class_enrollment.Class_ID, classes.Class_Date, classes.Class_StartTime, recipes.Recipe_name, users.User_fname, users.User_lname, classes.Class_duration, classes.Class_RoomNum
+        "SELECT 
+            class_enrollment.Class_ID, 
+            classes.Class_Date, 
+            classes.Class_StartTime, 
+            recipes.Recipe_name, 
+            users.User_fname, 
+            users.User_lname, 
+            classes.Class_RoomNum
         FROM class_enrollment
         INNER JOIN classes
         ON class_enrollment.Class_ID = classes.Class_ID
@@ -28,11 +35,12 @@
                     <td>" . $row['Class_StartTime'] . "</td>
                     <td>" . $row['Recipe_name'] . "</td>
                     <td>" . $row['User_fname'] . " " . $row['User_lname'] . "</td>
-                    <td>" . $row['Class_duration'] . "</td>
                     <td>" . $row['Class_RoomNum'] . "</td>
                    </tr>";
             
         }
+    } else{
+        echo "<h3>You have not Attended any Classes!</h3>";
     }
 
 ?>
