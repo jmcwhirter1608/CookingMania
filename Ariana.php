@@ -35,11 +35,30 @@
      $result1 = $connection->query($sql1);
 
       Print '<hr />';
-      Print '<h2 align="center">'. $row['Recipe_name'] . "</h2>"; 
+      Print '<h2 align="center">'. $row['Recipe_name'] . "</h2>"; //print recipe name
       Print '<h2 align="center"> Comments </h2> '; 
 
       while ( $row1 = $result1->fetch_assoc()){
+       
+        //print out comment with user name
         Print '<h2 align="center">'. $row1['User_fname'] . ": " . $row1['CommentText'] . "</h2>"; 
+
+          //edit and delete comment 
+          //admin can delete and edit all comments! 
+          if($row1['User_ID']==$_SESSION['User_ID'] || $_SESSION['User_ID']=== 1 ) { //if user = logged in user (you can edit/delete )
+            
+            //form to edit/delete 
+            Print '<form method = "post" action = "Edit_Delete_CommentSQL.php?Comment_ID='.$row1['Comment_ID'].'">
+            <label>'. $row1['User_fname'] . ": " .  '</label> <input type = "text" name = "CommentText" value ="' .$row1['CommentText'].'"> <br>
+           <input type="submit" name="Edit-comment" value="Edit"> 
+           <input type="submit" name="Delete-comment" value="Delete">
+            </form>';
+            
+        //teacher can delete all comments but not edit
+        }else{
+            Print '<h2 align="center">'. $row1['User_fname'] . ": " . $row1['CommentText'] . "</h2>"; 
+        }
+       
     }; 
 
       //create comment form, INSERT INTO Comments(Comment_ID, Recipe_ID,User_ID, CommentText)
@@ -49,27 +68,6 @@
       </form>';
    }
    ?>
-
-    <!-- edit/delete -->
-    <?php    
-
-        echo "<form id='DeleteAccount-RowForm' method='post' action=". htmlspecialchars($_SERVER["PHP_SELF"]) . ">";
-
-        while($row1 = $result1->fetch_assoc()){
-            if($row1['User_ID']==$_SESSION['User_ID']){ //if user id is same as session they can delete
-            echo   "<div id='DeleteAccount-RowForm-Row' >" . $row1['User_ID'] . "</div>"
-
-            Print "<input id='DeleteAccount-RowForm-Row-Delete' type='checkbox' name='check[" . $row['User_ID'] . "] >";
-    
- 
-             echo "<input type='submit' name='Delete-comment' value='Delete'></form>";
-            }
-
-        };
-    ?>
-  
-
-
 
 
 </body>
