@@ -18,11 +18,7 @@
                      //echo isset($_SESSION['User_ID']);
                     if(isset($_SESSION['User_ID'])){
                         echo "<li><a href=\"ProfilePage.php\">Profile</a></li>";
-                        echo "<li><a href=\"SignOut.php\">Sign Out</a></li>";
-                    } else {
-                        echo "<li><a href=\"Register.php\">Register</a></li>";
-                        echo "<li><a href=\"SignIn.php\">Sign In</a></li>";
-                    }
+                    } 
                 ?>
                 <li><a href="Ariana.php">Ariana</a></li>
                 <li><a href="view_recipe.php">Recipes</a></li>

@@ -1,70 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css\styles.css">
 
-    <title>Sign In</title>
-</head>
-<body>
+<?php 
+    if(isset($_SESSION['User_ID'])){
+        header("Location: ProfilePage.php");
+    };
+    // define variables and set to empty values
+    $acc_type = NULL;
+    $email = $psw = $psw_repeat = NULL;
+    $Err = NULL;
 
-    <?php include 'navbar.php'; include 'dbconnection.php';?>
-    <?php 
-        if(isset($_SESSION['User_ID'])){
-            header("Location: ProfilePage.php");
-        } ?>
-    <?php
-        // define variables and set to empty values
-        $acc_type = NULL;
-        $email = $psw = $psw_repeat = NULL;
-        $Err = NULL;
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-            switch(0){
-                case 0:
-                    if(empty($_POST['email'])){
-                        $Err = "Email is Required";
-                        break;
-                    } else{
-                    $email = test_input($_POST['email']);
-                    }
-                    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-                    $Err = "Invalid Email";
+        switch(0){
+            case 0:
+                if(empty($_POST['email'])){
+                    $Err = "Email is Required";
                     break;
-                    }
-                case 1:
-                    if(empty($_POST['psw'])){
-                        $Err = 'Password is Required';
-                        break;
-                    } else{
-                        $psw = test_input($_POST['psw']);
-                    }
-                case 2:
-                    if(empty($_POST['psw-repeat'])){
-                        $Err = "Repeat Password is Required";
-                        break;
-                    } else{
-                        $psw_repeat = test_input($_POST['psw']);
-                    }
-                    if($psw != $psw_repeat){
-                        $Err = "Passwords are not Equal";
-                        break;
-                    }
-            }
-           
+                } else{
+                $email = test_input($_POST['email']);
+                }
+                if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                $Err = "Invalid Email";
+                break;
+                }
+            case 1:
+                if(empty($_POST['psw'])){
+                    $Err = 'Password is Required';
+                    break;
+                } else{
+                    $psw = test_input($_POST['psw']);
+                }
+            case 2:
+                if(empty($_POST['psw-repeat'])){
+                    $Err = "Repeat Password is Required";
+                    break;
+                } else{
+                    $psw_repeat = test_input($_POST['psw']);
+                }
+                if($psw != $psw_repeat){
+                    $Err = "Passwords are not Equal";
+                    break;
+                }
         }
+        
+    }
 
-        function test_input($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-        }
-    ?>
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+?>
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
   <div class="register">
     <h1>Sign In</h1>
 
@@ -116,15 +97,7 @@
                     echo "Error: " . $e->getMessage();
             }
         }
-    }
-
-
-    if ($connection->connect_error){
-        die("Connection failed: " . $connection->connect_error);
-    }
-
-
-    
+    }    
     ?>
-</body>
-</html>
+<!-- </body>
+</html> -->

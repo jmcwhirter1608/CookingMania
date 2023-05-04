@@ -1,21 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css\styles.css">
 
-    <title>Register</title>
-</head>
-<body>
-    <?php include 'navbar.php'?>
     <?php 
     if(isset($_SESSION['User_ID'])){
       header("Location: ProfilePage.php");
-    }?>
-    <?php include 'dbconnection.php'?>
-    <?php include 'Profile/Register/RegisterInputConfirm.php'?>
+    }
+    include 'Profile/Register/RegisterInputConfirm.php'?>
     <form method='post' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
       <div class="register">
         <h1>Register</h1>
@@ -89,5 +77,3 @@
             die("Connection failed: " . $connection->connect_error);
         }
         ?>
-</body>
-</html>
