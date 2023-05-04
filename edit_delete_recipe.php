@@ -50,18 +50,15 @@
        <br /><br />";
 
 
-       if($user_type == 3 ){
+       if($user_type == 1 ){ //only if admin
             //get the user name
            $recipe_creator_id =  $recipe['User_ID'];
-           // $current_creator = mysqli_query($connection,"SELECT User_fname, User_lname FROM Users WHERE User_ID= $recipe_creator_id" );
-           // $creator = mysqli_fetch_array(  $current_creator);
-           //echo $creator['User_fname']." ". $creator['User_lname'];
+
            echo "<label for='User_name'>Recipe Creator:</label>
            <select name='User'>";
            // use a while loop to fetch data
-           // from the $all_categories variable
-           // and individually display as an option
-           $users_recipe = mysqli_query($connection,"SELECT User_ID, User_fname, User_lname FROM Users WHERE User_Type != 1" );
+          
+           $users_recipe = mysqli_query($connection,"SELECT User_ID, User_fname, User_lname FROM Users WHERE User_Type != 3" );
            while ($users = mysqli_fetch_array(  $users_recipe) ){
              if( $recipe_creator_id == $users['User_ID']){
                echo "<option value=". $users['User_ID']. " selected>";

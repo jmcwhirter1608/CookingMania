@@ -49,17 +49,15 @@
     <br/><br />
 
     <?php
-    if($user_type == 3 ){
+    if($user_type == 1 ){ //if an admin
     ?>
     <label for="User_name">Recipe Creator:</label>
     <select name="User">
     <?php
         // use a while loop to fetch data
-        // from the $all_categories variable
-        // and individually display as an option
-        $users_recipe = mysqli_query($connection,"SELECT User_ID, User_fname, User_lname FROM Users WHERE User_Type != 1" );
+        $users_recipe = mysqli_query($connection,"SELECT User_ID, User_fname, User_lname FROM Users WHERE User_Type != 3" );
         while ($users = mysqli_fetch_array(  $users_recipe) ){
-          //echo $users["User_fname"]." ". $users["User_lname"];
+
     ?>
     <option value="<?php echo $users["User_ID"]?>">
     <?php echo $users["User_fname"]." ". $users["User_lname"];?>

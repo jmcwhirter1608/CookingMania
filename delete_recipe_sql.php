@@ -31,8 +31,9 @@
       $Recipe_Name = ($_REQUEST['recipe_name']);
       $user_type = $_SESSION['User_type'];
 
-      //if can delete then remove. 
-      if( $user_type != 1){
+      //if can delete then remove.
+      //if not a user
+      if( $user_type != 3){
 
         $result_id = $connection->prepare( "DELETE FROM Recipes WHERE Recipe_ID=? ");
         $result_id->bind_param("i", $Recipe_ID);

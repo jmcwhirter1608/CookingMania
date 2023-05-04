@@ -39,10 +39,10 @@
       $last_update_date = date ('Y-m-d');
 
 
-      //make sure is teacher or admin
-      if( $user_type != 1){
-
-        if ($user_type == 3){
+      //make sure is teacher or admin (not user)
+      if( $user_type != 3){
+        //if is an admin check the user id
+        if ($user_type == 1){
           if( $recipe_creator != "" && $recipe_creator != $User_ID){
               $User_ID= $recipe_creator;
           }

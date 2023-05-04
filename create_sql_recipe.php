@@ -39,9 +39,9 @@
       $user_type = $_SESSION['User_type'];
 
 
-      if( $user_type != 1){
+      if( $user_type != 3){ //if not user
 
-        if ($user_type == 3){
+        if ($user_type == 1){ //if is admin
           if( $recipe_creator != "" && $recipe_creator != $User_ID){
               $User_ID= $recipe_creator;
           }

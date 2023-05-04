@@ -18,7 +18,7 @@
                     if(isset($_SESSION['User_ID'])){
                         echo "<li><a href=\"ProfilePage.php\">Profile</a></li>";
                         echo "<li><a href=\"Profile/SignOut.php\">Sign Out</a></li>";
-                    } 
+                    }
                 ?>
                 <li><a href="Ariana.php">Comments</a></li>
                 <li><a href="view_recipe.php">Recipes</a></li>
@@ -26,11 +26,11 @@
 
                 if(isset($_SESSION['User_type'])){
                     switch($_SESSION['User_type']){
-                        case 1:
+                        case 3:
                             break;
                         default:
                             echo '<li> <a href="create_recipe.php">Add Recipe</a></li>';
-                          
+
                     }
                 }
 

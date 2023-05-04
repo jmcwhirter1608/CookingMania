@@ -55,8 +55,8 @@
 
 
       <!-- make a edit button and post all of it to create recipe with the data.  -->
-
-      <?php if( $User_ID == $recipe["User_ID"] || $user_type[0] == 3 ) { ?>
+      <!-- if creator or admin -->
+      <?php if( $User_ID == $recipe["User_ID"] || $user_type == 1 ) { ?>
 
         <div align='center'>
 
