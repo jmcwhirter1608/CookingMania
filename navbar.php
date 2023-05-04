@@ -20,7 +20,7 @@
                         echo "<li><a href=\"ProfilePage.php\">Profile</a></li>";
                     } 
                 ?>
-                <li><a href="Ariana.php">Ariana</a></li>
+                <li><a href="Ariana.php">Comments</a></li>
                 <li><a href="view_recipe.php">Recipes</a></li>
 
 
