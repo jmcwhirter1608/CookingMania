@@ -41,11 +41,11 @@
       while ( $row1 = $result1->fetch_assoc()){
        
         //print out comment with user name
-        Print '<h2 align="center">'. $row1['User_fname'] . ": " . $row1['CommentText'] . "</h2>"; 
+       Print '<h2 align="center">'. $row1['User_fname'] . ": " . $row1['CommentText'] . "</h2>"; 
 
-          //edit and delete comment 
-          //admin can delete and edit all comments! 
-          if($row1['User_ID']==$_SESSION['User_ID'] || $_SESSION['User_ID']=== 1 ) { //if user = logged in user (you can edit/delete )
+        //edit and delete comment 
+        //admin can delete and edit all comments! 
+          if($row1['User_ID']==$_SESSION['User_ID'] ||  $_SESSION['User_type']==1 ) { //if user = logged in user (you can edit/delete )
             
             //form to edit/delete 
             Print '<form method = "post" action = "Edit_Delete_CommentSQL.php?Comment_ID='.$row1['Comment_ID'].'">
@@ -54,10 +54,10 @@
            <input type="submit" name="Delete-comment" value="Delete">
             </form>';
             
-        //teacher can delete all comments but not edit
         }else{
             Print '<h2 align="center">'. $row1['User_fname'] . ": " . $row1['CommentText'] . "</h2>"; 
         }
+
        
     }; 
 
