@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2023 at 07:49 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: May 02, 2023 at 12:24 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,20 +30,20 @@ SET time_zone = "+00:00";
 CREATE TABLE `classes` (
   `Class_ID` int(11) NOT NULL,
   `Recipe_ID` int(11) NOT NULL,
-  `Class_duration` double DEFAULT NULL,
   `User_ID` int(11) DEFAULT NULL,
   `Class_Date` date NOT NULL,
   `Class_StartTime` time NOT NULL,
-  `Class_RoomNum` int(11) NOT NULL
+  `Class_RoomNum` int(11) NOT NULL,
+  `Class_EndTime` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `classes`
 --
 
-INSERT INTO `classes` (`Class_ID`, `Recipe_ID`, `Class_duration`, `User_ID`, `Class_Date`, `Class_StartTime`, `Class_RoomNum`) VALUES
-(1, 1, 30, 19, '2023-05-01', '12:14:30', 201),
-(2, 2, 45, 19, '2023-05-02', '12:14:30', 201);
+INSERT INTO `classes` (`Class_ID`, `Recipe_ID`, `User_ID`, `Class_Date`, `Class_StartTime`, `Class_RoomNum`, `Class_EndTime`) VALUES
+(1, 1, 19, '2023-05-01', '12:14:30', 201, 0),
+(2, 2, 19, '2023-05-02', '12:14:30', 201, 0);
 
 -- --------------------------------------------------------
 
@@ -92,16 +92,17 @@ CREATE TABLE `recipes` (
   `Recipe_level` int(11) DEFAULT NULL,
   `Recipe_instructions` mediumtext DEFAULT NULL,
   `last_update_date` date DEFAULT NULL,
-  `User_ID` int(11) DEFAULT NULL
+  `User_ID` int(11) DEFAULT NULL,
+  `Recipe_Ingredients` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `recipes`
 --
 
-INSERT INTO `recipes` (`Recipe_ID`, `Recipe_name`, `Recipe_time`, `Recipe_level`, `Recipe_instructions`, `last_update_date`, `User_ID`) VALUES
-(1, 'Pizza', '30', 1, 'Roll Dough, Add Sauce, Add Cheese, Cook for 25', '2023-05-01', 19),
-(2, 'Chicken Parmesan', '45', 2, 'Cook Chicken Till Burnt\r\nPlace marinara in air fryer\r\nStir up the sauce\r\nRun it with the crew', '2023-05-01', 19);
+INSERT INTO `recipes` (`Recipe_ID`, `Recipe_name`, `Recipe_time`, `Recipe_level`, `Recipe_instructions`, `last_update_date`, `User_ID`, `Recipe_Ingredients`) VALUES
+(1, 'Pizza', '30', 1, 'Roll Dough, Add Sauce, Add Cheese, Cook for 25', '2023-05-01', 19, ''),
+(2, 'Chicken Parmesan', '45', 2, 'Cook Chicken Till Burnt\r\nPlace marinara in air fryer\r\nStir up the sauce\r\nRun it with the crew', '2023-05-01', 19, '');
 
 -- --------------------------------------------------------
 
@@ -228,6 +229,10 @@ ALTER TABLE `class_enrollment`
 ALTER TABLE `comments`
   ADD CONSTRAINT `Comment_Recipe` FOREIGN KEY (`Recipe_ID`) REFERENCES `recipes` (`Recipe_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `Comment_user` FOREIGN KEY (`User_ID`) REFERENCES `users` (`User_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
+ALTER TABLE `Recipes`
+  ADD CONSTRAINT `Recipe_User` FOREIGN KEY (`User_ID`) REFERENCES `Users` (`User_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

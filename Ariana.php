@@ -14,7 +14,6 @@
 ?>
 <!-- ADD,VIEW,UPDATE,DELETE comments -->
 <body>
-
 <?php include "navbar.php"?>
 
     <hr />
