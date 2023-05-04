@@ -14,7 +14,7 @@
             </div>
             <ul class="navbar body">
                 <?php
-                     session_start();
+                    session_start();
                     if(isset($_SESSION['User_ID'])){
                         echo "<li><a href=\"ProfilePage.php\">Profile</a></li>";
                         echo "<li><a href=\"SignOut.php\">Sign Out</a></li>";
@@ -26,6 +26,7 @@
                 <li><a href="Ariana.php">Comments</a></li>
                 
                 <li><a href="Preksha.php">Recipes</a></li>
+
 
 
                 <?php

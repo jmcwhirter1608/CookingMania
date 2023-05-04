@@ -68,4 +68,33 @@ tr:nth-child(even){
     background-color: rgba(150, 212, 212, 0.4);
 }
 
+.nav-links{
+    flex:1;
+    text-align: center;
+}
+.nav-links ul li{
+    list-style: none;
+    display: inline-block;
+    padding: 8px 12px;
+    position: relative;
+}
 
+.nav-links ul li a {
+    color: #fff;
+    text-decoration: underline;
+    font-size: 13px;
+}
+
+.nav-links ul li::after{
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #da74d4;
+    display: block;
+    margin: auto;
+    transition: 0.5s;
+}
+
+.nav-links ul li:hover::after{
+    width: 100%;
+}

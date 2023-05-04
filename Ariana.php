@@ -34,31 +34,13 @@
 
      $result1 = $connection->query($sql1);
 
-
-
       Print '<hr />';
       Print '<h2 align="center">'. $row['Recipe_name'] . "</h2>"; 
       Print '<h2 align="center"> Comments </h2> '; 
 
-
-     // echo "<form id='DeleteAccount-RowForm' method='post' action=". htmlspecialchars($_SERVER["PHP_SELF"]) . ">";
-
       while ( $row1 = $result1->fetch_assoc()){
         Print '<h2 align="center">'. $row1['User_fname'] . ": " . $row1['CommentText'] . "</h2>"; 
-        //if userid = session ... print fname and comment //  else print form 
-
-        //     echo   "<div id='DeleteAccount-RowForm-Row' >" . $row['User_ID'] . "</div>
-
-        //             <input id='DeleteAccount-RowForm-Row-Delete' type='checkbox' name='check[" . $row['User_ID'] . "]' >
-        //             ";
-            
-        // }
-        // echo "<input type='submit' name='Delete-comment' value='Delete'></form>";
-
-
     }; 
-
-
 
       //create comment form, INSERT INTO Comments(Comment_ID, Recipe_ID,User_ID, CommentText)
       Print '<form method = "post" action = "CreateSQLComment.php?Recipe_ID='.$row['Recipe_ID'].'">
@@ -66,7 +48,25 @@
          <input type="submit" name="Create-comment" value="Submit">
       </form>';
    }
-?>
+   ?>
+
+    <!-- edit/delete -->
+    <?php    
+
+        echo "<form id='DeleteAccount-RowForm' method='post' action=". htmlspecialchars($_SERVER["PHP_SELF"]) . ">";
+
+        while($row1 = $result1->fetch_assoc()){
+            if($row1['User_ID']==$_SESSION['User_ID']){ //if user id is same as session they can delete
+            echo   "<div id='DeleteAccount-RowForm-Row' >" . $row1['User_ID'] . "</div>"
+
+            Print "<input id='DeleteAccount-RowForm-Row-Delete' type='checkbox' name='check[" . $row['User_ID'] . "] >";
+    
+ 
+             echo "<input type='submit' name='Delete-comment' value='Delete'></form>";
+            }
+
+        };
+    ?>
   
 
 
