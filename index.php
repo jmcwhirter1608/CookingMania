@@ -7,7 +7,7 @@
 </head>
 <body>
     <?php include "navbar.php";?> <!-- Include This for navbar /!-->
-    <h1>Welcome to Cooking Mania</h1>
+    <h1 align="center">Welcome to Cooking Mania</h1>
 
     <!-- <form method='post' action='SignInForm.php'>
       <input type='submit' name='signin' value='Sign In'></input>
