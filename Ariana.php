@@ -11,7 +11,6 @@
 
 <!-- ADD,VIEW,UPDATE,DELETE comments -->
 <body>
-
 <?php include "navbar.php"?>
     <hr />
     <h1 align="center">Recipes Comment</h1>

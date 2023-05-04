@@ -11,7 +11,7 @@
         <input type="text" placeholder="Enter Email" name="email" ><br/>
 
         <label for="phone"><b>Phone Number</b></label>
-        <input type="tel" name="phone" value="<?php echo $phone;?>" placeholder="xxxxxxxxxx"><br/>
+        <input type="tel" name="phone" placeholder="xxxxxxxxxx"><br/>
 
         <label for="psw"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="psw" ><br/>
@@ -37,10 +37,6 @@
                 echo "Error: ". $Err . "<br>";
             }
             else{
-                if($acc_type == 3){
-                    $acc_type = 0;
-                }
-
                 $sql = sprintf("INSERT INTO `users` (`User_ID`, `User_type`, `User_fname`, `User_lname`, `User_email`, `User_phonenumber`, `User_password`)
                 VALUES (NULL, %d , '%s', '%s', '%s', %d, '%s')", 
                 $acc_type,
