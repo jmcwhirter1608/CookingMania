@@ -17,14 +17,11 @@
                      session_start();
                     if(isset($_SESSION['User_ID'])){
                         echo "<li><a href=\"ProfilePage.php\">Profile</a></li>";
-                        echo "<li><a href=\"SignOut.php\">Sign Out</a></li>";
+                        echo "<li><a href=\"Profile/SignOut.php\">Sign Out</a></li>";
                     } 
                 ?>
                 <li><a href="Ariana.php">Comments</a></li>
                 <li><a href="view_recipe.php">Recipes</a></li>
-
-
-
                 <?php
 
                 if(isset($_SESSION['User_type'])){
