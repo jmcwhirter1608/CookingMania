@@ -1,4 +1,7 @@
-<?php 
+<?php
+//author: ariana p 
+//file that has the insert functionality for comment 
+
 include "../dbconnection.php";
 session_start();
     //taking values from the form data input
@@ -6,6 +9,7 @@ session_start();
     $Recipe_ID = ($_REQUEST["Recipe_ID"]);
     // Performing insert query execution
         echo $Recipe_ID;
+        //sql to insert comment from the user 
         $sql = sprintf(
             "INSERT INTO comments  
             VALUES (NULL,%d,%d,'%s');",

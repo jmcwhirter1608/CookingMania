@@ -1,7 +1,9 @@
 <?php 
+//author: ariana p 
+//file that has the sql statements for edit and delete 
 include "../dbconnection.php";
 
-
+//sql to delete from comments table 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Delete-comment'])) {
     $sql = sprintf("DELETE FROM comments 
     WHERE
@@ -10,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Delete-comment'])) {
     $result = $connection->query($sql);
 };
 
-
+//sql to edit from comments table 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Edit-comment'])){
     $sql = sprintf("UPDATE comments 
     SET CommentText ='%s'

@@ -8,11 +8,15 @@
     <title>Comment</title>
 </head>
 
-
+<?php 
+//author: ariana pouya
+//main file to be able to add/view/update/delete comments 
+?>
 <!-- ADD,VIEW,UPDATE,DELETE comments -->
 <body>
 
 <?php include "navbar.php"?>
+
     <hr />
     <h1 align="center">Recipes Comment</h1>
     <?php include "dbconnection.php"?>
@@ -26,6 +30,7 @@
    while ( $row = $result->fetch_assoc()) {
 
     // get the comment from database
+    //sql to link comments and users table to be able to get the user id when they comment 
      $sql1 = sprintf("SELECT * 
      FROM comments
      INNER JOIN users
