@@ -23,7 +23,7 @@
                         echo "<li><a href=\"SignIn.php\">Sign In</a></li>";
                     }
                 ?>
-                <li><a href="Ariana.php">Ariana</a></li>
+                <li><a href="Ariana.php">Comments</a></li>
                 
                 <li><a href="Preksha.php">Recipes</a></li>
 
