@@ -59,8 +59,12 @@
       <?php if( $User_ID == $recipe["User_ID"] || $user_type[0] == 3 ) { ?>
 
         <div align='center'>
-      <!-- send all needed data to edit/delete -->
+
+
       <?php
+        //admin or creator can also see the last date of update for this recipe.
+        Print '<p align="center">'. "Recipe Last Updated: ". $recipe["last_update_date"].'</p>';
+        //send all needed data to edit/delete
         echo "<form method='post' action='edit_delete_recipe.php'>.
           <input type='hidden' name='recipe_id' value=". $recipe_id. ">
           <input type='submit' name='edit' value='Edit Recipe'>
