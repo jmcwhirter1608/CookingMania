@@ -1,5 +1,5 @@
 <?php 
-include "dbconnection.php";
+include "../dbconnection.php";
 session_start();
     //taking values from the form data input
     $CommentText = ($_POST["comment"]);
@@ -21,6 +21,6 @@ session_start();
             echo "ERROR: Hush! Sorry $sql. "
                 . mysqli_error($connection);
         }
-        header('location: Ariana.php');
+        header('location: ../Ariana.php');
 ?>
 

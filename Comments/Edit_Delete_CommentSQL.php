@@ -1,5 +1,5 @@
 <?php 
-include "dbconnection.php";
+include "../dbconnection.php";
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Delete-comment'])) {
@@ -23,6 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Edit-comment'])){
     $result = $connection->query($sql);
 };
 
-header('location: Ariana.php');
+header('location: ../Ariana.php');
 ?>
 
