@@ -11,7 +11,6 @@
             classes.Class_Date,
             classes.Class_StartTime,
             recipes.Recipe_name,
-            classes.Class_duration,
             classes.Class_RoomNum,
             s.mycount AS Class_Attendance
         FROM classes
@@ -37,10 +36,11 @@
                     <td>" . $row['Class_Date'] . "</td>
                     <td>" . $row['Class_StartTime'] . "</td>
                     <td>" . $row['Recipe_name'] . "</td>
-                    <td>" . $row['Class_duration'] . "</td>
                     <td>" . $row['Class_RoomNum'] . "</td>
                     <td>" . $row['Class_Attendance'] . "</td>
                     </tr>";
         }
+    } else{
+        echo "<h3>You have not attended any Classes!</h3>";
     }
 ?>

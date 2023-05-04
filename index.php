@@ -21,8 +21,8 @@
     if(isset($_SESSION['User_ID'])){
       header('Location: ProfilePage.php');
     } else{
-      include "SignIn.php";
-      include "Register.php";
+      include "Profile/SignIn.php";
+      include "Profile/Register.php";
     }
     ?>
 
