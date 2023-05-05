@@ -16,3 +16,6 @@ The Student can create comments. The student can join/leave a class. View recipe
 
 ### Admin
 The Admin can create, edit, delete Teacher accounts and Student accounts. The Admin can create, edit and /delete classes, recipes, comments.
+
+
+PROJECT REPORT FILE DISCUSSES CHANGES AND FUNCTIONALITIES. 
