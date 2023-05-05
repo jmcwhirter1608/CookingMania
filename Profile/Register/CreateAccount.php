@@ -1,6 +1,5 @@
-<?php include 'RegisterInputConfirm.php'?>
-    <form method='post' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-      <div class="register">
+    <form class=UpdatePersonal method='post' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+ 
         <label for="fname"><b>First Name</b></label>
         <input type="text" placeholder="Enter First Name" name="fname" ><br/>
 
@@ -18,17 +17,20 @@
 
         <label for="psw-repeat"><b>Repeat Password</b></label>
         <input type="password" placeholder="Repeat Password" name="psw-repeat"><br/>
-        <label for='acc-type'><b>Account Type: </b></label>
-        <label for="acc-type"><b>Admin</b></label>
+        <b>Account Type: </b> <br/>
+        <label for="acc-type"><b>Admin</b>
         <input type="radio" name="acc-type" value=1>
-        <label for="acc-type"><b>Teacher</b></label>
+        </label><br/>
+        <label for="acc-type"><b>Teacher</b>
         <input type="radio" name="acc-type" value=2>
-        <label for="acc-type"><b>Student</b></label>
+        </label><br/>
+        <label for="acc-type"><b>Student</b>
         <input type="radio" name="acc-type" value=3>
+        </label>
+        </label>
         <br>
         <input type='submit' name='Create-submit' value='Create'>
 
-      </div>
     </form> 
     <?php
         if(isset($_POST['Create-submit'])){

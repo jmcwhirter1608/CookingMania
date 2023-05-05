@@ -3,16 +3,11 @@
 $fname = $lname = $email = $phone = $psw = $psw_repeat = NULL;
 $Err = NULL;
 
-if(isset($_SESSION['User_ID'])){
-    $uid = $_SESSION['User_ID'];
-} else {
-    header("Location: SignIn.php");
-}
 
 
 $sql = sprintf("SELECT User_email, User_phonenumber, User_password FROM users 
 WHERE User_ID = %d",
-$uid);
+$_SESSION['User_ID']);
 
 try{
     $result = $connection->query($sql);

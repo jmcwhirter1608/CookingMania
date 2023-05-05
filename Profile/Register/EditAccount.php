@@ -15,7 +15,7 @@
                             <input id='EditAccount-RowForm-Row' type=\"text\" placeholder=\"Enter Last Name\" name=\"lname\" value=" . $row['User_lname'] .">
                             <input id='EditAccount-RowForm-Row' type=\"text\" placeholder=\"Enter Email\" name=\"email\" value=" . $row['User_email'] . ">
                             <input id='EditAccount-RowForm-Row' type=\"text\" name=\"phone\" placeholder=\"xxxxxxxxxx\" value=" . $row['User_phonenumber'] . ">
-                            <input id='EditAccount-RowForm-Row' type=\"text\" placeholder=\"Enter Password\" name=\"psw\" value=" . $row['User_password'] . ">
+                            <input id='EditAccount-RowForm-Row' type=\"password\" placeholder=\"Enter Password\" name=\"psw\" value=" . $row['User_password'] . ">
                             <input id='EditAccount-RowForm-Row' type=\"submit\" name=\"Edit-submit\" value=\"Update\">
              
                         </form>";

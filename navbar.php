@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css\styles.css">
+    
     <title>Document</title>
 </head>
 <body>
 <nav>
         <div class="container">
             <div class="navbar-header">
-                <a class="Logo" href="index.php">Home</a>
+                <a class="Logo" href="index.php">Cooking Mania</a>
             </div>
-            <ul class="navbar body">
+            <ul class="nav-links">
                 <?php
-                     session_start();
+                    session_start();
                     if(isset($_SESSION['User_ID'])){
                         echo "<li><a href=\"ProfilePage.php\">Profile</a></li>";
                         echo "<li><a href=\"Profile/SignOut.php\">Sign Out</a></li>";

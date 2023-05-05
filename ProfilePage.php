@@ -14,17 +14,18 @@
 
     <?php include 'Profile/GetUser.php'?>
     <?php include 'Profile/UpdateUser.php'?>
-    <h1> Welcome <?php echo $fname . " " . $lname; ?>!</h1>
+    <?php include 'Profile/DeleteUser.php'?>
+    <h1 class='Profileheader'> Welcome <?php echo $fname . " " . $lname; ?>!</h1>
 
-    <div id='Update-Information'>
-        <h2> Update Information </h2>
-        <form method='post' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+    <div class='Update-Information'>
+        <h2 class='header'> Update Information </h2>
+        <form class='UpdatePersonal' method='post' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             
             <label for="fname"><b>First Name</b></label>
-            <input type="text" placeholder="Enter First Name" name="fname" value="<?php echo $fname;?>"><br/>
+            <input type="text" placeholder="Enter First Name" name="fname" value="<?php echo $_SESSION['User_fname'];?>"><br/>
 
             <label for="lname"><b>Last Name</b></label>
-            <input type="text" placeholder="Enter Last Name" name="lname" value="<?php echo $lname;?>"><br/>
+            <input type="text" placeholder="Enter Last Name" name="lname" value="<?php echo $_SESSION['User_lname'];?>"><br/>
 
             <label for="email"><b>Email</b></label>
             <input type="text" placeholder="Enter Email" name="email" value="<?php echo $email;?>"><br/>
@@ -38,11 +39,12 @@
             <label for="psw-repeat"><b>Repeat Password</b></label>
             <input type="password" placeholder="Repeat Password" name="psw-repeat" value="<?php echo $psw_repeat;?>"><br/>
 
-            <input type='submit' name='UpdateUser-submit' value="Update">
+            <input type='submit' name='UpdateUser-submit' value="Update"> <br>
+            <input type='submit' name='DeleteUser-submit' value='Delete Account'>
         </form>
     </div>
 
-    <div id='UserType-Information'>
+    <div class='UserType-Information'>
         <?php 
             if(isset($_SESSION['User_type'])){
                 switch($_SESSION['User_type']){
