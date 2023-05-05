@@ -46,19 +46,7 @@ h1 {
     font-size: 12pt;
 }
 
-table{
-    border: 1px solid black;
-    width: 100%;
-}
 
-th {
-    background-color: rgba(150, 212, 212, 0.8);
-    font-size: 20pt;
-}
-
-tr:nth-child(even){
-    background-color: rgba(150, 212, 212, 0.4);
-}
 
 .navbar-header{
     display: flex;
@@ -132,7 +120,6 @@ a.Logo{
     background-color: rgb(150, 212, 212);
     color:white;
     padding: 40px 20px;
-    padding: 2% 0;
     text-align: center;
 }
 
@@ -179,6 +166,7 @@ a.Logo{
     font-style: italic;
     width: 100%;
     background-color: rgb(43, 116, 116);
+    padding: 2% 0 ;
     text-align: center;
 }
 
@@ -187,4 +175,58 @@ a.Logo{
     width: 100%;
     font-style: italic;
     background-color: rgb(43, 116, 116);
+}
+
+.ClassesProfile{
+    display: flex;
+    justify-content: center;
+    border: none;
+}
+
+
+.ClassesProfile tr{
+    display: grid;
+    grid-template-columns: 120px 200px 200px 200px 200px;
+    grid-gap: 5px;
+    border: 2px solid rgb(24, 104, 104);
+}
+
+.ClassesProfile tr th{
+    font-style: italic;
+    text-align: center;
+    font-size: 16pt;
+    padding: 4% ;
+}
+
+.ClassesProfile tr td{
+    color: black;
+    background-color: white;
+    text-align: center;
+}
+
+.ClassesAttended{
+    display: flex;
+    justify-content: center;
+    border: none;
+}
+
+
+.ClassesAttended tr{
+    display: grid;
+    grid-template-columns: 120px 200px 200px 200px 200px;
+    grid-gap: 5px;
+    border: 2px solid rgb(24, 104, 104);
+}
+
+.ClassesAttended tr th{
+    font-style: italic;
+    text-align: center;
+    font-size: 16pt;
+    padding: 4% ;
+}
+
+.ClassesAttended tr td{
+    color: black;
+    background-color: white;
+    text-align: center;
 }

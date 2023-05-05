@@ -30,7 +30,14 @@
     $result = $connection->query($sql);
 
     if($result->num_rows > 0){
-        echo "<table><tr><th>Date</th><th>Start Time</th><th>Recipe</th><th>Duration</th><th>Room Number</th><th>Attendance</tr>";
+        echo "<table class=ClassesProfile>
+                <tr>
+                    <th>Date</th>
+                    <th>Start Time</th>
+                    <th>Recipe</th>
+                    <th>Room Number</th>
+                    <th>Attendance</th>
+                    </tr>";
         while($row = $result->fetch_assoc()){
             echo "<tr>
                     <td>" . $row['Class_Date'] . "</td>
