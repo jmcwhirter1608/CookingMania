@@ -46,7 +46,7 @@
             //form to edit/delete 
             Print '
               <form method = "post" action = "Comments/Edit_Delete_CommentSQL.php?Comment_ID='.$row1['Comment_ID'].'">
-                <label>'. $row1['User_fname'] . " " . $row1['User_lname'] .  '</label> <br>
+                <label><b>'. $row1['User_fname'] . " " . $row1['User_lname'] .  ':</b></label> <br>
                 <input type = "text" name = "CommentText" value ="' .$row1['CommentText'].'">
                 <input type="submit" name="Edit-comment" value="Edit"> 
                 <input type="submit" name="Delete-comment" value="Delete">
@@ -61,7 +61,7 @@
 
       //create comment form, INSERT INTO Comments(Comment_ID, Recipe_ID,User_ID, CommentText)
       Print '<form method = "post" action = "Comments/CreateSQLComment.php?Recipe_ID='.$row['Recipe_ID'].'">
-          <label> Post Comment: </label> <input type = "text" name = "comment"> <br>
+          <label><b> Post Comment: </b></label> <input type = "text" name = "comment"> <br>
          <input type="submit" name="Create-comment" value="Submit">
       </form>';
     Print '</div>';

@@ -1,8 +1,16 @@
 <?php 
 include "../dbconnection.php";
+
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+  } 
+
 session_start();
     //taking values from the form data input
-    $CommentText = ($_POST["comment"]);
+    $CommentText = (test_input($_POST["comment"]));
     $Recipe_ID = ($_REQUEST["Recipe_ID"]);
     // Performing insert query execution
         echo $Recipe_ID;
