@@ -91,9 +91,9 @@ CREATE TABLE `recipes` (
   `Recipe_time` varchar(255) DEFAULT NULL,
   `Recipe_level` int(11) DEFAULT NULL,
   `Recipe_instructions` mediumtext DEFAULT NULL,
+  `Recipe_Ingredients` text NOT NULL,
   `last_update_date` date DEFAULT NULL,
   `User_ID` int(11) DEFAULT NULL,
-  `Recipe_Ingredients` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -169,7 +169,7 @@ ALTER TABLE `comments`
 ALTER TABLE `recipes`
   ADD PRIMARY KEY (`Recipe_ID`),
   ADD UNIQUE KEY `Recipe_ID` (`Recipe_ID`);
-
+  ADD KEY `Recipe_User` (`User_ID`);
 --
 -- Indexes for table `users`
 --
@@ -229,6 +229,10 @@ ALTER TABLE `class_enrollment`
 ALTER TABLE `comments`
   ADD CONSTRAINT `Comment_Recipe` FOREIGN KEY (`Recipe_ID`) REFERENCES `recipes` (`Recipe_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `Comment_user` FOREIGN KEY (`User_ID`) REFERENCES `users` (`User_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
+ALTER TABLE `recipes`
+  ADD CONSTRAINT `Recipe_User` FOREIGN KEY (`User_ID`) REFERENCES `Users` (`User_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

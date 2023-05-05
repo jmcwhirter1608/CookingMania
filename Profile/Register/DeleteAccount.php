@@ -20,7 +20,9 @@
                         ";
                 
             }
-            echo "<input type='submit' name='Delete-submit' value='Delete'></form>";
+            echo "
+            <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+            <input type='submit' name='Delete-submit' value='Delete'></form>";
         }
     } catch(Exception $e){
         echo "Error: " . $e->getMessage();

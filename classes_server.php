@@ -1,5 +1,3 @@
-
-
 <?php include "navbar.php"?>
 <?php include 'dbconnection.php'?>
 
@@ -171,7 +169,3 @@ if(isset($_POST['save']))
 
 
 ?>
-
-
-
-

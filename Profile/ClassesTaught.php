@@ -11,7 +11,6 @@
             classes.Class_Date,
             classes.Class_StartTime,
             recipes.Recipe_name,
-            classes.Class_duration,
             classes.Class_RoomNum,
             s.mycount AS Class_Attendance
         FROM classes
@@ -31,16 +30,24 @@
     $result = $connection->query($sql);
 
     if($result->num_rows > 0){
-        echo "<table><tr><th>Date</th><th>Start Time</th><th>Recipe</th><th>Duration</th><th>Room Number</th><th>Attendance</tr>";
+        echo "<table class=ClassesProfile>
+                <tr>
+                    <th>Date</th>
+                    <th>Start Time</th>
+                    <th>Recipe</th>
+                    <th>Room Number</th>
+                    <th>Attendance</th>
+                    </tr>";
         while($row = $result->fetch_assoc()){
             echo "<tr>
                     <td>" . $row['Class_Date'] . "</td>
                     <td>" . $row['Class_StartTime'] . "</td>
                     <td>" . $row['Recipe_name'] . "</td>
-                    <td>" . $row['Class_duration'] . "</td>
                     <td>" . $row['Class_RoomNum'] . "</td>
                     <td>" . $row['Class_Attendance'] . "</td>
                     </tr>";
         }
+    } else{
+        echo "<h3>You have not attended any Classes!</h3>";
     }
 ?>

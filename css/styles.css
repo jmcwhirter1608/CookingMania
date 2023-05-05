@@ -1,71 +1,324 @@
 
 * {
     font-family: "Comic Sans MS";
+    caret-color: transparent;
+}
 
+form input{
+    caret-color: black;
 }
 
 h1 {
     font-size: 32pt;
 }
 
+.Welcome {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(150, 212, 212);
+    color: white;
+    min-width: 1500px;
+    caret-color: transparent;
+}
+
+.Welcome form{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(43, 116, 116);
+    padding: 2%;
+    margin: 5%;
+    width: 40%;
+    height: 100%;
+}
+
+.Welcome form label{
+    font-size: 16pt;
+    padding: 25px 0 0 0;
+}
+
+.Welcome form input[type=text], input[type=password], input[type=tel]{
+    font-size: 12pt;
+}
+
+.Welcome form input[type=submit]{
+    background-color: rgb(150, 212, 212);
+    font-style: italic;
+    font-size: 32pt;
+    color: white;
+    padding: 15px;
+    margin: 15px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.Welcome form input[type=submit]:hover{
+    background-color: rgb(65, 172, 172);
+}
+
 #EditAccount-RowForm{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-gap: 20px;
-    width: 1500px;
+    grid-template-columns: 100px 100px 200px 200px 200px 120px 100px 1fr;
+    grid-gap: 5px;
+    border: 2px solid rgb(24, 104, 104);
+    width: 1200px;
 }
 
 #EditAccount-RowForm-Row{
     display: flex;
     justify-content: center;
+    /* padding: 0 2%; */
+    font-size: 12pt;
 }
 
 #DeleteAccount-RowForm{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-
-    width: 1500px;
+    grid-template-columns: 100px 100px 200px 200px 200px 120px 100px 1fr;
+    grid-gap: 5px;
+    border: 2px solid rgb(24, 104, 104);
+    width: 1200px;
 }
 
 #DeleteAccount-RowForm-Row{
     display: flex;
-    justify-content: center;
     border: 1px solid black;
-    min-width: 200px;
-    font-size: 10pt;
+    background-color: white;
+    color: black;
+    font-size: 12pt;
+    padding: 0 2pt ;
 }
 
 #DeleteAccount-RowForm-Row-header{
     display: flex;
     justify-content: center;
-    min-width: 200px;
+    font-size: 12pt;
 }
 
-#DeleteAccount-RowForm-Row-Delete{
+
+
+.navbar-header{
     display: flex;
     justify-content: center;
-    border: 1px solid black;
-    width: 100px;
-    font-size: 10pt;
+    font-size: 64px;
+    background: rgb(150, 212, 212);
+    padding: 20px 40px;
 }
 
-#DeleteAccount-RowForm-Row-Delete-header{
+a.Logo{
+    color: white;
+    text-decoration: none;
+}
+
+.nav-links{
     display: flex;
-    justify-content: center;
-    width: 100px;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style-type: none;
+    background-color: rgb(150, 212, 212);
+    padding: 20px 40px;
 }
 
-table{
-    border: 1px solid black;
+.nav-links li{
+    display: inline-block;
+    padding: 8px 12px;
+    position: relative;
+}
+
+.nav-links li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 40px;
+}
+
+.nav-links li::after{
+    content: '';
+    width: 0%;
+    height: 5px;
+    background: white;
+    display: block;
+    margin: auto;
+    transition: 0.5s;
+}
+
+.nav-links li:hover::after{
     width: 100%;
 }
 
-th {
-    background-color: rgba(150, 212, 212, 0.8);
+.Update-Information{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(150, 212, 212);
+    color: white;
+    padding: 40px 20px;
 }
 
-tr:nth-child(even){
-    background-color: rgba(150, 212, 212, 0.4);
+.Update-Information .header{
+    font-size: 32pt;
+    text-align: center;
+    width: 100%;
+    background-color: rgb(24, 104, 104);
+    font-style: italic;
+    padding: 2% 0;
+
 }
+
+.Profileheader{
+    background-color: rgb(150, 212, 212);
+    color:white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.UpdatePersonal{
+    width: 75%;
+}
+ 
+.UpdatePersonal label{
+    width: 42%;
+    text-align: right;
+    display: inline-block;
+    margin: 0 3%;
+}
+.UpdatePersonal input{
+    margin: 0 3%;
+    width: 42%;
+}
+
+.UpdatePersonal input[type=submit] {
+    background-color: rgb(150, 212, 212);
+    font-style: italic;
+    color: white;
+    padding: 2px;
+    cursor: pointer;
+    transition: 0.5s;
+    width: 10%;
+    position: absolute;
+    right: 25%;
+}
+
+.UpdatePersonal input[type=submit]:hover{
+    background-color: rgb(43, 116, 116);
+}
+
+.UserType-Information{
+    background-color: rgb(150, 212, 212);
+    color: white;
+    padding: 2%;
+    margin: 4% 0;
+}
+
+.UserType-Information h2{
+    font-size: 32pt;
+    font-style: italic;
+    width: 100%;
+    background-color: rgb(43, 116, 116);
+    padding: 2% 0 ;
+    text-align: center;
+}
+
+.UserType-Information h3{
+    font-size: 24pt;
+    width: 100%;
+    font-style: italic;
+    background-color: rgb(43, 116, 116);
+}
+
+.ClassesProfile{
+    display: flex;
+    justify-content: center;
+    border: none;
+}
+
+
+.ClassesProfile tr{
+    display: grid;
+    grid-template-columns: 120px 200px 200px 200px 200px;
+    grid-gap: 5px;
+    border: 2px solid rgb(24, 104, 104);
+}
+
+.ClassesProfile tr th{
+    font-style: italic;
+    text-align: center;
+    font-size: 16pt;
+    padding: 4% ;
+}
+
+.ClassesProfile tr td{
+    color: black;
+    background-color: white;
+    text-align: center;
+}
+
+.Comment{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(150, 212, 212);
+    margin: 4% 0;
+    padding: 4%;
+}
+
+.Comment .Comment-Recipe{
+    background-color: rgb(24, 104, 104);
+    color: white;
+    padding: 2%;
+    margin: 2%;
+}
+
+.Comment form{
+    margin: 2%;
+    color: white;
+    border: 4px solid rgb(24, 104, 104);
+    padding: 2%;
+}
+
+.Comment form label{
+    font-size: 16pt;
+}
+
+.Comment form input[type=text]{
+    font-size: 12pt;
+    width: 100%;
+}
+
+.Comment form input[type=submit]{
+    width: 80px;
+    margin: calc(20px + 2%) calc(20px + 2%) 0 0;
+    background-color: rgb(150, 212, 212);
+    border: 2px solid rgb(43, 116, 116);
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.Comment form input[type=submit]:hover{
+    background-color: rgb(43, 116, 116);
+    color: white;
+}
+
+.Comment h3{
+    color: white;
+    font-size: 16pt;
+    margin: 0 2% 0 2%;
+    padding: 2% 2% 0 2%;
+    border-top: 4px solid rgb(43, 116, 116);
+    border-left: 4px solid rgb(43, 116, 116);
+    border-right: 4px solid rgb(43, 116, 116);
+
+
+}
+
+.Comment p{
+    color: white;
+    margin: 0 2% 0 2%;
+    padding: 0 3% 3% 3%;
+    border-bottom: 4px solid rgb(43, 116, 116);
+    border-left: 4px solid rgb(43, 116, 116);
+    border-right: 4px solid rgb(43, 116, 116);
+}
+
+
+
 
 

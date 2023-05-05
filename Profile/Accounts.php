@@ -24,7 +24,7 @@
             <div id='DeleteAccount-RowForm-Row-header'>Email</div>
             <div id='DeleteAccount-RowForm-Row-header'>Phone Number</div>
             <div id='DeleteAccount-RowForm-Row-header'>Password</div>
-            <div id='DeleteAccount-RowForm-Row-Delete-header'>To Delete</div>
+            <div id='DeleteAccount-RowForm-Row-header'>To Delete</div>
         </div>
         <?php include 'Register/DeleteAccount.php'?>
     </body>

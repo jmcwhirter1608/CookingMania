@@ -1,4 +1,12 @@
 <?php
+
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+    } 
+
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['UpdateUser-submit'])) {
         // echo $_POST['uid'] . " " .  $_POST['acc-type'] . " " . $_POST['fname'] . " " . $_POST['lname'] . " " . $_POST['email'] . " " . $_POST['phone'] . " " . $_POST['psw'] . "<br>";
         switch(0){
@@ -28,8 +36,9 @@
                     break;
                 }
                 $query = sprintf("SELECT * FROM users 
-                WHERE User_email='%s' AND NOT User_ID=$uid",
-                $connection->real_escape_string($email));
+                WHERE User_email='%s' AND NOT User_ID=%d",
+                $connection->real_escape_string($email),
+                $_SESSION['User_ID']);
                 $result = $connection->query($query);
                 if($result->num_rows > 0){
                     while($row = $result->fetch_assoc()){
@@ -75,8 +84,12 @@
                 $connection->real_escape_string($email),
                 $connection->real_escape_string($phone),
                 $connection->real_escape_string($psw),
-                $uid
+                $_SESSION['User_ID']
                 );
+
+                $_SESSION['User_fname'] = $fname;
+                $_SESSION['User_lname'] = $lname;
+                $_SESSION['User_email'] = $email;
 
                 try{
                     $result = $connection->query($sql);
