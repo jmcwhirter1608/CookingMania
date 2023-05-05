@@ -128,7 +128,7 @@ if(isset($_POST['save']))
         echo "Enter in a valid Recipe ID.<br>";
     }
     
-        
+    //if user id is null we need a different insert prompt
     if($userid_null){
     $sql_query = "INSERT INTO `classes`(`Recipe_ID`, `User_ID`, `Class_Date`, `Class_StartTime`, `Class_RoomNum`, `Class_EndTime`, `Class_Enrollment`)
     VALUES ('$Recipe_ID',NULL,'$Class_Date','$Class_StartTime','$Class_RoomNum','$Class_EndTime','$Class_Enrollment')";
@@ -137,7 +137,7 @@ if(isset($_POST['save']))
         $sql_query = "INSERT INTO `classes`(`Recipe_ID`, `User_ID`, `Class_Date`, `Class_StartTime`, `Class_RoomNum`, `Class_EndTime`, `Class_Enrollment`)
         VALUES ('$Recipe_ID','$User_ID','$Class_Date','$Class_StartTime','$Class_RoomNum','$Class_EndTime','$Class_Enrollment')";
     }
-      
+    //if conditions met for valid inputs from form then insert
     if($recipeid_true && $Class_Datevalid && $rowcount_user_valid && $Class_StartTimevalid && $canbook && $user_type_valid){
         if ($connection->query($sql_query) === TRUE) {
             echo "Class Record inserted successfully";

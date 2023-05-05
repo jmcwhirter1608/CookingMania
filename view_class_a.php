@@ -236,7 +236,7 @@
     if($user_type == 3){
         echo '<table> <tr> <th> Class ID </th> <th> Recipe_Name </th> <th> Class_Date </th> <th> Start Time </th> <th> End Time </th> <th> Room Num </th> <th> Instructor Name </th> <th> Instructor Email </th> <th> Enrollment Limit </th> </tr>';
     }
-    while($row = mysqli_fetch_assoc($result_all)){
+    while($row = mysqli_fetch_assoc($result_all)){ //While fetch information from the inner join table, access those values below row by row
         if($user_type == 1 || $user_type == 2){
             if($row["User_ID"] == NULL){
                 $rowinstructor = NULL;

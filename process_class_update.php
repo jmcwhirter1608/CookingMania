@@ -53,7 +53,7 @@ if(isset($_POST['process']))
     }
     else{ //make sure it's a valid user id!
         $userid_null = false;
-        
+        //Now check if the user id given is actually a valid instructor
         $sql_usertype= "SELECT User_type AS `usertype` FROM `users` WHERE `User_ID`=$User_ID";
         $result_usertype=mysqli_query($connection, $sql_usertype);
         $usertypee = mysqli_fetch_assoc($result_usertype);

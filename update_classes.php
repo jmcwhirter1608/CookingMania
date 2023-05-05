@@ -136,13 +136,13 @@
                 $rowinstructor = NULL;
                 echo '<tr > <td>' . $row["Class_ID"] . '</td>
                 <td>' . $row["Recipe_name"] . '</td>
-            <td>' . $row["Class_Date"] . '</td>
-            <td> ' . rtrim($row["Class_StartTime"],".00000") . '</td>
-            <td>' . rtrim($row["Class_EndTime"],".00000") . '</td> 
-            <td>' . $row["Class_RoomNum"] . '</td>
-            <td>' . "-" . '</td>
-            <td>' . $row["Class_Enrollment"] . '</td>
-            </tr>';
+                <td>' . $row["Class_Date"] . '</td>
+                <td> ' . rtrim($row["Class_StartTime"],".00000") . '</td>
+                <td>' . rtrim($row["Class_EndTime"],".00000") . '</td> 
+                <td>' . $row["Class_RoomNum"] . '</td>
+                <td>' . "-" . '</td>
+                <td>' . $row["Class_Enrollment"] . '</td>
+                </tr>';
             }
             else{
                 $id = $row["User_ID"];
@@ -156,13 +156,13 @@
                 $rowinstructor = $row["User_ID"];
                 echo '<tr > <td>' . $row["Class_ID"] . '</td>
                 <td>' . $row["Recipe_name"] . '</td>
-            <td>' . $row["Class_Date"] . '</td>
-            <td> ' . rtrim($row["Class_StartTime"],".00000") . '</td>
-            <td>' . rtrim($row["Class_EndTime"],".00000") . '</td> 
-            <td>' . $row["Class_RoomNum"] . '</td>
-            <td>' . $instructorname . " ".$instructorlname . '</td>
-            <td>' . $row["Class_Enrollment"] . '</td>
-            </tr>';
+                <td>' . $row["Class_Date"] . '</td>
+                <td> ' . rtrim($row["Class_StartTime"],".00000") . '</td>
+                <td>' . rtrim($row["Class_EndTime"],".00000") . '</td> 
+                <td>' . $row["Class_RoomNum"] . '</td>
+                <td>' . $instructorname . " ".$instructorlname . '</td>
+                <td>' . $row["Class_Enrollment"] . '</td>
+                </tr>';
             }
         }
    echo '</table>';
