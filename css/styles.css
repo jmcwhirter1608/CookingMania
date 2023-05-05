@@ -251,3 +251,74 @@ a.Logo{
     background-color: white;
     text-align: center;
 }
+
+.Comment{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(150, 212, 212);
+    margin: 4% 0;
+    padding: 4%;
+}
+
+.Comment .Comment-Recipe{
+    background-color: rgb(24, 104, 104);
+    color: white;
+    padding: 2%;
+    margin: 2%;
+}
+
+.Comment form{
+    margin: 2%;
+    color: white;
+    border: 4px solid rgb(24, 104, 104);
+    padding: 2%;
+}
+
+.Comment form label{
+    font-size: 16pt;
+}
+
+.Comment form input[type=text]{
+    font-size: 12pt;
+    width: 100%;
+}
+
+.Comment form input[type=submit]{
+    width: 80px;
+    margin: calc(20px + 2%) calc(20px + 2%) 0 0;
+    background-color: rgb(150, 212, 212);
+    border: 2px solid rgb(43, 116, 116);
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.Comment form input[type=submit]:hover{
+    background-color: rgb(43, 116, 116);
+    color: white;
+}
+
+.Comment h3{
+    color: white;
+    font-size: 16pt;
+    margin: 0 2% 0 2%;
+    padding: 2% 2% 0 2%;
+    border-top: 4px solid rgb(43, 116, 116);
+    border-left: 4px solid rgb(43, 116, 116);
+    border-right: 4px solid rgb(43, 116, 116);
+
+
+}
+
+.Comment p{
+    color: white;
+    margin: 0 2% 0 2%;
+    padding: 0 3% 3% 3%;
+    border-bottom: 4px solid rgb(43, 116, 116);
+    border-left: 4px solid rgb(43, 116, 116);
+    border-right: 4px solid rgb(43, 116, 116);
+}
+
+
+
+
+

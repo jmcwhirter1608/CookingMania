@@ -12,8 +12,7 @@
 <!-- ADD,VIEW,UPDATE,DELETE comments -->
 <body>
 <?php include "navbar.php"?>
-    <hr />
-    <h1 align="center">Recipes Comment</h1>
+    <h1 class=Profileheader>Recipe Comments</h1>
     <?php include "dbconnection.php"?>
 
    <?php 
@@ -32,29 +31,29 @@
      WHERE Recipe_ID = %d", $row['Recipe_ID']);
 
      $result1 = $connection->query($sql1);
-
-      Print '<hr />';
-      Print '<h2 align="center">'. $row['Recipe_name'] . "</h2>"; //print recipe name
-      Print '<h2 align="center"> Comments </h2> '; 
+      Print '<div class=Comment>';
+      Print '<h2 class=Comment-Recipe>'. $row['Recipe_name'] . "</h2>"; //print recipe name
 
       while ( $row1 = $result1->fetch_assoc()){
        
         //print out comment with user name
-       Print '<h2 align="center">'. $row1['User_fname'] . ": " . $row1['CommentText'] . "</h2>"; 
+      //  Print '<h2 align="center">'. $row1['User_fname'] . ": " . $row1['CommentText'] . "</h2>"; 
 
         //edit and delete comment 
         //admin can delete and edit all comments! 
           if($row1['User_ID']==$_SESSION['User_ID'] ||  $_SESSION['User_type']==1 ) { //if user = logged in user (you can edit/delete )
             
             //form to edit/delete 
-            Print '<form method = "post" action = "Comments/Edit_Delete_CommentSQL.php?Comment_ID='.$row1['Comment_ID'].'">
-            <label>'. $row1['User_fname'] . ": " .  '</label> <input type = "text" name = "CommentText" value ="' .$row1['CommentText'].'"> <br>
-           <input type="submit" name="Edit-comment" value="Edit"> 
-           <input type="submit" name="Delete-comment" value="Delete">
+            Print '
+              <form method = "post" action = "Comments/Edit_Delete_CommentSQL.php?Comment_ID='.$row1['Comment_ID'].'">
+                <label>'. $row1['User_fname'] . " " . $row1['User_lname'] .  '</label> <br>
+                <input type = "text" name = "CommentText" value ="' .$row1['CommentText'].'">
+                <input type="submit" name="Edit-comment" value="Edit"> 
+                <input type="submit" name="Delete-comment" value="Delete">
             </form>';
             
         }else{
-            Print '<h2 align="center">'. $row1['User_fname'] . ": " . $row1['CommentText'] . "</h2>"; 
+            Print '<h3>'. $row1['User_fname'] . ":</h3><p>" . $row1['CommentText'] . "</p>"; 
         }
 
        
@@ -62,10 +61,11 @@
 
       //create comment form, INSERT INTO Comments(Comment_ID, Recipe_ID,User_ID, CommentText)
       Print '<form method = "post" action = "Comments/CreateSQLComment.php?Recipe_ID='.$row['Recipe_ID'].'">
-          <label> Comment: </label> <input type = "text" name = "comment"> <br>
+          <label> Post Comment: </label> <input type = "text" name = "comment"> <br>
          <input type="submit" name="Create-comment" value="Submit">
       </form>';
-   }
+    Print '</div>';
+    }
    ?>
 
 
