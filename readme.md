@@ -1,4 +1,4 @@
-# Cooking Mania 
+# Cooking Mania
 ## Team 12 Members
 - Ariana Pouya
 - Shri Mathavan
@@ -6,19 +6,13 @@
 - John McWhirter
 
 ## Description
-A Web Application designed to track Recipes, their ingredients, their creators, and classes dedicated to each recipe. The users involed include the Administrator, Teacher, and Student. 
+A Web Application designed to track Recipes, their creators, comments, and classes dedicated to each recipe. The users involved include the Administrator, Teacher, and Student.
 
 ### Teacher
-The Teacher can create classes, recipes, and comments. The Teacher can add/remove students from a class. 
+The Teacher can create classes, recipes, and comments. The Teacher can add/remove students from a class.
 
 ### Student
-The Student can create recipes and comments. The student can join/leave a class.
+The Student can create comments. The student can join/leave a class. View recipes.
 
 ### Admin
-The Admin can create/delete Teacher accounts and Student accounts. The Admin can create/delete classes, recipes, comments. 
-
-XAMPP: everyone should have it but the demo will be off of one computer
-
-All functionalities should flow
-
-Web server + SQL on local. share web server files. Each person independently develops their page.
+The Admin can create, edit, delete Teacher accounts and Student accounts. The Admin can create, edit and /delete classes, recipes, comments.
