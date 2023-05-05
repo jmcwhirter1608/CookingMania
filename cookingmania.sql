@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 05, 2023 at 08:56 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: localhost
+-- Generation Time: May 05, 2023 at 09:53 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `cookingmania`
+-- Database: `CookingMania`
 --
 
 -- --------------------------------------------------------
@@ -242,11 +242,37 @@ INSERT INTO `users` (`User_ID`, `User_type`, `User_fname`, `User_lname`, `User_e
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `users_create_recipes`
+-- (See below for the actual view)
+--
+CREATE TABLE `users_create_recipes` (
+`User_ID` int(11)
+,`User_type` int(11)
+,`User_fname` varchar(255)
+,`User_lname` varchar(255)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `users_recipes`
+-- (See below for the actual view)
+--
+CREATE TABLE `users_recipes` (
+`User_ID` int(11)
+,`User_type` int(11)
+,`User_fname` varchar(255)
+,`User_lname` varchar(255)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `admins`
 --
 DROP TABLE IF EXISTS `admins`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `admins`  AS SELECT `users`.`User_ID` AS `User_ID`, `users`.`User_type` AS `User_type`, `users`.`User_fname` AS `User_fname`, `users`.`User_lname` AS `User_lname`, `users`.`User_email` AS `User_email`, `users`.`User_phonenumber` AS `User_phonenumber`, `users`.`User_password` AS `User_password` FROM `users` WHERE `users`.`User_type` = 11 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `cookingmania`.`admins`  AS SELECT `cookingmania`.`users`.`User_ID` AS `User_ID`, `cookingmania`.`users`.`User_type` AS `User_type`, `cookingmania`.`users`.`User_fname` AS `User_fname`, `cookingmania`.`users`.`User_lname` AS `User_lname`, `cookingmania`.`users`.`User_email` AS `User_email`, `cookingmania`.`users`.`User_phonenumber` AS `User_phonenumber`, `cookingmania`.`users`.`User_password` AS `User_password` FROM `cookingmania`.`users` WHERE `cookingmania`.`users`.`User_type` = 1111  ;
 
 -- --------------------------------------------------------
 
@@ -255,7 +281,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `classes_recipes_matching`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `classes_recipes_matching`  AS SELECT `classes`.`User_ID` AS `User_ID`, `recipes`.`Recipe_name` AS `Recipe_name`, `classes`.`Class_Date` AS `Class_Date`, `classes`.`Class_StartTime` AS `Class_StartTime`, `classes`.`Class_EndTime` AS `Class_EndTime`, `classes`.`Class_RoomNum` AS `Class_RoomNum`, `classes`.`Class_Enrollment` AS `Class_Enrollment`, `classes`.`Class_ID` AS `Class_ID`, `recipes`.`Recipe_time` AS `Recipe_time`, `recipes`.`Recipe_level` AS `Recipe_level`, `recipes`.`Recipe_instructions` AS `Recipe_instructions` FROM (`classes` join `recipes` on(`classes`.`Recipe_ID` = `recipes`.`Recipe_ID`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `cookingmania`.`classes_recipes_matching`  AS SELECT `cookingmania`.`classes`.`User_ID` AS `User_ID`, `cookingmania`.`recipes`.`Recipe_name` AS `Recipe_name`, `cookingmania`.`classes`.`Class_Date` AS `Class_Date`, `cookingmania`.`classes`.`Class_StartTime` AS `Class_StartTime`, `cookingmania`.`classes`.`Class_EndTime` AS `Class_EndTime`, `cookingmania`.`classes`.`Class_RoomNum` AS `Class_RoomNum`, `cookingmania`.`classes`.`Class_Enrollment` AS `Class_Enrollment`, `cookingmania`.`classes`.`Class_ID` AS `Class_ID`, `cookingmania`.`recipes`.`Recipe_time` AS `Recipe_time`, `cookingmania`.`recipes`.`Recipe_level` AS `Recipe_level`, `cookingmania`.`recipes`.`Recipe_instructions` AS `Recipe_instructions` FROM (`cookingmania`.`classes` join `cookingmania`.`recipes` on(`cookingmania`.`classes`.`Recipe_ID` = `cookingmania`.`recipes`.`Recipe_ID`))  ;
 
 -- --------------------------------------------------------
 
@@ -264,7 +290,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `registration_to_classes`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `registration_to_classes`  AS SELECT `classes`.`Class_ID` AS `Class_ID`, `class_enrollment`.`User_ID` AS `User_ID`, `classes`.`Class_Date` AS `Class_Date`, `classes`.`Class_RoomNum` AS `Class_RoomNum`, `classes`.`Class_StartTime` AS `Class_StartTime`, `classes`.`Class_EndTime` AS `Class_EndTime`, `classes`.`Recipe_ID` AS `Recipe_ID`, `classes`.`Class_Enrollment` AS `Class_Enrollment` FROM (`classes` join `class_enrollment` on(`classes`.`Class_ID` = `class_enrollment`.`Class_ID`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `cookingmania`.`registration_to_classes`  AS SELECT `cookingmania`.`classes`.`Class_ID` AS `Class_ID`, `cookingmania`.`class_enrollment`.`User_ID` AS `User_ID`, `cookingmania`.`classes`.`Class_Date` AS `Class_Date`, `cookingmania`.`classes`.`Class_RoomNum` AS `Class_RoomNum`, `cookingmania`.`classes`.`Class_StartTime` AS `Class_StartTime`, `cookingmania`.`classes`.`Class_EndTime` AS `Class_EndTime`, `cookingmania`.`classes`.`Recipe_ID` AS `Recipe_ID`, `cookingmania`.`classes`.`Class_Enrollment` AS `Class_Enrollment` FROM (`cookingmania`.`classes` join `cookingmania`.`class_enrollment` on(`cookingmania`.`classes`.`Class_ID` = `cookingmania`.`class_enrollment`.`Class_ID`))  ;
 
 -- --------------------------------------------------------
 
@@ -273,7 +299,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `students`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `students`  AS SELECT `users`.`User_ID` AS `User_ID`, `users`.`User_type` AS `User_type`, `users`.`User_fname` AS `User_fname`, `users`.`User_lname` AS `User_lname`, `users`.`User_email` AS `User_email`, `users`.`User_phonenumber` AS `User_phonenumber`, `users`.`User_password` AS `User_password` FROM `users` WHERE `users`.`User_type` = 33 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `cookingmania`.`students`  AS SELECT `cookingmania`.`users`.`User_ID` AS `User_ID`, `cookingmania`.`users`.`User_type` AS `User_type`, `cookingmania`.`users`.`User_fname` AS `User_fname`, `cookingmania`.`users`.`User_lname` AS `User_lname`, `cookingmania`.`users`.`User_email` AS `User_email`, `cookingmania`.`users`.`User_phonenumber` AS `User_phonenumber`, `cookingmania`.`users`.`User_password` AS `User_password` FROM `cookingmania`.`users` WHERE `cookingmania`.`users`.`User_type` = 3333  ;
 
 -- --------------------------------------------------------
 
@@ -282,7 +308,25 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `teachers`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `teachers`  AS SELECT `users`.`User_ID` AS `User_ID`, `users`.`User_type` AS `User_type`, `users`.`User_fname` AS `User_fname`, `users`.`User_lname` AS `User_lname`, `users`.`User_email` AS `User_email`, `users`.`User_phonenumber` AS `User_phonenumber`, `users`.`User_password` AS `User_password` FROM `users` WHERE `users`.`User_type` = 22 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `cookingmania`.`teachers`  AS SELECT `cookingmania`.`users`.`User_ID` AS `User_ID`, `cookingmania`.`users`.`User_type` AS `User_type`, `cookingmania`.`users`.`User_fname` AS `User_fname`, `cookingmania`.`users`.`User_lname` AS `User_lname`, `cookingmania`.`users`.`User_email` AS `User_email`, `cookingmania`.`users`.`User_phonenumber` AS `User_phonenumber`, `cookingmania`.`users`.`User_password` AS `User_password` FROM `cookingmania`.`users` WHERE `cookingmania`.`users`.`User_type` = 2222  ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `users_create_recipes`
+--
+DROP TABLE IF EXISTS `users_create_recipes`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `cookingmania`.`users_create_recipes`  AS SELECT `cookingmania`.`users`.`User_ID` AS `User_ID`, `cookingmania`.`users`.`User_type` AS `User_type`, `cookingmania`.`users`.`User_fname` AS `User_fname`, `cookingmania`.`users`.`User_lname` AS `User_lname` FROM `cookingmania`.`users` WHERE `cookingmania`.`users`.`User_type` <> 33  ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `users_recipes`
+--
+DROP TABLE IF EXISTS `users_recipes`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `cookingmania`.`users_recipes`  AS SELECT `cookingmania`.`users`.`User_ID` AS `User_ID`, `cookingmania`.`users`.`User_type` AS `User_type`, `cookingmania`.`users`.`User_fname` AS `User_fname`, `cookingmania`.`users`.`User_lname` AS `User_lname` FROM (`cookingmania`.`users` join `cookingmania`.`recipes` on(`cookingmania`.`users`.`User_ID` = `cookingmania`.`recipes`.`User_ID`))  ;
 
 --
 -- Indexes for dumped tables
