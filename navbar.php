@@ -29,13 +29,18 @@
                 if(isset($_SESSION['User_type'])){
                     switch($_SESSION['User_type']){
                         case 3:
+                            echo '<li><a href="class_reg.php">Class Registration</a></li>';
+                            echo '<li> <a href="view_class_a.php">View Classes</a></li>';  
                             break;
                         case 2:
                           echo '<li> <a href="view_teacher_recipe.php">View Your Recipes</a></li>';
                           echo '<li> <a href="create_recipe.php">Add Recipe</a></li>';
+                          echo '<li> <a href="view_class_a.php">View Classes</a></li>';
                           break;
                         case 1:
                           echo '<li> <a href="create_recipe.php">Add Recipe</a></li>';
+                          echo '<li> <a href="view_class_a.php">View Classes</a></li>';
+                          echo '<li> <a href="create_class.php">Create Classes</a></li>';
                           break;
                         default:
                             echo '<li> <a href="create_recipe.php">Add Recipe</a></li>';
@@ -45,7 +50,6 @@
 
 
                 ?>
-                <li><a href="Shri.php">Classes</a></li>
             </ul>
         </div>
     </nav>
