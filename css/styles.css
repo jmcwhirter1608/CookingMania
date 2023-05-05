@@ -8,6 +8,49 @@ h1 {
     font-size: 32pt;
 }
 
+.Welcome {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(150, 212, 212);
+    color: white;
+    min-width: 1500px;
+}
+
+.Welcome form{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(43, 116, 116);
+    padding: 2%;
+    margin: 5%;
+    width: 40%;
+    height: 100%;
+}
+
+.Welcome form label{
+    font-size: 16pt;
+    padding: 25px 0 0 0;
+}
+
+.Welcome form input[type=text], input[type=password], input[type=tel]{
+    font-size: 12pt;
+}
+
+.Welcome form input[type=submit]{
+    background-color: rgb(150, 212, 212);
+    font-style: italic;
+    font-size: 32pt;
+    color: white;
+    padding: 15px;
+    margin: 15px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.Welcome form input[type=submit]:hover{
+    background-color: rgb(65, 172, 172);
+}
+
 #EditAccount-RowForm{
     display: grid;
     grid-template-columns: 100px 100px 200px 200px 200px 120px 100px 1fr;
@@ -199,33 +242,6 @@ a.Logo{
 }
 
 .ClassesProfile tr td{
-    color: black;
-    background-color: white;
-    text-align: center;
-}
-
-.ClassesAttended{
-    display: flex;
-    justify-content: center;
-    border: none;
-}
-
-
-.ClassesAttended tr{
-    display: grid;
-    grid-template-columns: 120px 200px 200px 200px 200px;
-    grid-gap: 5px;
-    border: 2px solid rgb(24, 104, 104);
-}
-
-.ClassesAttended tr th{
-    font-style: italic;
-    text-align: center;
-    font-size: 16pt;
-    padding: 4% ;
-}
-
-.ClassesAttended tr td{
     color: black;
     background-color: white;
     text-align: center;

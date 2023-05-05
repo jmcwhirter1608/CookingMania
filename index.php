@@ -10,7 +10,7 @@
     include 'dbconnection.php'; 
     session_start();
 
-    echo '<h1>Welcome to Cooking Mania</h1>';
+    echo '<h1 class=Profileheader>Welcome to Cooking Mania</h1>';
 
     if(isset($_SESSION['User_ID'])){
       header('Location: ProfilePage.php');
@@ -67,7 +67,7 @@
      
     }
     ?>
-    <div id=container>
+    <div class=Welcome>
       <form method="post" action="Profile/SignIn.php">
           <h1>Sign In</h1>
 
