@@ -1,144 +1,171 @@
+<?php include "navbar.php"?>
+<?php include 'dbconnection.php'?>
+
 <?php
-session_start();
-
-$server_name = "localhost";
-$user_name = "root";
-$password = "";
-$database_name = "CookingMania";
-
-// Create connection
-$conn = mysqli_connect($server_name, $user_name, $password, $database_name);
-
-$sql_query = "SELECT Recipe_name FROM Recipes";
-$result = mysqli_query($conn, $sql_query);
-while ( $row = mysqli_fetch_array($result) ) {
-   echo $row["Recipe_name"]. " . ";
- //   echo $row{'Ingredient_ID'}." . ". $row{'Ingredient_Name'}. "." ."<br>" ;
-  }
-
-// Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
-echo "Connected successfully";
 
 if(isset($_POST['save']))
-{	
-	 $recipe_name = $_POST['Recipe_Name'];
-	 $Class_duration = $_POST['Class_duration'];
-	 $User_ID = $_POST['User_ID'];
-	 $Class_Size_Limit = $_POST['Class_Size_Limit'];
+{   
+    if (!$connection) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+    echo "<br>";
+    echo "<br>";
+    $Recipe_ID = $_POST['Recipe'];
+    $User_ID = $_POST['User_ID'];
+    $Class_StartTime = $_POST['Class_StartTime'];
+    $Class_EndTime = $_POST['Class_EndTime'];
+    $Class_Date = $Class_Date = date('Y-m-d', strtotime($_POST['Class_Date']));
+    $Class_RoomNum = $_POST['Class_RoomNum'];
+    $Class_Enrollment = $_POST['Class_Enrollment'];
+    
+//    $Recipe_ID = $_POST['Recipe'];
+    
+    
+    //check time
+    //BOOLEAN FOR DATE
+    if($Class_StartTime < $Class_EndTime){
+        $Class_StartTimevalid = true;
+    }
+    else{
+        $Class_StartTimevalid = false;
+        echo 'Class Start time has to be ahead of end time <br>';
+    }
+    
+    
+    //CHECK IF DATE IS VALID
+    $currentDate = new DateTime();
+    $currentDate = $currentDate->format('Y-m-d');
+    //BOOLEAN FOR DATE
+    if($Class_Date >=$currentDate){
+        $Class_Datevalid = true;
+    }
+    else{
+        $Class_Datevalid = false;
+        echo 'Class date is in the past. Not valid <br>';
+    }
+    
+    $sql = "SELECT Recipe_ID FROM recipes WHERE Recipe_ID = $Recipe_ID";
+    if ($result=$connection->query($sql))
+    {
+        $rowcount=mysqli_num_rows($result);
+        mysqli_free_result($result);
+    }
+    
+    //If user id is empty we use a different sql insert function
+    if(empty($User_ID)) {
+        echo "NULL value for user id <br>";
+        $userid_null = true;
+        $rowcount_user_valid = true;
+    }
+    else{ //make sure it's a valid user id!
+        echo "not empty user id <br>";
+        $userid_null = false;
+        $sql = "SELECT User_ID FROM users WHERE User_ID = $User_ID";
+        if ($result=$connection->query($sql))
+        {
+            $rowcount_user=mysqli_num_rows($result);
+            mysqli_free_result($result);
+        }
+        
+        //boolean for user id check
+        if($rowcount_user>0){
+            $rowcount_user_valid = true;
+            echo "valid user!<br>";
+        }
+        else{
+            $rowcount_user_valid = false;
+            echo "Enter in a valid User ID. This field can also be left blank if teacher has
+                not been assigned yet.<br>";
+        }
+        
+    }
 
-     $sql_query = "INSERT INTO `Classes`(`Recipe_ID`, `Class_duration`, `User_ID`, `Class_Size_Limit`, `Recipe_Name`)
-     VALUES ('2','$Class_duration','$User_ID','$Class_Size_Limit','$recipe_name')";
+    //CHECK IF CLASS CAN BE BOOKED AT THAT TIME.
+    $sql_check = "SELECT * FROM classes WHERE Class_Date = '$Class_Date'";
+    $result_check = mysqli_query($connection, $sql_check);
+    $canbook = true;
+    if(mysqli_num_rows($result_check) > 0)
+    {
+    while($row = mysqli_fetch_assoc($result_check)){
+        if($row["Class_RoomNum"] == $Class_RoomNum){
+            // if($row["Class_StartTime"] <= $Class_EndTime || $row["Class_EndTime"]>= $Class_StartTime){
+                if($row["Class_StartTime"] <= $Class_EndTime && $Class_EndTime <= $row["Class_EndTime"]){
+                echo "scheduling conflict. Check with class checker to plan accordingly.<br>";
+                $canbook = false;
+                break;
+            }
+            if($row["Class_StartTime"] <= $Class_StartTime && $Class_StartTime <= $row["Class_EndTime"]){
+                echo "scheduling conflict. Check with class checker to plan accordingly.<br>";
+                $canbook = false;
+                break;
+            }
+        }
 
-	 if (mysqli_query($conn, $sql_query)) 
-	 {
-		echo "New Details Entry inserted successfully !";
-	 } 
-	 else
-     {
-		echo "Error: " . $sql . "" . mysqli_error($conn);
-	 }
+    }
+    }
+    else
+    {
+        $canbook = true;
+    }
+    
+        
+        
 
+    
+    //boolean for recipe id check
+    if($rowcount>0){
+        $recipeid_true = 1;
+    }
+    else{
+        $recipeid_true = 0;
+        echo "Enter in a valid Recipe ID.<br>";
+    }
+    
+        
+    if($userid_null){
+    $sql_query = "INSERT INTO `classes`(`Recipe_ID`, `User_ID`, `Class_Date`, `Class_StartTime`, `Class_RoomNum`, `Class_EndTime`, `Class_Enrollment`)
+    VALUES ('$Recipe_ID',NULL,'$Class_Date','$Class_StartTime','$Class_RoomNum','$Class_EndTime','$Class_Enrollment')";
+        }
+    else{
+        $sql_query = "INSERT INTO `classes`(`Recipe_ID`, `User_ID`, `Class_Date`, `Class_StartTime`, `Class_RoomNum`, `Class_EndTime`, `Class_Enrollment`)
+        VALUES ('$Recipe_ID','$User_ID','$Class_Date','$Class_StartTime','$Class_RoomNum','$Class_EndTime','$Class_Enrollment')";
+    }
+      
+    if($recipeid_true && $Class_Datevalid && $rowcount_user_valid && $Class_StartTimevalid && $canbook){
+        if ($connection->query($sql_query) === TRUE) {
+            echo "Class Record inserted successfully";
+            } else {
+            echo "Error: " . $sql_query . "<br>" . $connection->error;
+            }
+    }
+    else{
+        echo "Fields not filled correctly <br>";
+    }
+    
+   
+//    //$sql_query = "INSERT INTO `classes`(`Recipe_ID`, `User_ID`, `Class_Date`, `Class_StartTime`, `Class_RoomNum`, `Class_EndTime`) 
+//    // VALUES ('$Recipe_ID','$User_ID','$Class_Date','$Class_StartTime','$Class_RoomNum','$Class_EndTime')";
+//     $numrows = $connection->query("SELECT COUNT(*) FROM recipes WHERE Recipe_ID = 2");
+//    // echo $numrows;
 
-	 mysqli_close($conn);
+//    if ($connection->query($sql_query) === TRUE) {
+//     echo "record inserted successfully";
+//     } else {
+//     echo "Error: " . $sql_query . "<br>" . $connection->error;
+//     }
+
+    // if (mysqli_query($connection, $sql_query)) 
+    // {
+    // echo "New Details Entry inserted successfully !";
+    // } 
+    // else
+    // {
+    // echo "Error: " . $sql . "" . mysqli_error($connection);
+    // }
+
 }
+
+
 
 
 ?>
-
-
-
-<!-- // initializing variables
-$username = "";
-$email    = "";
-$errors = array(); 
-
-// connect to the database
-$db = mysqli_connect('localhost', 'root', '', 'CookingMania');
-
-$conn=mysqli_connect($server_name,$username,$password,$database_name);
-
-if(!$conn)
-{die("Connection Failed:" . mysqli_connect_error());}
-
-if(isset($_POST['save']))
-{
-$first_name = $_POST['first_name'];
-$last_name = $_POST['last_name'];
-$gender = $_POST['gender'];
-$email = $_POST['email'];
-$phone = $_POST['phone'];
-
-// // REGISTER USER
-// if (isset($_POST['reg_user'])) {
-//   // receive all input values from the form
-//   $username = mysqli_real_escape_string($db, $_POST['username']);
-//   $email = mysqli_real_escape_string($db, $_POST['email']);
-//   $password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
-//   $password_2 = mysqli_real_escape_string($db, $_POST['password_2']);
-
-//   // form validation: ensure that the form is correctly filled ...
-//   // by adding (array_push()) corresponding error unto $errors array
-//   if (empty($username)) { array_push($errors, "Username is required"); }
-//   if (empty($email)) { array_push($errors, "Email is required"); }
-//   if (empty($password_1)) { array_push($errors, "Password is required"); }
-//   if ($password_1 != $password_2) {
-// 	array_push($errors, "The two passwords do not match");
-//   }
-
-//   // first check the database to make sure 
-//   // a user does not already exist with the same username and/or email
-//   $user_check_query = "SELECT * FROM users WHERE username='$username' OR email='$email' LIMIT 1";
-//   $result = mysqli_query($db, $user_check_query);
-//   $user = mysqli_fetch_assoc($result);
-  
-//   if ($user) { // if user exists
-//     if ($user['username'] === $username) {
-//       array_push($errors, "Username already exists");
-//     }
-
-//     if ($user['email'] === $email) {
-//       array_push($errors, "email already exists");
-//     }
-//   }
-
-//   // Finally, register user if there are no errors in the form
-//   if (count($errors) == 0) {
-//   	$password = md5($password_1);//encrypt the password before saving in the database
-
-//   	$query = "INSERT INTO users (username, email, password) 
-//   			  VALUES('$username', '$email', '$password')";
-//   	mysqli_query($db, $query);
-//   	$_SESSION['username'] = $username;
-//   	$_SESSION['success'] = "You are now logged in";
-//   	header('location: index.php');
-//   }
-// }
-
-// // LOGIN USER
-// if (isset($_POST['login_user'])) {
-//   $username = mysqli_real_escape_string($db, $_POST['username']);
-//   $password = mysqli_real_escape_string($db, $_POST['password']);
-
-//   if (empty($username)) {
-//   	array_push($errors, "Username is required");
-//   }
-//   if (empty($password)) {
-//   	array_push($errors, "Password is required");
-//   }
-
-//   if (count($errors) == 0) {
-//   	$password = md5($password);
-//   	$query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
-//   	$results = mysqli_query($db, $query);
-//   	if (mysqli_num_rows($results) == 1) {
-//   	  $_SESSION['username'] = $username;
-//   	  $_SESSION['success'] = "You are now logged in";
-//   	  header('location: index.php');
-//   	}else {
-//   		array_push($errors, "Wrong username/password combination");
-//   	}
-//   }
-// } -->
