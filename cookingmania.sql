@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: May 05, 2023 at 08:03 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Host: 127.0.0.1
+-- Generation Time: May 05, 2023 at 08:56 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -103,6 +103,7 @@ CREATE TABLE `class_enrollment` (
 INSERT INTO `class_enrollment` (`Class_ID`, `User_ID`) VALUES
 (1, 16),
 (1, 18),
+(1, 20),
 (2, 15),
 (2, 16),
 (3, 18);
@@ -119,6 +120,17 @@ CREATE TABLE `comments` (
   `User_ID` int(11) DEFAULT NULL,
   `CommentText` mediumtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`Comment_ID`, `Recipe_ID`, `User_ID`, `CommentText`) VALUES
+(3, 1, 19, 'Very Delicious! I loved teaching this class!'),
+(4, 1, 18, 'Thank you for teaching professor!'),
+(5, 2, 18, 'This was a horrible dish'),
+(6, 2, 20, 'I agree with Hermione'),
+(7, 57, 21, 'Make this Harry Potter it will help.');
 
 -- --------------------------------------------------------
 
@@ -143,7 +155,8 @@ CREATE TABLE `recipes` (
 
 INSERT INTO `recipes` (`Recipe_ID`, `Recipe_name`, `Recipe_time`, `Recipe_level`, `Recipe_instructions`, `Recipe_Ingredients`, `last_update_date`, `User_ID`) VALUES
 (1, 'Pizza', '30', 1, 'Roll Dough, Add Sauce, Add Cheese, Cook for 25', '', '2023-05-01', 19),
-(2, 'Chicken Parmesan', '45', 2, 'Cook Chicken Till Burnt\r\nPlace marinara in air fryer\r\nStir up the sauce\r\nRun it with the crew', '', '2023-05-01', 19);
+(2, 'Chicken Parmesan', '45', 2, 'Cook Chicken Till Burnt\r\nPlace marinara in air fryer\r\nStir up the sauce\r\nRun it with the crew', '', '2023-05-01', 19),
+(57, 'Hamburger', '0.4', 1, 'Cook the Burger for 15 minutes on each side at medium high heat. Use my homemade werstechire sauce.', 'Beef 85/15\r\nbuns\r\nketchup\r\nlettuce\r\ntomato\r\nonion\r\n', '2023-05-05', 21);
 
 -- --------------------------------------------------------
 
@@ -222,7 +235,9 @@ INSERT INTO `users` (`User_ID`, `User_type`, `User_fname`, `User_lname`, `User_e
 (15, 3, 'Ron', 'Weasley', 'RWgriffin@gmail.com', '1234567890', 'rat'),
 (16, 3, 'Harry', 'Potter', 'thechosenone@gmail.com', '1234567890', 'slytherin'),
 (18, 3, 'Hermione', 'Granger', 'smartgirl@gmail.com', '1234567890', 'asdf'),
-(19, 2, 'Severus', 'Snape', 'HalfBlodP@gmail.com', '1234567890', 'asdf');
+(19, 2, 'Severus', 'Snape', 'HalfBlodP@gmail.com', '1234567890', 'asdf'),
+(20, 3, 'Harry', 'Potter', 'hpt@gmail.com', '1234567890', 'asdf'),
+(21, 2, 'Albus', 'Dumbledore', 'hmaster@gmail.com', '1234567890', 'asdf');
 
 -- --------------------------------------------------------
 
@@ -231,7 +246,7 @@ INSERT INTO `users` (`User_ID`, `User_type`, `User_fname`, `User_lname`, `User_e
 --
 DROP TABLE IF EXISTS `admins`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `admins`  AS SELECT `users`.`User_ID` AS `User_ID`, `users`.`User_type` AS `User_type`, `users`.`User_fname` AS `User_fname`, `users`.`User_lname` AS `User_lname`, `users`.`User_email` AS `User_email`, `users`.`User_phonenumber` AS `User_phonenumber`, `users`.`User_password` AS `User_password` FROM `users` WHERE `users`.`User_type` = 11  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `admins`  AS SELECT `users`.`User_ID` AS `User_ID`, `users`.`User_type` AS `User_type`, `users`.`User_fname` AS `User_fname`, `users`.`User_lname` AS `User_lname`, `users`.`User_email` AS `User_email`, `users`.`User_phonenumber` AS `User_phonenumber`, `users`.`User_password` AS `User_password` FROM `users` WHERE `users`.`User_type` = 11 ;
 
 -- --------------------------------------------------------
 
@@ -240,7 +255,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `classes_recipes_matching`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `classes_recipes_matching`  AS SELECT `classes`.`User_ID` AS `User_ID`, `recipes`.`Recipe_name` AS `Recipe_name`, `classes`.`Class_Date` AS `Class_Date`, `classes`.`Class_StartTime` AS `Class_StartTime`, `classes`.`Class_EndTime` AS `Class_EndTime`, `classes`.`Class_RoomNum` AS `Class_RoomNum`, `classes`.`Class_Enrollment` AS `Class_Enrollment`, `classes`.`Class_ID` AS `Class_ID`, `recipes`.`Recipe_time` AS `Recipe_time`, `recipes`.`Recipe_level` AS `Recipe_level`, `recipes`.`Recipe_instructions` AS `Recipe_instructions` FROM (`classes` join `recipes` on(`classes`.`Recipe_ID` = `recipes`.`Recipe_ID`))  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `classes_recipes_matching`  AS SELECT `classes`.`User_ID` AS `User_ID`, `recipes`.`Recipe_name` AS `Recipe_name`, `classes`.`Class_Date` AS `Class_Date`, `classes`.`Class_StartTime` AS `Class_StartTime`, `classes`.`Class_EndTime` AS `Class_EndTime`, `classes`.`Class_RoomNum` AS `Class_RoomNum`, `classes`.`Class_Enrollment` AS `Class_Enrollment`, `classes`.`Class_ID` AS `Class_ID`, `recipes`.`Recipe_time` AS `Recipe_time`, `recipes`.`Recipe_level` AS `Recipe_level`, `recipes`.`Recipe_instructions` AS `Recipe_instructions` FROM (`classes` join `recipes` on(`classes`.`Recipe_ID` = `recipes`.`Recipe_ID`)) ;
 
 -- --------------------------------------------------------
 
@@ -249,7 +264,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `registration_to_classes`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `registration_to_classes`  AS SELECT `classes`.`Class_ID` AS `Class_ID`, `class_enrollment`.`User_ID` AS `User_ID`, `classes`.`Class_Date` AS `Class_Date`, `classes`.`Class_RoomNum` AS `Class_RoomNum`, `classes`.`Class_StartTime` AS `Class_StartTime`, `classes`.`Class_EndTime` AS `Class_EndTime`, `classes`.`Recipe_ID` AS `Recipe_ID`, `classes`.`Class_Enrollment` AS `Class_Enrollment` FROM (`classes` join `class_enrollment` on(`classes`.`Class_ID` = `class_enrollment`.`Class_ID`))  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `registration_to_classes`  AS SELECT `classes`.`Class_ID` AS `Class_ID`, `class_enrollment`.`User_ID` AS `User_ID`, `classes`.`Class_Date` AS `Class_Date`, `classes`.`Class_RoomNum` AS `Class_RoomNum`, `classes`.`Class_StartTime` AS `Class_StartTime`, `classes`.`Class_EndTime` AS `Class_EndTime`, `classes`.`Recipe_ID` AS `Recipe_ID`, `classes`.`Class_Enrollment` AS `Class_Enrollment` FROM (`classes` join `class_enrollment` on(`classes`.`Class_ID` = `class_enrollment`.`Class_ID`)) ;
 
 -- --------------------------------------------------------
 
@@ -258,7 +273,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `students`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `students`  AS SELECT `users`.`User_ID` AS `User_ID`, `users`.`User_type` AS `User_type`, `users`.`User_fname` AS `User_fname`, `users`.`User_lname` AS `User_lname`, `users`.`User_email` AS `User_email`, `users`.`User_phonenumber` AS `User_phonenumber`, `users`.`User_password` AS `User_password` FROM `users` WHERE `users`.`User_type` = 33  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `students`  AS SELECT `users`.`User_ID` AS `User_ID`, `users`.`User_type` AS `User_type`, `users`.`User_fname` AS `User_fname`, `users`.`User_lname` AS `User_lname`, `users`.`User_email` AS `User_email`, `users`.`User_phonenumber` AS `User_phonenumber`, `users`.`User_password` AS `User_password` FROM `users` WHERE `users`.`User_type` = 33 ;
 
 -- --------------------------------------------------------
 
@@ -267,7 +282,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `teachers`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `teachers`  AS SELECT `users`.`User_ID` AS `User_ID`, `users`.`User_type` AS `User_type`, `users`.`User_fname` AS `User_fname`, `users`.`User_lname` AS `User_lname`, `users`.`User_email` AS `User_email`, `users`.`User_phonenumber` AS `User_phonenumber`, `users`.`User_password` AS `User_password` FROM `users` WHERE `users`.`User_type` = 22  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `teachers`  AS SELECT `users`.`User_ID` AS `User_ID`, `users`.`User_type` AS `User_type`, `users`.`User_fname` AS `User_fname`, `users`.`User_lname` AS `User_lname`, `users`.`User_email` AS `User_email`, `users`.`User_phonenumber` AS `User_phonenumber`, `users`.`User_password` AS `User_password` FROM `users` WHERE `users`.`User_type` = 22 ;
 
 --
 -- Indexes for dumped tables
@@ -330,19 +345,19 @@ ALTER TABLE `classes`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `Comment_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Comment_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `recipes`
 --
 ALTER TABLE `recipes`
-  MODIFY `Recipe_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `Recipe_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `User_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables
