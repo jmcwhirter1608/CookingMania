@@ -1,7 +1,11 @@
 
 * {
     font-family: "Comic Sans MS";
+    caret-color: transparent;
+}
 
+form input{
+    caret-color: black;
 }
 
 h1 {
@@ -15,6 +19,7 @@ h1 {
     background-color: rgb(150, 212, 212);
     color: white;
     min-width: 1500px;
+    caret-color: transparent;
 }
 
 .Welcome form{

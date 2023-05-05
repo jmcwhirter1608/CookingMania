@@ -108,10 +108,10 @@
         <label for="psw-repeat"><b>Repeat Password</b></label>
         <input type="password" placeholder="Repeat Password" name="psw-repeat"><br/>
 
-        <label for="acc-type"><b>Teacher</b></label>
-        <input type="radio" name="acc-type" value=2>
-        <label for="acc-type"><b>Student</b></label>
-        <input type="radio" name="acc-type" value=3>
+        <label style="width:100%;text-align:center" for="acc-type"><b>Teacher</b>
+        <input type="radio" name="acc-type" value=2></label>
+        <label style="width:100%;text-align:center" for="acc-type"><b>Student</b>
+        <input type="radio" name="acc-type" value=3></label>
         <br>
         <input type='submit' name='Create-submit' value='Register'>
 
