@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css\styles.css">
-    
+
     <title>Document</title>
 </head>
 <body>
@@ -30,6 +30,13 @@
                     switch($_SESSION['User_type']){
                         case 3:
                             break;
+                        case 2:
+                          echo '<li> <a href="view_teacher_recipe.php">View Your Recipes</a></li>';
+                          echo '<li> <a href="create_recipe.php">Add Recipe</a></li>';
+                          break;
+                        case 1:
+                          echo '<li> <a href="create_recipe.php">Add Recipe</a></li>';
+                          break;
                         default:
                             echo '<li> <a href="create_recipe.php">Add Recipe</a></li>';
 
@@ -38,7 +45,7 @@
 
 
                 ?>
-                <li><a href="Shri.php">Shri</a></li>
+                <li><a href="Shri.php">Classes</a></li>
             </ul>
         </div>
     </nav>

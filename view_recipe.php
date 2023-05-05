@@ -18,7 +18,7 @@
 
     //go through all the recipes and get all recipe data
     $result = mysqli_query($connection, "SELECT * FROM Recipes");
-
+    
     while ( $recipe = mysqli_fetch_array($result) ) {
       //for each recipe get the name and the time of ingredients
       $recipe_id = $recipe['Recipe_ID'];
@@ -64,8 +64,9 @@
       <?php
         //admin or creator can also see the last date of update for this recipe.
         Print '<p align="center">'. "Recipe Last Updated: ". $recipe["last_update_date"].'</p>';
+        Print '<p align="center">'. "Recipe ID: ". $recipe["Recipe_ID"].'</p>';
         //send all needed data to edit/delete
-        echo "<form method='post' action='edit_delete_recipe.php'>.
+        echo "<form method='post' action='edit_delete_recipe.php'>
           <input type='hidden' name='recipe_id' value=". $recipe_id. ">
           <input type='submit' name='edit' value='Edit Recipe'>
 
