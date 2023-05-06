@@ -12,7 +12,7 @@ A Web Application designed to track Recipes, their creators, comments, and class
 The Teacher can create recipes, and comments. The Teacher can view and update/delete classes. 
 
 ### Student
-The Student can create comments. The student can view and join/leave a class. View recipes.
+The Student can create comments. The Student can view and join/leave a class. View recipes.
 
 ### Admin
 The Admin can create, edit, delete Teacher accounts and Student accounts. The Admin can create, view, and edit/delete classes, recipes, comments.
